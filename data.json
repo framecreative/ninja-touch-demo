@@ -1,0 +1,158 @@
+{
+  "questions": [
+    {
+      "text": "Your morning coffee is…",
+      "weight": 1.5,
+      "options": [
+        { "text": "My daily anchor\nSame mug same moment, same me.", "value": "stability" },
+        { "text": "A precision test\nI'm chasing god-tier crema.", "value": "mastery" },
+        { "text": "A wild card\nDepends who I wake up as today.", "value": "independence" },
+        { "text": "A shared ritual\nHalf the joy's in who I drink it with.", "value": "belonging" }
+      ]
+    },
+    {
+      "text": "When it comes to taste, you’re drawn to…",
+      "weight": 1,
+      "options": [
+        { "text": "Smooth and steady\nthe comfort playlist of coffee.", "value": "stability" },
+        { "text": "Bold and balanced\npure craft, zero shortcuts.", "value": "mastery" },
+        { "text": "Whatever fits the mood\nvariety keeps things interesting.", "value": "independence" },
+        { "text": "The easy crowd-pleaser\nhits the spot without overthinking it.", "value": "belonging" }
+      ]
+    },
+    {
+      "text": "When you’re at the machine, you…",
+      "weight": 1,
+      "options": [
+        { "text": "Geek out\npressure, grind, and tamp like it’s performance art.", "value": "stability" },
+        { "text": "Hit brew, zone out and trust the machine.", "value": "mastery" },
+        { "text": "Treat it like a creative outlet\nfollow the recipe once, then make it yours.", "value": "independence" },
+        { "text": "Take everyone’s order\ncoffee diplomacy is your love language.", "value": "belonging" }
+      ]
+    },
+    {
+      "text": "When your cup hits the bench, it usually…",
+      "weight": 1,
+      "options": [
+        { "text": "Keeps it stripped-back\nblack, white, and effortlessly unfussy.", "value": "minimalist" },
+        { "text": "Looks engineered by NASA\nprecision, poise, serious intent.", "value": "futurist" },
+        { "text": "Could start a micro-trend on TikTok\nconfident pour, main-character energy.", "value": "trendy" },
+        { "text": "Feels like home\nwarm, familiar and a little nostalgic.", "value": "classic" }
+      ]
+    }
+  ],
+  "profiles": {
+    "precisionist": {
+      "icon": "icon_precisionist.png",
+      "title": "The<br>precisionist",
+      "tagline": "Every detail, dialled",
+      "description1": "You know perfection doesn't happen by accident it happens one micro-adjustment at a time. You're the type to notice when the crema's two seconds late.",
+      "description2": "Weight-based dosing and active temperature control keep every variable locked, so the details stay as dialled as you are."
+    },
+    "optimiser": {
+      "icon": "icon_optimiser.png",
+      "title": "The<br>optimiser", 
+      "tagline": "Always pushing boundaries",
+      "description1": "You're constantly experimenting with new methods, beans, and techniques. The next great cup is always just one experiment away.",
+      "description2": "You see every cup as a canvas for creativity. New beans, new methods, new possibilities - you're always chasing the next breakthrough."
+    },
+    "roastician": {
+      "icon": "icon_roastician.png",
+      "title": "The<br>roastician",
+      "tagline": "Craft over convenience",
+      "description1": "You approach coffee as an art form, taking time to perfect every detail. The process is as important as the final cup.",
+      "description2": "Every roast tells a story, and you're the author of each cup's journey from bean to brew."
+    },
+    "baristocrat": {
+      "icon": "icon_baristocrat.png",
+      "title": "The<br>baristocrat",
+      "tagline": "Coffee brings people together",
+      "description1": "For you, coffee is about connection. The best cups are shared with friends, family, or even strangers who become friends.",
+      "description2": "Half the joy's in who you drink it with. Coffee is your social glue, bringing people together one cup at a time."
+    },
+    "classicist": {
+      "icon": "icon_classicist.png",
+      "title": "The<br>classicist",
+      "tagline": "Consistency is your comfort",
+      "description1": "You find peace in the familiar rhythm of your coffee routine. Every morning follows the same pattern, and that's exactly how you like it.",
+      "description2": "Your coffee ritual is sacred - same mug, same moment, same you. It's not just about the coffee, it's about grounding yourself in the familiar."
+    },
+    "smooth_operator": {
+      "icon": "icon_smooth_operator.png",
+      "title": "The<br>smooth operator",
+      "tagline": "Effortless excellence",
+      "description1": "You make great coffee look easy. No fuss, no drama, just consistently perfect results.",
+      "description2": "Your coffee game is smooth as silk - reliable, refined, and always on point."
+    },
+    "brewsmith": {
+      "icon": "icon_brewsmith.png",
+      "title": "The<br>brewsmith",
+      "tagline": "Crafting the perfect blend",
+      "description1": "You're a master of the craft, blending tradition with innovation to create something uniquely yours.",
+      "description2": "Every cup is a carefully crafted masterpiece, balancing technique with personal style."
+    },
+    "home_brewer": {
+      "icon": "icon_home_brewer.png",
+      "title": "The<br>home brewer",
+      "tagline": "Comfort in every cup",
+      "description1": "Your coffee is like a warm hug - familiar, comforting, and always there when you need it.",
+      "description2": "Home is where the heart is, and your coffee is the heart of your home."
+    },
+    "zen_brewer": {
+      "icon": "icon_zen_brewer.png",
+      "title": "The<br>zen brewer",
+      "tagline": "Mindful moments",
+      "description1": "Coffee is your meditation. You find peace in the ritual, mindfulness in the process.",
+      "description2": "Each cup is a moment of zen - simple, pure, and perfectly present."
+    },
+    "mood_swinger": {
+      "icon": "icon_mood_swinger.png",
+      "title": "The<br>mood swinger",
+      "tagline": "Coffee for every mood",
+      "description1": "Your coffee changes with your mood - bold when you need energy, smooth when you need calm.",
+      "description2": "You're the chameleon of coffee, adapting your brew to match your vibe."
+    },
+    "blendsetter": {
+      "icon": "icon_blendsetter.png",
+      "title": "The<br>blendsetter",
+      "tagline": "Setting the trend",
+      "description1": "You're always ahead of the curve, discovering new flavors and techniques before they're cool.",
+      "description2": "Your coffee choices inspire others. You're not just drinking coffee, you're defining it."
+    },
+    "ritualist": {
+      "icon": "icon_ritualist.png",
+      "title": "The<br>ritualist",
+      "tagline": "Sacred routine",
+      "description1": "Your coffee ritual is sacred - same mug, same moment, same you. It's not just about the coffee, it's about grounding yourself in the familiar.",
+      "description2": "Consistency is your comfort. Every morning follows the same pattern, and that's exactly how you like it."
+    },
+    "everybuddy": {
+      "icon": "icon_everybuddy.png",
+      "title": "The<br>everybuddy",
+      "tagline": "Coffee for everyone",
+      "description1": "You believe great coffee should be accessible to everyone. No pretension, just good coffee.",
+      "description2": "Your coffee brings people together - simple, welcoming, and always satisfying."
+    },
+    "percolator": {
+      "icon": "icon_percolator.png",
+      "title": "The<br>percolator",
+      "tagline": "Brewing connections",
+      "description1": "You're the social catalyst of coffee. Your brew brings people together and keeps conversations flowing.",
+      "description2": "Like a good percolator, you help ideas and connections bubble up through the power of coffee."
+    },
+    "beanfluencer": {
+      "icon": "icon_beanfluencer.png",
+      "title": "The<br>beanfluencer",
+      "tagline": "Influencing taste",
+      "description1": "You're the trendsetter of coffee culture. People look to you for what's next in the coffee world.",
+      "description2": "Your coffee choices influence others. You're not just drinking coffee, you're shaping coffee culture."
+    },
+    "brewmantic": {
+      "icon": "icon_brewmantic.png",
+      "title": "The<br>brewmantic",
+      "tagline": "Coffee with heart",
+      "description1": "You see coffee as an expression of love. Every cup is made with care and shared with warmth.",
+      "description2": "Your coffee is romantic - it's about connection, comfort, and creating beautiful moments."
+    }
+  }
+}
