@@ -288,12 +288,33 @@
 
             async loadData() {
                 try {
-                    const response = await fetch('data.json');
-                    const data = await response.json();
-                    this.questions = data.questions;
-                    this.profiles = data.profiles;
-                } catch (error) {
-                    console.error('Error loading quiz data:', error);
+                    // First try to fetch from GitHub Gist
+                    console.log('Attempting to fetch data from GitHub Gist...');
+                    const timestamp = new Date().getTime();
+                    const gistResponse = await fetch(`https://gist.githubusercontent.com/leighgibbo/5e86fcca79b39f5e7216c8a55a101de2/raw/touchscreen-data.json?t=${timestamp}`);
+                    
+                    if (gistResponse.ok) {
+                        const gistData = await gistResponse.json();
+                        this.questions = gistData.questions;
+                        this.profiles = gistData.profiles;
+                        console.log('Successfully loaded data from GitHub Gist');
+                    } else {
+                        throw new Error(`Gist fetch failed with status: ${gistResponse.status}`);
+                    }
+                } catch (gistError) {
+                    console.warn('Failed to load from GitHub Gist, falling back to local data:', gistError);
+                    
+                    try {
+                        // Fallback to local data.json
+                        const localResponse = await fetch('data.json');
+                        const localData = await localResponse.json();
+                        this.questions = localData.questions;
+                        this.profiles = localData.profiles;
+                        console.log('Successfully loaded data from local file');
+                    } catch (localError) {
+                        console.error('Failed to load both Gist and local data:', localError);
+                        // Do something else here?
+                    }
                 }
                 this.init();
             }
