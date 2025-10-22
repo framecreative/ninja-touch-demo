@@ -4,41 +4,143 @@
       "text": "Your morning coffee is…",
       "weight": 1.5,
       "options": [
-        { "text": "My daily anchor\nSame mug same moment, same me.", "value": "stability" },
-        { "text": "A precision test\nI'm chasing god-tier crema.", "value": "mastery" },
-        { "text": "A wild card\nDepends who I wake up as today.", "value": "independence" },
-        { "text": "A shared ritual\nHalf the joy's in who I drink it with.", "value": "belonging" }
+        {
+          "text": "My daily anchor\nSame mug same moment, same me.",
+          "value": "stability",
+          "proofpoint": "proofpoint-1"
+        },
+        {
+          "text": "A precision test\nI'm chasing god-tier crema.",
+          "value": "mastery",
+          "proofpoint": "proofpoint-2"
+        },
+        {
+          "text": "A wild card\nDepends who I wake up as today.",
+          "value": "independence",
+          "proofpoint": "proofpoint-3"
+        },
+        {
+          "text": "A shared ritual\nHalf the joy's in who I drink it with.",
+          "value": "belonging",
+          "proofpoint": "proofpoint-4"
+        }
       ]
     },
     {
       "text": "When it comes to taste, you’re drawn to…",
       "weight": 1,
       "options": [
-        { "text": "Smooth and steady\nthe comfort playlist of coffee.", "value": "stability" },
-        { "text": "Bold and balanced\npure craft, zero shortcuts.", "value": "mastery" },
-        { "text": "Whatever fits the mood\nvariety keeps things interesting.", "value": "independence" },
-        { "text": "The easy crowd-pleaser\nhits the spot without overthinking it.", "value": "belonging" }
+        {
+          "text": "Smooth and steady\nthe comfort playlist of coffee.",
+          "value": "stability",
+          "proofpoint": "proofpoint-5"
+        },
+        {
+          "text": "Bold and balanced\npure craft, zero shortcuts.",
+          "value": "mastery",
+          "proofpoint": "proofpoint-6"
+        },
+        {
+          "text": "Whatever fits the mood\nvariety keeps things interesting.",
+          "value": "independence",
+          "proofpoint": "proofpoint-1"
+        },
+        {
+          "text": "The easy crowd-pleaser\nhits the spot without overthinking it.",
+          "value": "belonging",
+          "proofpoint": "proofpoint-2"
+        }
       ]
     },
     {
       "text": "When you’re at the machine, you…",
       "weight": 1,
       "options": [
-        { "text": "Geek out\npressure, grind, and tamp like it’s performance art.", "value": "stability" },
-        { "text": "Hit brew, zone out and trust the machine.", "value": "mastery" },
-        { "text": "Treat it like a creative outlet\nfollow the recipe once, then make it yours.", "value": "independence" },
-        { "text": "Take everyone’s order\ncoffee diplomacy is your love language.", "value": "belonging" }
+        {
+          "text": "Geek out\npressure, grind, and tamp like it’s performance art.",
+          "value": "stability",
+          "proofpoint": "proofpoint-3"
+        },
+        {
+          "text": "Hit brew, zone out and trust the machine.",
+          "value": "mastery",
+          "proofpoint": "proofpoint-4"
+        },
+        {
+          "text": "Treat it like a creative outlet\nfollow the recipe once, then make it yours.",
+          "value": "independence",
+          "proofpoint": "proofpoint-5"
+        },
+        {
+          "text": "Take everyone’s order\ncoffee diplomacy is your love language.",
+          "value": "belonging",
+          "proofpoint": "proofpoint-6"
+        }
       ]
     },
     {
       "text": "When your cup hits the bench, it usually…",
       "weight": 1,
       "options": [
-        { "text": "Keeps it stripped-back\nblack, white, and effortlessly unfussy.", "value": "minimalist" },
-        { "text": "Looks engineered by NASA\nprecision, poise, serious intent.", "value": "futurist" },
-        { "text": "Could start a micro-trend on TikTok\nconfident pour, main-character energy.", "value": "trendy" },
-        { "text": "Feels like home\nwarm, familiar and a little nostalgic.", "value": "classic" }
+        {
+          "text": "Keeps it stripped-back\nblack, white, and effortlessly unfussy.",
+          "value": "minimalist",
+          "proofpoint": "proofpoint-1"
+        },
+        {
+          "text": "Looks engineered by NASA\nprecision, poise, serious intent.",
+          "value": "futurist",
+          "proofpoint": "proofpoint-2"
+        },
+        {
+          "text": "Could start a micro-trend on TikTok\nconfident pour, main-character energy.",
+          "value": "trendy",
+          "proofpoint": "proofpoint-3"
+        },
+        {
+          "text": "Feels like home\nwarm, familiar and a little nostalgic.",
+          "value": "classic",
+          "proofpoint": "proofpoint-4"
+        }
       ]
+    }
+  ],
+  "proofpoints": [
+    {
+      "id": "proofpoint-1",
+      "image": "proofpoint-demo.png",
+      "title": "Proofpoint 1 Title",
+      "description": "Proofpoint 1 Description"
+    },
+    {
+      "id": "proofpoint-2",
+      "image": "proofpoint-demo.png",
+      "title": "Proofpoint 2 Title",
+      "description": "Proofpoint 2 Description"
+    },
+    {
+      "id": "proofpoint-3",
+      "image": "proofpoint-demo.png",
+      "title": "Proofpoint 3 Title",
+      "description": "Proofpoint 3 Description"
+    },
+    {
+      "id": "proofpoint-4",
+      "image": "proofpoint-demo.png",
+      "title": "Proofpoint 4 Title",
+      "description": "Proofpoint 4 Description"
+    },
+    {
+      "id": "proofpoint-5",
+      "image": "proofpoint-demo.png",
+      "title": "Proofpoint 5 Title",
+      "description": "Proofpoint 5 Description"
+    },
+    {
+      "id": "proofpoint-6",
+      "image": "proofpoint-demo.png",
+      "title": "Proofpoint 6 Title",
+      "description": "Proofpoint 6 Description"
     }
   ],
   "profiles": {
@@ -51,7 +153,7 @@
     },
     "optimiser": {
       "icon": "icon_optimiser.png",
-      "title": "The<br>optimiser", 
+      "title": "The<br>optimiser",
       "tagline": "Better, every time.",
       "description1": "You can’t leave well enough alone — and that’s the point. You tweak, refine, and shave seconds until routine becomes art.",
       "proofpoint": "Barista Assist Technology™ takes out the guesswork, guiding you from grind size to extraction for perfectly consistent results."

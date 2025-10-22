@@ -104,19 +104,23 @@
             </div>
         </div>
 
-        <!-- Answer Confirmation Screen -->
-        <!-- <div id="answer-screen" class="screen hidden relative bg-tan min-h-screen">
+        <!-- Proofpoint Display Screen -->
+        <div id="proofpoint-screen" class="screen hidden relative bg-tan min-h-screen">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="w-full mx-auto px-[11.85%] text-center">
                     <div class="mb-8">
-                        <div class="w-32 h-32 bg-buff rounded-full mx-auto mb-6 flex items-center justify-center">
-                            <div class="w-20 h-20 bg-washed-black rounded-full"></div>
+                        <div class="w-full h-auto bg-buff flex items-center justify-center">
+                            <img id="proofpoint-image" src="" alt="Proofpoint image" class="w-full h-full object-contain">
                         </div>
                     </div>
-                    <h2 class="text-5xl font-bold text-washed-black mb-4">ANSWER:</h2>
-                    <p id="selected-answer" class="text-3xl text-washed-black mb-8">My daily anchor</p>
-                    <p class="text-xl text-washed-black mb-12 leading-relaxed">
-                        Our 25 grind settings mean espresso exactly your way
+                    <h2 id="proofpoint-title" class="text-5xl font-bold text-washed-black mb-4">
+                        <!-- Proofpoint title will be dynamically generated -->
+                    </h2>
+                    <p id="proofpoint-subtitle" class="text-3xl text-washed-black mb-8">
+                        <!-- Proofpoint subtitle will be dynamically generated -->
+                    </p>
+                    <p id="proofpoint-description" class="text-xl text-washed-black mb-12 leading-relaxed">
+                        <!-- Proofpoint description will be dynamically generated -->
                     </p>
                     <button
                         id="continue-btn"
@@ -125,7 +129,7 @@
                     </button>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <!-- Profile Reveal Screen -->
         <div id="profile-reveal-screen" class="screen hidden relative bg-tan min-h-screen">
@@ -302,12 +306,13 @@
                     // First try to fetch from GitHub Gist
                     console.log('Attempting to fetch data from GitHub Gist...');
                     const timestamp = new Date().getTime();
-                    const gistResponse = await fetch(`https://gist.githubusercontent.com/leighgibbo/5e86fcca79b39f5e7216c8a55a101de2/raw/touchscreen-data.json?t=${timestamp}`);
+                    const gistResponse = await fetch(`https://gist.githubusercontent.com/leighgibbod/5e86fcca79b39f5e7216c8a55a101de2/raw/touchscreen-data.json?t=${timestamp}`);
 
                     if (gistResponse.ok) {
                         const gistData = await gistResponse.json();
                         this.questions = gistData.questions;
                         this.profiles = gistData.profiles;
+                        this.proofpoints = gistData.proofpoints;
                         console.log('Successfully loaded data from GitHub Gist');
                     } else {
                         throw new Error(`Gist fetch failed with status: ${gistResponse.status}`);
@@ -321,6 +326,7 @@
                         const localData = await localResponse.json();
                         this.questions = localData.questions;
                         this.profiles = localData.profiles;
+                        this.proofpoints = localData.proofpoints;
                         console.log('Successfully loaded data from local file');
                     } catch (localError) {
                         console.error('Failed to load both Gist and local data:', localError);
@@ -358,10 +364,10 @@
                     this.nextQuestion();
                 });
 
-                // Answer confirmation button ('continue' button) - not needed for now
-                // document.getElementById('continue-btn').addEventListener('click', () => {
-                //     this.continueToNext();
-                // });
+                // Proofpoint confirmation button ('continue' button)
+                document.getElementById('continue-btn').addEventListener('click', () => {
+                    this.continueToNext();
+                });
 
                 // Profile back button - disabled so user can't go back and adjust their answers
                 // document.getElementById('profile-back-btn').addEventListener('click', () => {
@@ -425,7 +431,7 @@
                     optionElement.addEventListener('click', () => {
                         this.selectOption(optionElement, option, question.weight);
                     });
-
+                    // Append the answer option button to the options container:
                     optionsContainer.appendChild(optionElement);
                 });
 
@@ -460,17 +466,24 @@
                         value: this.selectedOption.value,
                         weight: this.selectedOption.weight
                     });
-                    // this.showAnswerConfirmation();
-                    this.continueToNext();
+                    this.showProofpointScreen();
+                    // this.continueToNext();
                 }
             }
 
-            // showAnswerConfirmation() {
-            //     // Extract just the first line for the answer display
-            //     const firstLine = this.selectedOption.text.split('\n')[0];
-            //     document.getElementById('selected-answer').textContent = firstLine;
-            //     this.showScreen('answer-screen');
-            // }
+            showProofpointScreen() {
+                const selectedProofpoint = this.proofpoints.filter(proofpoint => proofpoint.id === this.selectedOption.proofpoint)[0];
+                if (!selectedProofpoint) {
+                    console.warn('No proofpoint found for selected option, skipping to next question...');
+                    this.continueToNext();
+                    return;
+                }
+                document.getElementById('proofpoint-image').src = `assets/images/${selectedProofpoint.image}`;
+                document.getElementById('proofpoint-title').textContent = selectedProofpoint.title;
+                document.getElementById('proofpoint-subtitle').textContent = selectedProofpoint.subtitle || '';
+                document.getElementById('proofpoint-description').textContent = selectedProofpoint.description || '';
+                this.showScreen('proofpoint-screen');
+            }
 
             continueToNext() {
                 this.currentQuestion++;
