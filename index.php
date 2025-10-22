@@ -31,13 +31,12 @@
     <div id="app" class="min-h-screen flex flex-col">
         <!-- Waiting/Touch Screen -->
         <div id="waiting-screen" class="screen relative bg-buff min-h-screen">
-            <div class="absolute inset-0 flex items-center justify-center">
-                <video 
+            <div class="absolute inset-0 flex items-center justify-center bg-washed-black">
+                <video
                     src="assets/video/homepage.mp4"
-                    class="absolute inset-0 w-full h-full object-cover object-right-top"
-                    autoplay 
-                    muted 
-                    loop 
+                    class="transition-all duration-200 opacity-0 absolute inset-0 w-full h-full object-cover object-right-top"
+                    muted
+                    loop
                     playsinline
                     preload="auto">
                 </video>
@@ -290,6 +289,11 @@
                 this.questions = [];
                 this.profiles = {};
 
+                // Video synchronization properties
+                this.videoDuration = null; // Will be set when video loads
+                this.syncEpoch = 1700000000000; // Fixed epoch start time for all devices (adjust if needed)
+                this.playbackStartTime = null;
+
                 this.loadData();
             }
 
@@ -329,6 +333,7 @@
             init() {
                 this.bindEvents();
                 this.startActivityTracking();
+                this.initializeVideoSync();
                 this.showScreen('waiting-screen');
             }
 
@@ -735,8 +740,65 @@
                 // Show target screen
                 document.getElementById(screenId).classList.remove('hidden');
 
+                // Handle video synchronization & fading in/out for waiting screen
+                if (screenId === 'waiting-screen') {
+                    this.syncVideoPlayback();
+                    document.querySelector('#waiting-screen video').classList.add('opacity-100');
+                    document.querySelector('#waiting-screen video').classList.remove('opacity-0');
+                } else {
+                    document.querySelector('#waiting-screen video').classList.add('opacity-0');
+                    document.querySelector('#waiting-screen video').classList.remove('opacity-100');
+                }
+
                 // Update activity tracking
                 this.lastActivity = Date.now();
+            }
+
+            syncVideoPlayback() {
+                const video = document.querySelector('#waiting-screen video');
+                if (!video) return;
+
+                // Set video duration if not already set
+                if (!this.videoDuration && video.duration) {
+                    this.videoDuration = video.duration;
+                    console.log('Video duration set to:', this.videoDuration, 'seconds');
+                }
+
+                // Calculate synchronized playback time
+                const currentTime = Date.now();
+                const timeSinceEpoch = currentTime - this.syncEpoch;
+
+                // Convert to seconds and modulo by video duration to get loop position
+                const synchronizedTime = (timeSinceEpoch / 1000) % this.videoDuration;
+
+                // Set video to synchronized time
+                video.currentTime = synchronizedTime;
+
+                console.log('Video synced to time:', synchronizedTime.toFixed(2), 'seconds');
+
+                // Ensure video is playing
+                if (video.paused) {
+                    video.play().catch(e => console.log('Video play failed:', e));
+                }
+            }
+
+            initializeVideoSync() {
+                const video = document.querySelector('#waiting-screen video');
+                if (!video) return;
+
+                // Wait for video metadata to load
+                video.addEventListener('loadedmetadata', () => {
+                    this.videoDuration = video.duration;
+                    console.log('Video metadata loaded. Duration:', this.videoDuration, 'seconds');
+
+                    // Initial sync
+                    this.syncVideoPlayback();
+                });
+
+                // Handle video load errors
+                video.addEventListener('error', (e) => {
+                    console.error('Video load error:', e);
+                });
             }
         }
 
