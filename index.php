@@ -33,8 +33,8 @@
         <div id="waiting-screen" class="screen relative bg-buff min-h-screen">
             <div class="absolute inset-0 flex items-center justify-center">
                 <img src="assets/images/home-bg-demo.png"
-                     alt="Coffee background"
-                     class="absolute inset-0 w-full h-full object-cover object-right-top">
+                    alt="Coffee background"
+                    class="absolute inset-0 w-full h-full object-cover object-right-top">
             </div>
             <div class="absolute inset-0 flex items-center justify-center">
                 <div class="w-full mx-auto px-[11.85%]">
@@ -73,7 +73,7 @@
                 <div class="w-full mx-auto px-[11.85%]">
                     <!-- Question -->
                     <h2 id="question-text" class="text-5xl font-semibold text-washed-black mb-16 text-center leading-tight">
-                        Your morning coffee is…
+                        <!-- Question text will be dynamically generated -->
                     </h2>
 
                     <!-- Answer Options -->
@@ -100,7 +100,7 @@
         </div>
 
         <!-- Answer Confirmation Screen -->
-        <div id="answer-screen" class="screen hidden relative bg-tan min-h-screen">
+        <!-- <div id="answer-screen" class="screen hidden relative bg-tan min-h-screen">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="w-full mx-auto px-[11.85%] text-center">
                     <div class="mb-8">
@@ -120,7 +120,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Profile Reveal Screen -->
         <div id="profile-reveal-screen" class="screen hidden relative bg-tan min-h-screen">
@@ -135,12 +135,12 @@
 
                     <!-- Profile Title -->
                     <h1 id="profile-title" class="text-[56px] font-extrabold text-washed-black mb-4 text-center leading-[72px] tracking-[9px] uppercase">
-                        The<br>xxxxxx
+                        The<br>...
                     </h1>
 
                     <!-- Profile Tagline -->
                     <p id="profile-tagline" class="text-[44px] font-extrabold text-washed-black mb-16 text-center leading-[72px]">
-                        Every detail, dialled
+                        Your coffee profile tagline will load here..
                     </p>
 
                     <!-- Navigation -->
@@ -166,11 +166,12 @@
                 <div class="w-full mx-auto px-[11.85%] text-center">
                     <div class="mb-16">
                         <p id="profile-description-1" class="text-[44px] font-extrabold text-washed-black mb-8 leading-[72px]">
-                            You know perfection doesn't happen by accident<br>it happens one micro-adjustment at a time.<br>You're the type to notice when the crema's two seconds late.
+                            Your coffee profile description will load here..
                         </p>
-                        <p id="profile-description-2" class="text-[44px] font-extrabold text-washed-black mb-8 leading-[72px]">
+                        <!-- Proof Point (do we need to show this?) -->
+                        <!-- <p id="profile-proof-point" class="text-[44px] font-extrabold text-washed-black mb-8 leading-[72px]">
                             Weight-based dosing and active temperature control keep every variable locked, so the details stay as dialled as you are.
-                        </p>
+                        </p> -->
                     </div>
 
                     <!-- Navigation -->
@@ -202,7 +203,7 @@
                             We hope you enjoyed<br>discovering your coffee profile!
                         </p>
                     </div>
-                    
+
                     <!-- Start Over Button -->
                     <button
                         id="start-over-btn"
@@ -219,8 +220,8 @@
                 <!-- Timeout Icon -->
                 <div class="mb-8">
                     <img src="/Users/leighgibson/Sites/test/ninja-touch/4a8d527f94fdd11281a715ff2df93e015c6d253c.svg"
-                         alt="Timeout icon"
-                         class="w-[99px] h-[99px] mx-auto">
+                        alt="Timeout icon"
+                        class="w-[99px] h-[99px] mx-auto">
                 </div>
 
                 <!-- Countdown Text -->
@@ -292,7 +293,7 @@
                     console.log('Attempting to fetch data from GitHub Gist...');
                     const timestamp = new Date().getTime();
                     const gistResponse = await fetch(`https://gist.githubusercontent.com/leighgibbo/5e86fcca79b39f5e7216c8a55a101de2/raw/touchscreen-data.json?t=${timestamp}`);
-                    
+
                     if (gistResponse.ok) {
                         const gistData = await gistResponse.json();
                         this.questions = gistData.questions;
@@ -303,7 +304,7 @@
                     }
                 } catch (gistError) {
                     console.warn('Failed to load from GitHub Gist, falling back to local data:', gistError);
-                    
+
                     try {
                         // Fallback to local data.json
                         const localResponse = await fetch('data.json');
@@ -326,47 +327,58 @@
             }
 
             bindEvents() {
+                // Touch button - kicks off the quiz intro from the waiting screen
                 document.getElementById('touch-btn').addEventListener('click', () => {
                     this.showIntro();
                 });
 
+                // Intro next button - starts the quiz from the intro screen
                 document.getElementById('intro-next-btn').addEventListener('click', () => {
                     this.startQuiz();
                 });
 
+                // Standard back button - goes back to the previous question
                 document.getElementById('back-btn').addEventListener('click', () => {
                     this.goBack();
                 });
 
+                // Standard next button - goes to the next question
                 document.getElementById('next-btn').addEventListener('click', () => {
                     this.nextQuestion();
                 });
 
-                document.getElementById('continue-btn').addEventListener('click', () => {
-                    this.continueToNext();
-                });
+                // Answer confirmation button ('continue' button) - not needed for now
+                // document.getElementById('continue-btn').addEventListener('click', () => {
+                //     this.continueToNext();
+                // });
 
+                // Profile back button - disabled so user can't go back and adjust their answers
                 // document.getElementById('profile-back-btn').addEventListener('click', () => {
                 //     this.goBack();
                 // });
 
+                // Profile next button - shows the profile details
                 document.getElementById('profile-next-btn').addEventListener('click', () => {
                     console.log('showProfileDetails called, profile:', this.profile);
                     this.showProfileDetails();
                 });
 
+                // Profile details back button - goes back to the profile reveal
                 document.getElementById('details-back-btn').addEventListener('click', () => {
                     this.showProfileReveal();
                 });
 
+                // Profile details next button - shows the thank you screen
                 document.getElementById('details-next-btn').addEventListener('click', () => {
                     this.showThankYou();
                 });
 
+                // Start over button (shown on the final thank you screen) - resets the quiz to the waiting screen
                 document.getElementById('start-over-btn').addEventListener('click', () => {
                     this.resetToWaiting();
                 });
 
+                // Dismiss button - dismisses the timeout overlay
                 document.getElementById('dismiss-btn').addEventListener('click', () => {
                     this.dismissTimeout();
                 });
@@ -567,7 +579,7 @@
                 document.querySelector('.profile-icon').src = `assets/images/${this.profile.icon}`;
                 document.getElementById('profile-title').innerHTML = this.profile.title;
                 document.getElementById('profile-tagline').textContent = this.profile.tagline;
-                
+
                 // Update profile icon dynamically
                 const profileIcon = document.querySelector('#profile-reveal-screen img');
                 if (profileIcon && this.profile.icon) {
@@ -580,7 +592,7 @@
 
             showProfileDetails() {
                 document.getElementById('profile-description-1').textContent = this.profile.description1;
-                document.getElementById('profile-description-2').textContent = this.profile.description2;
+                // document.getElementById('profile-proof-point').textContent = this.profile.proofpoint;
 
                 this.showScreen('profile-details-screen');
             }
