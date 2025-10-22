@@ -32,9 +32,15 @@
         <!-- Waiting/Touch Screen -->
         <div id="waiting-screen" class="screen relative bg-buff min-h-screen">
             <div class="absolute inset-0 flex items-center justify-center">
-                <img src="assets/images/home-bg-demo.png"
-                    alt="Coffee background"
-                    class="absolute inset-0 w-full h-full object-cover object-right-top">
+                <video 
+                    src="assets/video/homepage.mp4"
+                    class="absolute inset-0 w-full h-full object-cover object-right-top"
+                    autoplay 
+                    muted 
+                    loop 
+                    playsinline
+                    preload="auto">
+                </video>
             </div>
             <div class="absolute inset-0 flex items-center justify-center">
                 <div class="w-full mx-auto px-[11.85%]">
