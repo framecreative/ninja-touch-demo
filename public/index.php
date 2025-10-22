@@ -24,13 +24,24 @@
             }
         }
     </script>
+    <style>
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 4px solid #1e1d1c;
+            border-top-color: #d7b792;
+            will-change: transform;
+        }
+    </style>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body class="bg-tan min-h-screen font-sans">
-    <div id="app" class="min-h-screen flex flex-col">
+    <div id="app" class="min-h-screen min-w-screen flex flex-col relative overflow-hidden">
+
         <!-- Waiting/Touch Screen -->
-        <div id="waiting-screen" class="screen relative bg-buff min-h-screen">
+        <div id="waiting-screen" class="screen absolute transition-all duration-200 bg-buff h-full w-full">
             <div class="absolute inset-0 flex items-center justify-center bg-washed-black">
                 <video
                     src="assets/video/homepage.mp4"
@@ -46,7 +57,7 @@
                     <div class="backdrop-blur-[75px] backdrop-filter bg-white bg-opacity-[0.02] h-[130px] rounded-xl flex items-center justify-center">
                         <button
                             id="touch-btn"
-                            class="text-tan text-4xl font-extrabold tracking-[9px] hover:opacity-70 transition-opacity duration-200">
+                            class="w-full h-full text-tan text-4xl font-extrabold tracking-[9px] hover:opacity-70 transition-opacity duration-200">
                             TOUCH ME
                         </button>
                     </div>
@@ -55,7 +66,7 @@
         </div>
 
         <!-- Intro Screen -->
-        <div id="intro-screen" class="screen hidden relative min-h-screen bg-gradient-to-b from-[#f3e8d8] to-[#d7b792]">
+        <div id="intro-screen" class="screen opacity-0 transition-all duration-300 absolute h-full w-full bg-gradient-to-b from-[#f3e8d8] to-[#d7b792]">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="w-full mx-auto px-[11.85%] text-center">
                     <div class="font-semibold text-washed-black text-5xl leading-[52px] mb-16">
@@ -73,7 +84,7 @@
         </div>
 
         <!-- Question Screens -->
-        <div id="question-screen" class="screen hidden relative bg-tan min-h-screen">
+        <div id="question-screen" class="screen opacity-0 transition-all duration-300 absolute  h-full w-full bg-tan">
             <div class="absolute inset-0 flex flex-col justify-center items-center">
                 <div class="w-full mx-auto px-[11.85%]">
                     <!-- Question -->
@@ -104,8 +115,8 @@
             </div>
         </div>
 
-        <!-- Proofpoint Display Screen -->
-        <div id="proofpoint-screen" class="screen hidden relative bg-tan min-h-screen">
+        <!-- Proofpoint Display Screens -->
+        <div id="proofpoint-screen" class="screen opacity-0 transition-all duration-300 absolute h-full w-full bg-tan">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="w-full mx-auto px-[11.85%] text-center">
                     <div class="mb-8">
@@ -131,8 +142,22 @@
             </div>
         </div>
 
+        <!-- Profile Calculation Screen -->
+        <div id="profile-calculation-screen" class="screen opacity-0 transition-all duration-300 absolute h-full w-full bg-black">
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <div class="profile-calculate-content w-full mx-auto px-[11.85%] text-center opacity-0">
+                    <h1 class="text-[56px] font-extrabold text-buff mb-8 text-center leading-[72px] tracking-[9px] uppercase">
+                        Calculating your coffee profile...
+                    </h1>
+                    <div class="flex justify-center items-center">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Profile Reveal Screen -->
-        <div id="profile-reveal-screen" class="screen hidden relative bg-tan min-h-screen">
+        <div id="profile-reveal-screen" class="screen opacity-0 transition-all duration-300 absolute h-full w-full bg-tan">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="w-full mx-auto px-[11.85%] text-center">
                     <!-- Profile Icon -->
@@ -170,11 +195,11 @@
         </div>
 
         <!-- Profile Details Screen -->
-        <div id="profile-details-screen" class="screen hidden relative bg-tan min-h-screen">
+        <div id="profile-details-screen" class="screen opacity-0 transition-all duration-300 absolute h-full w-full bg-tan">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="w-full mx-auto px-[11.85%] text-center">
                     <div class="mb-16">
-                        <p id="profile-description-1" class="text-[44px] font-extrabold text-washed-black mb-8 leading-[72px]">
+                        <p id="profile-details-description" class="text-[44px] font-extrabold text-washed-black mb-8 leading-[72px]">
                             Your coffee profile description will load here..
                         </p>
                         <!-- Proof Point (do we need to show this?) -->
@@ -201,7 +226,7 @@
         </div>
 
         <!-- Thank You Screen -->
-        <div id="thank-you-screen" class="screen hidden relative bg-tan min-h-screen">
+        <div id="thank-you-screen" class="screen opacity-0 transition-all duration-300 absolute h-full w-full bg-tan">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="w-full mx-auto px-[11.85%] text-center">
                     <div class="mb-16">
@@ -350,6 +375,34 @@
                 this.startActivityTracking();
                 this.initializeVideoSync();
                 this.showScreen('waiting-screen');
+
+                // Motion animation declarations:
+                // Spinners:
+                const spinners = document.querySelectorAll(".spinner");
+                if (spinners.length > 0) {
+                    spinners.forEach(spinner => {
+                        Motion.animate(
+                            spinner, {
+                                rotate: 360
+                            }, {
+                                duration: 1.5,
+                                repeat: Infinity,
+                                ease: "linear",
+                            }
+                        )
+                    });
+                }
+
+                // Global button press state:
+                Motion.press("button", (element) => {
+                    Motion.animate(element, {
+                        scale: 0.95
+                    })
+
+                    return () => Motion.animate(element, {
+                        scale: 1
+                    })
+                })
             }
 
             bindEvents() {
@@ -449,6 +502,7 @@
 
                 this.showScreen('question-screen');
 
+                // stagger-animate the answer options buttons in:
                 Motion.animate("#answer-options button", {
                     opacity: 1,
                     y: [50, 0]
@@ -498,7 +552,7 @@
                 document.getElementById('proofpoint-title').textContent = selectedProofpoint.title;
                 document.getElementById('proofpoint-subtitle').textContent = selectedProofpoint.subtitle || '';
                 document.getElementById('proofpoint-description').textContent = selectedProofpoint.description || '';
-                this.showScreen('proofpoint-screen');
+                this.showScreen('proofpoint-screen', 'question-screen');
             }
 
             continueToNext() {
@@ -508,7 +562,8 @@
                     this.showQuestion();
                 } else {
                     this.calculateProfile();
-                    this.showProfileReveal();
+                    this.showProfileCalculationScreen();
+                    // this.showProfileReveal();
                 }
             }
 
@@ -518,7 +573,7 @@
                     this.answers.pop();
                     this.showQuestion();
                 } else {
-                    this.showScreen('intro-screen');
+                    this.showScreen('intro-screen', 'question-screen');
                 }
             }
 
@@ -615,7 +670,34 @@
                 return profileMatrix[needState]?.[styleProfile] || 'ritualist';
             }
 
-            showProfileReveal() {
+            showProfileCalculationScreen() {
+                this.showScreen('profile-calculation-screen', 'question-screen');
+                this.populateProfileReveal();
+
+                const calcContent = document.querySelector('.profile-calculate-content');
+                Motion.animate(calcContent, {
+                    opacity: 1,
+                    scale: [0.9, 1]
+                }, {
+                    delay: 0.3,
+                    duration: 0.8
+                }).then(() => {
+                    // animate back out after a 2s delay, before changing to the next page:
+                    Motion.animate(calcContent, {
+                        opacity: 0,
+                        scale: [1, 0.9]
+                    }, {
+                        delay: 2,
+                        duration: 0.8
+                    }).then(() => {
+                        setTimeout(() => {
+                            this.showScreen('profile-reveal-screen', 'profile-calculation-screen');
+                        }, 200);
+                    })
+                })
+            }
+
+            populateProfileReveal() {
                 document.querySelector('.profile-icon').src = `assets/images/${this.profile.icon}`;
                 document.getElementById('profile-title').innerHTML = this.profile.title;
                 document.getElementById('profile-tagline').textContent = this.profile.tagline;
@@ -626,19 +708,15 @@
                     profileIcon.src = `assets/images/${this.profile.icon}`;
                     profileIcon.alt = `${this.profile.title.replace('<br>', ' ')} icon`;
                 }
-
-                this.showScreen('profile-reveal-screen');
             }
 
             showProfileDetails() {
-                document.getElementById('profile-description-1').textContent = this.profile.description1;
-                // document.getElementById('profile-proof-point').textContent = this.profile.proofpoint;
-
-                this.showScreen('profile-details-screen');
+                document.getElementById('profile-details-description').textContent = this.profile.description1;
+                this.showScreen('profile-details-screen', 'profile-reveal-screen');
             }
 
             showThankYou() {
-                this.showScreen('thank-you-screen');
+                this.showScreen('thank-you-screen', 'profile-details-screen');
             }
 
             showTimeout() {
@@ -688,7 +766,7 @@
                 this.answers = [];
                 this.profile = null;
                 this.hideTimeout(); // Hide timeout overlay if visible
-                this.showScreen('waiting-screen');
+                this.showScreen('waiting-screen', 'thank-you-screen');
                 this.lastActivity = Date.now();
                 this.startActivityTracking();
             }
@@ -760,14 +838,34 @@
                 }, 30000);
             }
 
-            showScreen(screenId) {
-                // Hide all screens
-                document.querySelectorAll('.screen').forEach(screen => {
-                    screen.classList.add('hidden');
-                });
+            showScreen(screenId, previousScreenId = false) {
 
-                // Show target screen
-                document.getElementById(screenId).classList.remove('hidden');
+                const nextScreen = document.getElementById(screenId);
+
+                // if (!previousScreenId) {
+                //     // Hide all other screens
+                //     document.querySelectorAll('.screen').forEach(screen => {
+                //         screen.classList.add('opacity-0', 'pointer-events-none');
+                //     });
+                //     // Show the next screen
+                //     nextScreen.classList.remove('opacity-0', 'pointer-events-none');
+                // } else {
+                //     // Animate the two screens in a sequence
+                //     const previousScreen = document.getElementById(previousScreenId);
+                //     const sequence = [
+                //         [previousScreen, {opacity: 0}, {duration: 0.2}],
+                //         [nextScreen, {opacity: 1}, {duration: 0.2}]
+                //     ]
+                //     Motion.animate(sequence);
+                //     console.log('Animating screens in sequence:', previousScreenId, '->', screenId);
+                // }
+
+                // Hide all other screens
+                document.querySelectorAll('.screen').forEach(screen => {
+                    screen.classList.add('opacity-0', 'pointer-events-none');
+                });
+                // Show the next screen
+                nextScreen.classList.remove('opacity-0', 'pointer-events-none');
 
                 // Handle video synchronization & fading in/out for waiting screen
                 if (screenId === 'waiting-screen') {
