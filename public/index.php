@@ -248,6 +248,15 @@
         </div>
     </div>
 
+    <script src="assets/js/motion.js"></script>
+    <script>
+        const {
+            animate,
+            stagger,
+            scroll
+        } = Motion
+    </script>
+
     <script>
         /**
          * ===== Scoring: =====
@@ -423,7 +432,7 @@
 
                 question.options.forEach((option, index) => {
                     const optionElement = document.createElement('button');
-                    optionElement.className = 'w-full h-[200px] bg-buff rounded-xl hover:opacity-90 transition-opacity duration-200 text-washed-black font-semibold text-4xl leading-tight text-center flex items-center justify-center';
+                    optionElement.className = 'w-full h-[200px] bg-buff opacity-0 rounded-xl hover:opacity-90 transition-opacity duration-200 text-washed-black font-semibold text-4xl leading-tight text-center flex items-center justify-center';
                     optionElement.innerHTML = option.text.replace('\n', '<br>');
                     optionElement.dataset.value = option.value;
                     optionElement.dataset.weight = question.weight || 1; // Store the question weight
@@ -439,6 +448,13 @@
                 document.getElementById('next-btn').disabled = true;
 
                 this.showScreen('question-screen');
+
+                Motion.animate("#answer-options button", {
+                    opacity: 1,
+                    y: [50, 0]
+                }, {
+                    delay: stagger(0.05)
+                })
             }
 
             selectOption(element, option, weight = 1) {
