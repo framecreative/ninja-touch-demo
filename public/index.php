@@ -340,7 +340,7 @@
                     // First try to fetch from GitHub Gist
                     console.log('Attempting to fetch data from GitHub Gist...');
                     const timestamp = new Date().getTime();
-                    const gistResponse = await fetch(`https://gist.githubusercontent.com/leighgibbod/5e86fcca79b39f5e7216c8a55a101de2/raw/touchscreen-data.json?t=${timestamp}`);
+                    const gistResponse = await fetch(`https://gist.githubusercontent.com/leighgibbo/5e86fcca79b39f5e7216c8a55a101de2/raw/touchscreen-data.json?t=${timestamp}`);
 
                     if (gistResponse.ok) {
                         const gistData = await gistResponse.json();
