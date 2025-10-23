@@ -118,7 +118,7 @@
         <!-- Proofpoint Display Screens -->
         <div id="proofpoint-screen" class="screen opacity-0 transition-all duration-300 absolute h-full w-full bg-tan">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <div class="w-full mx-auto px-[11.85%] text-center">
+                <div class="proofpoint-content w-full mx-auto px-[11.85%] text-center">
                     <div class="mb-8">
                         <div class="w-full h-auto bg-buff flex items-center justify-center">
                             <img id="proofpoint-image" src="" alt="Proofpoint image" class="w-full h-full object-contain">
@@ -249,7 +249,7 @@
         </div>
 
         <!-- Timeout Overlay -->
-        <div id="timeout-screen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div id="timeout-screen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 pointer-events-none">
             <div class="bg-tan rounded-xl p-12 w-[80vw] h-[80vh] mx-4 text-center">
                 <!-- Timeout Icon -->
                 <div class="mb-8">
@@ -278,7 +278,7 @@
         const {
             animate,
             stagger,
-            scroll
+            scroll,
         } = Motion
     </script>
 
@@ -485,7 +485,7 @@
 
                 question.options.forEach((option, index) => {
                     const optionElement = document.createElement('button');
-                    optionElement.className = 'w-full h-[200px] bg-buff opacity-0 rounded-xl hover:opacity-90 transition-opacity duration-200 text-washed-black font-semibold text-4xl leading-tight text-center flex items-center justify-center';
+                    optionElement.className = 'w-full h-[200px] bg-buff rounded-xl transition-all duration-200 text-washed-black font-semibold text-4xl leading-tight text-center flex items-center justify-center';
                     optionElement.innerHTML = option.text.replace('\n', '<br>');
                     optionElement.dataset.value = option.value;
                     optionElement.dataset.weight = question.weight || 1; // Store the question weight
@@ -503,22 +503,22 @@
                 this.showScreen('question-screen');
 
                 // stagger-animate the answer options buttons in:
-                Motion.animate("#answer-options button", {
-                    opacity: 1,
-                    y: [50, 0]
-                }, {
-                    delay: stagger(0.05)
-                })
+                // Motion.animate("#answer-options button", {
+                //     opacity: [0, 1],
+                //     y: [50, 0]
+                // }, {
+                //     delay: stagger(0.05)
+                // })
             }
 
             selectOption(element, option, weight = 1) {
                 // Remove previous selection
                 document.querySelectorAll('#answer-options button').forEach(btn => {
-                    btn.classList.remove('ring-4', 'ring-washed-black', 'ring-opacity-30');
+                    btn.classList.remove('bg-gradient-to-b', 'from-[#f3e8d8]', 'to-[#d7b792]');
                 });
 
                 // Highlight selected option
-                element.classList.add('ring-4', 'ring-washed-black', 'ring-opacity-30');
+                element.classList.add('bg-gradient-to-b', 'from-[#f3e8d8]', 'to-[#d7b792]');
 
                 // Enable next button
                 document.getElementById('next-btn').disabled = false;
@@ -552,7 +552,18 @@
                 document.getElementById('proofpoint-title').textContent = selectedProofpoint.title;
                 document.getElementById('proofpoint-subtitle').textContent = selectedProofpoint.subtitle || '';
                 document.getElementById('proofpoint-description').textContent = selectedProofpoint.description || '';
+
+                const proofpointContent = document.querySelector('.proofpoint-content');
+
                 this.showScreen('proofpoint-screen', 'question-screen');
+                Motion.animate(proofpointContent, {
+                    y: ["150%", "0%"]
+                }, {
+                    ease: "circOut",
+                    delay: 0.35,
+                    duration: 0.6
+                })
+
             }
 
             continueToNext() {
@@ -691,7 +702,7 @@
                         duration: 0.8
                     }).then(() => {
                         setTimeout(() => {
-                            this.showScreen('profile-reveal-screen', 'profile-calculation-screen');
+                            this.showProfileReveal();
                         }, 200);
                     })
                 })
@@ -710,6 +721,10 @@
                 }
             }
 
+            showProfileReveal() {
+                this.showScreen('profile-reveal-screen', 'profile-calculation-screen');
+            }
+
             showProfileDetails() {
                 document.getElementById('profile-details-description').textContent = this.profile.description1;
                 this.showScreen('profile-details-screen', 'profile-reveal-screen');
@@ -721,7 +736,7 @@
 
             showTimeout() {
                 // Only show timeout if not on the waiting screen
-                const currentScreen = document.querySelector('.screen:not(.hidden)');
+                const currentScreen = document.querySelector('.screen:not(.opacity-0)');
                 if (currentScreen && currentScreen.id === 'waiting-screen') {
                     // Don't show timeout on waiting screen, just reset
                     this.resetToWaiting();
@@ -729,7 +744,7 @@
                 }
 
                 // Show timeout overlay
-                document.getElementById('timeout-screen').classList.remove('hidden');
+                document.getElementById('timeout-screen').classList.remove('opacity-0', 'pointer-events-none');
                 this.startCountdown();
             }
 
@@ -758,7 +773,7 @@
             }
 
             hideTimeout() {
-                document.getElementById('timeout-screen').classList.add('hidden');
+                document.getElementById('timeout-screen').classList.add('opacity-0', 'pointer-events-none');
             }
 
             resetToWaiting() {
