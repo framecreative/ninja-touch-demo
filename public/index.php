@@ -59,14 +59,14 @@ function vite_assets() {
 </head>
 
 <body class="bg-tan min-h-screen font-sans">
-    <div id="app" class="min-h-screen min-w-screen flex flex-col relative overflow-hidden">
+    <div id="app" class="h-screen w-screen relative overflow-hidden">
 
         <!-- Waiting/Touch Screen -->
-        <div id="waiting-screen" class="screen absolute transition-all duration-200 bg-buff h-full w-full will-change-opacity">
+        <div id="waiting-screen" class="screen active bg-buff">
             <div class="absolute inset-0 flex items-center justify-center bg-washed-black">
                 <video
                     src="assets/video/homepage.mp4"
-                    class="transition-all duration-200 opacity-0 absolute inset-0 w-full h-full object-cover object-right-top"
+                    class="transition-all duration-200 opacity-0 absolute inset-0 w-full h-full object-cover object-top-right"
                     muted
                     loop
                     playsinline
@@ -87,7 +87,7 @@ function vite_assets() {
         </div>
 
         <!-- Intro Screen -->
-        <div id="intro-screen" class="screen opacity-0 transition-opacity duration-300 absolute h-full w-full bg-gradient-to-b from-[#f3e8d8] to-[#d7b792] will-change-opacity">
+        <div id="intro-screen" class="screen bg-gradient-to-b from-[#f3e8d8] to-[#d7b792]">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="w-full mx-auto px-[11.85%] text-center">
                     <div class="font-semibold text-washed-black text-5xl leading-[52px] mb-16">
@@ -105,7 +105,7 @@ function vite_assets() {
         </div>
 
         <!-- Question Screens -->
-        <div id="question-screen" class="screen opacity-0 transition-opacity duration-300 absolute  h-full w-full bg-tan will-change-opacity">
+        <div id="question-screen" class="screen bg-tan">
             <div class="absolute inset-0 flex flex-col justify-center items-center">
                 <div class="w-full mx-auto px-[11.85%] will-change-contents">
                     <!-- Question -->
@@ -137,9 +137,9 @@ function vite_assets() {
         </div>
 
         <!-- Proofpoint Display Screens -->
-        <div id="proofpoint-screen" class="screen opacity-0 transition-opacity duration-300 absolute h-full w-full bg-gradient-to-b from-[#f3e8d8] to-[#d7b792] will-change-opacity">
+        <div id="proofpoint-screen" class="screen bg-gradient-to-b from-[#f3e8d8] to-[#d7b792]">
             <div class="absolute inset-0 flex flex-col items-center justify-center will-change-contents">
-                <div class="proofpoint-content w-full mx-auto px-[11.85%] text-center will-change-transform">
+                <div class="proofpoint-content hidden w-full mx-auto px-[11.85%] text-center will-change-transform">
                     <div class="mb-8">
                         <div class="w-full h-auto bg-buff flex items-center justify-center">
                             <img id="proofpoint-image" src="" alt="Proofpoint image" class="w-full h-full object-contain">
@@ -164,13 +164,10 @@ function vite_assets() {
         </div>
 
         <!-- Profile Calculation Screen -->
-        <div id="profile-calculation-screen" class="screen opacity-0 transition-opacity duration-300 absolute h-full w-full bg-black will-change-opacity">
+        <div id="profile-calculation-screen" class="screen bg-black">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="profile-calculate-content w-full mx-auto px-[11.85%] text-center opacity-0">
-                    <h1 class="text-[56px] font-extrabold text-buff mb-8 text-center leading-[72px] tracking-[9px] uppercase">
-                        Calculating your coffee profile...
-                    </h1>
-                    <div class="flex justify-center items-center">
+                    <div class="rounded-xl flex justify-center items-center">
                         <div class="spinner"></div>
                     </div>
                 </div>
@@ -178,7 +175,7 @@ function vite_assets() {
         </div>
 
         <!-- Profile Reveal Screen -->
-        <div id="profile-reveal-screen" class="screen opacity-0 transition-opacity duration-300 absolute h-full w-full bg-tan will-change-opacity">
+        <div id="profile-reveal-screen" class="screen bg-tan">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="w-full mx-auto px-[11.85%] text-center">
                     <!-- Profile Icon -->
@@ -216,7 +213,7 @@ function vite_assets() {
         </div>
 
         <!-- Profile Details Screen -->
-        <div id="profile-details-screen" class="screen opacity-0 transition-opacity duration-300 absolute h-full w-full bg-tan will-change-opacity">
+        <div id="profile-details-screen" class="screen bg-tan">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="w-full mx-auto px-[11.85%] text-center">
                     <div class="mb-16">
@@ -247,7 +244,7 @@ function vite_assets() {
         </div>
 
         <!-- Thank You Screen -->
-        <div id="thank-you-screen" class="screen opacity-0 transition-opacity duration-300 absolute h-full w-full bg-tan will-change-opacity">
+        <div id="thank-you-screen" class="screen bg-tan">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="w-full mx-auto px-[11.85%] text-center">
                     <div class="mb-16">
@@ -270,7 +267,7 @@ function vite_assets() {
         </div>
 
         <!-- Timeout Overlay -->
-        <div id="timeout-screen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div id="timeout-screen" class="timeout-screen">
             <div class="bg-tan rounded-xl p-12 w-[80vw] h-[80vh] mx-4 text-center">
                 <!-- Timeout Icon -->
                 <div class="mb-8">
