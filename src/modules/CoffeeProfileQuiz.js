@@ -1,3 +1,6 @@
+import { VideoSync } from './VideoSync.js';
+import { ActivityTracker } from './ActivityTracker.js';
+
 /**
  * Coffee Profile Quiz
  * 
@@ -37,17 +40,31 @@ export class CoffeeProfileQuiz {
         this.currentQuestion = 0;
         this.answers = [];
         this.profile = null;
-        this.timeoutTimer = null;
-        this.countdownTimer = null;
-        this.lastActivity = Date.now();
-        this.activityListenersSetup = false;
         this.questions = [];
         this.profiles = {};
 
-        // Video synchronization properties
-        this.videoDuration = null; // Will be set when video loads
-        this.syncEpoch = 1700000000000; // Fixed epoch start time for all devices (adjust if needed)
-        this.playbackStartTime = null;
+        // Initialize video synchronization
+        this.videoSync = new VideoSync();
+
+        // Initialize activity tracking
+        this.activityTracker = new ActivityTracker();
+        this.activityTracker.setCallbacks(
+            () => this.showTimeout(),
+            () => this.resetToWaiting()
+        );
+
+        this.screens = {
+            introScreen: document.getElementById('intro-screen'),
+            questionScreen: document.getElementById('question-screen'),
+            proofpointScreen: document.getElementById('proofpoint-screen'),
+            proofpointContent: document.querySelector('.proofpoint-content'),
+            profileCalculationScreen: document.getElementById('profile-calculation-screen'),
+            profileRevealScreen: document.getElementById('profile-reveal-screen'),
+            profileDetailsScreen: document.getElementById('profile-details-screen'),
+            thankYouScreen: document.getElementById('thank-you-screen'),
+            waitingScreen: document.getElementById('waiting-screen'),
+            timeoutScreen: document.getElementById('timeout-screen'),
+        };
 
         this.loadData();
     }
@@ -89,8 +106,8 @@ export class CoffeeProfileQuiz {
 
     init() {
         this.bindEvents();
-        this.startActivityTracking();
-        this.initializeVideoSync();
+        this.activityTracker.startActivityTracking();
+        this.videoSync.initializeVideoSync();
         this.showScreen('waiting-screen');
 
         // Motion animation declarations:
@@ -145,7 +162,7 @@ export class CoffeeProfileQuiz {
 
         // Proofpoint confirmation button ('continue' button)
         document.getElementById('continue-btn').addEventListener('click', () => {
-            this.continueToNext();
+            this.continueToNextQuestion();
         });
 
         // Profile back button - disabled so user can't go back and adjust their answers
@@ -176,21 +193,23 @@ export class CoffeeProfileQuiz {
 
         // Dismiss button - dismisses the timeout overlay
         document.getElementById('dismiss-btn').addEventListener('click', () => {
-            this.dismissTimeout();
+            this.activityTracker.dismissTimeout();
         });
     }
 
     showIntro() {
-        this.showScreen('intro-screen');
+        console.log('showIntro called', this.screens);
+        this.slideScreen(this.screens.introScreen, this.screens.waitingScreen, 'up');
     }
 
     startQuiz() {
         this.currentQuestion = 0;
         this.answers = [];
-        this.showQuestion();
+        this.populateQuestionScreen();
+        this.slideScreen(this.screens.questionScreen, this.screens.introScreen, 'up');
     }
 
-    showQuestion() {
+    populateQuestionScreen() {
         const question = this.questions[this.currentQuestion];
 
         // Update question text
@@ -217,7 +236,7 @@ export class CoffeeProfileQuiz {
         // Reset next button
         document.getElementById('next-btn').disabled = true;
 
-        this.showScreen('question-screen');
+        // this.showScreen('question-screen');
 
         // stagger-animate the answer options buttons in:
         // Motion.animate("#answer-options button", {
@@ -254,15 +273,16 @@ export class CoffeeProfileQuiz {
                 weight: this.selectedOption.weight
             });
             this.showProofpointScreen();
-            // this.continueToNext();
+            // this.continueToNextQuestion();
         }
     }
 
     showProofpointScreen() {
+        // populate the proofpoint data first:
         const selectedProofpoint = this.proofpoints.filter(proofpoint => proofpoint.id === this.selectedOption.proofpoint)[0];
         if (!selectedProofpoint) {
             console.warn('No proofpoint found for selected option, skipping to next question...');
-            this.continueToNext();
+            this.continueToNextQuestion();
             return;
         }
         document.getElementById('proofpoint-image').src = `assets/images/${selectedProofpoint.image}`;
@@ -270,28 +290,53 @@ export class CoffeeProfileQuiz {
         document.getElementById('proofpoint-subtitle').textContent = selectedProofpoint.subtitle || '';
         document.getElementById('proofpoint-description').textContent = selectedProofpoint.description || '';
 
-        const proofpointContent = document.querySelector('.proofpoint-content');
+        this.screens.proofpointScreen.classList.add('active');
+        this.screens.proofpointContent.classList.remove('hidden');
 
-        this.showScreen('proofpoint-screen', 'question-screen');
-        Motion.animate(proofpointContent, {
-            y: ["150%", "0%"]
-        }, {
-            ease: "circOut",
-            delay: 0.35,
-            duration: 0.6
-        })
-
+        // this.showScreen('proofpoint-screen', 'question-screen');
+        // fade in the proofpoint screen and then animate in the content.
+        Motion.animate([
+            // fade in the screen
+            [ this.screens.proofpointScreen, {
+                opacity: [0, 1]
+            }, {
+                ease: "easeInOut",
+                delay: 0,
+                duration: 0.3
+            }],
+            // animate in the content
+            [ this.screens.proofpointContent, {
+                y: ["150%", "0%"]
+            }, {
+                ease: "easeInOut",
+                delay: 0.35,
+                duration: 0.7
+            }]
+        ])
     }
 
-    continueToNext() {
-        this.currentQuestion++;
-
-        if (this.currentQuestion < this.questions.length) {
-            this.showQuestion();
+    continueToNextQuestion() {
+        if ((this.currentQuestion + 1) < this.questions.length) {
+            console.log(`going to question number: ${this.currentQuestion + 2} of ${this.questions.length}`);
+            // Slide out the proofpoint content, and recalc the next question:
+            Motion.animate(this.screens.proofpointContent, {
+                y: ["0%", "150%"]
+            }, {
+                ease: "easeInOut",
+                delay: 0.15,
+                duration: 0.7
+            }).then(() => {
+                this.screens.proofpointContent.classList.add('hidden');
+            }).then(() => {
+                this.currentQuestion++;
+                this.populateQuestionScreen();
+                this.slideScreen(this.screens.questionScreen, this.screens.proofpointScreen, 'up');
+            })
         } else {
+            console.log('All questions done. calculating profile and showing profile calculation screen');
+            // Calculate the profile and show the profile calculation screen:
             this.calculateProfile();
             this.showProfileCalculationScreen();
-            // this.showProfileReveal();
         }
     }
 
@@ -299,7 +344,7 @@ export class CoffeeProfileQuiz {
         if (this.currentQuestion > 0) {
             this.currentQuestion--;
             this.answers.pop();
-            this.showQuestion();
+            this.populateQuestionScreen();
         } else {
             this.showScreen('intro-screen', 'question-screen');
         }
@@ -399,8 +444,11 @@ export class CoffeeProfileQuiz {
     }
 
     showProfileCalculationScreen() {
-        this.showScreen('profile-calculation-screen', 'question-screen');
+        // this.showScreen('profile-calculation-screen', 'question-screen');
         this.populateProfileReveal();
+
+        this.screens.questionScreen.classList.remove('active');
+        this.slideScreen(this.screens.profileCalculationScreen, this.screens.proofpointScreen, 'down', true);
 
         const calcContent = document.querySelector('.profile-calculate-content');
         Motion.animate(calcContent, {
@@ -462,45 +510,17 @@ export class CoffeeProfileQuiz {
 
         // Show timeout overlay
         document.getElementById('timeout-screen').classList.remove('opacity-0', 'pointer-events-none');
-        this.startCountdown();
+        this.activityTracker.startCountdown();
     }
 
-    startCountdown() {
-        let countdown = 15;
-        document.getElementById('countdown-number').textContent = countdown;
-
-        this.countdownTimer = setInterval(() => {
-            countdown--;
-            document.getElementById('countdown-number').textContent = countdown;
-
-            if (countdown <= 0) {
-                clearInterval(this.countdownTimer);
-                this.hideTimeout();
-                this.resetToWaiting();
-            }
-        }, 1000);
-    }
-
-    dismissTimeout() {
-        if (this.countdownTimer) {
-            clearInterval(this.countdownTimer);
-        }
-        this.hideTimeout();
-        this.resetActivity();
-    }
-
-    hideTimeout() {
-        document.getElementById('timeout-screen').classList.add('opacity-0', 'pointer-events-none');
-    }
 
     resetToWaiting() {
         this.currentQuestion = 0;
         this.answers = [];
         this.profile = null;
-        this.hideTimeout(); // Hide timeout overlay if visible
+        this.activityTracker.hideTimeout(); // Hide timeout overlay if visible
         this.showScreen('waiting-screen', 'thank-you-screen');
-        this.lastActivity = Date.now();
-        this.startActivityTracking();
+        this.activityTracker.startActivityTracking();
     }
 
     shareProfile() {
@@ -521,63 +541,71 @@ export class CoffeeProfileQuiz {
         }
     }
 
-    startActivityTracking() {
-        // Clear any existing timeout
-        if (this.timeoutTimer) {
-            clearTimeout(this.timeoutTimer);
-        }
-
-        // Only set up listeners once
-        if (!this.activityListenersSetup) {
-            const activityEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
-            const resetActivity = (event) => {
-                // Ensure mouse movement resets the timer
-                this.lastActivity = Date.now();
-                this.resetTimeout();
-            };
-
-            // Add listeners with passive: false to ensure they work properly
-            activityEvents.forEach(event => {
-                document.addEventListener(event, resetActivity, {
-                    passive: false,
-                    capture: true
-                });
-            });
-
-            // Also add mouse move specifically to the window for better coverage
-            window.addEventListener('mousemove', resetActivity, {
-                passive: false,
-                capture: true
-            });
-
-            this.activityListenersSetup = true;
-        }
-
-        // Set timeout for 30 seconds
-        this.timeoutTimer = setTimeout(() => {
-            this.showTimeout();
-        }, 30000);
+    setActiveScreen(screenId) {
+        const others = document.querySelectorAll('.screen');
+        others.forEach(screen => {
+            screen.classList.remove('active');
+        });
+        console.log('setting active screen state for:', screenId);
+        const activeScreen = document.getElementById(screenId);
+        activeScreen.classList.add('active');
     }
 
-    resetTimeout() {
-        // Clear existing timeout and set a new one
-        if (this.timeoutTimer) {
-            clearTimeout(this.timeoutTimer);
+    resetOtherScreens(screenId) {
+        const otherScreens = document.querySelectorAll('.screen:not(#' + screenId + ')');
+        otherScreens.forEach(screen => {
+            screen.classList.remove('active', 'z-20');
+        });
+    }
+
+    slideScreen(nextScreenEl, prevScreenEl, direction = 'up', reverse = false) {
+        console.log('slideScreen', {
+            "prev": prevScreenEl.id, 
+            "next": nextScreenEl.id,
+            "direction": direction,
+            "reverse": reverse,
+        });
+        let movementScheme, elementToSlide;
+
+        if (reverse) {
+            elementToSlide = prevScreenEl;
+            movementScheme = ['0%', (direction === 'up' ? '-100%' : '100%')]
+            prevScreenEl.classList.add('active', 'z-20');
+            nextScreenEl.classList.add('active', 'z-10');
+        } else {
+            elementToSlide = nextScreenEl;
+            movementScheme = [(direction === 'up' ? '100%' : '-100%'), '0%']
+            // make sure the next screen is off-page before applying the 'active' and animating (prevents flickering)
+            nextScreenEl.style.transform = (direction === 'up')? 'translateY(100%)' : 'translateY(-100%)';
+            nextScreenEl.classList.add('active', 'z-20');
         }
 
-        this.timeoutTimer = setTimeout(() => {
-            this.showTimeout();
-        }, 30000);
+        // This will either:
+        // - slide the 'next screen' element IN as the foreground screen, or; 
+        // - slide the 'previous screen' element OUT as the foreground screen, revealing the 'next screen' element behind.
+        Motion.animate(elementToSlide, {
+            y: movementScheme
+        }, {
+            ease: "easeInOut",
+            delay: 0.1,
+            duration: 0.5
+        }).then(() => {
+            if (reverse) {
+                prevScreenEl.classList.remove('active', 'z-20');
+                nextScreenEl.classList.remove('z-10');
+            } else {
+                nextScreenEl.classList.remove('z-20');
+                prevScreenEl.classList.remove('active', 'z-20');
+            }
+        })
     }
 
-    resetActivity() {
-        this.lastActivity = Date.now();
-        this.resetTimeout();
-    }
-
+    // TODO: likely delete this function
     showScreen(screenId, previousScreenId = false) {
 
         const nextScreen = document.getElementById(screenId);
+        // apply 'active' class to the next screen before doing anything else
+        this.setActiveScreen(screenId);
 
         // if (!previousScreenId) {
         //     // Hide all other screens
@@ -597,16 +625,9 @@ export class CoffeeProfileQuiz {
         //     console.log('Animating screens in sequence:', previousScreenId, '->', screenId);
         // }
 
-        // Hide all other screens
-        document.querySelectorAll('.screen').forEach(screen => {
-            screen.classList.add('opacity-0', 'pointer-events-none');
-        });
-        // Show the next screen
-        nextScreen.classList.remove('opacity-0', 'pointer-events-none');
-
         // Handle video synchronization & fading in/out for waiting screen
         if (screenId === 'waiting-screen') {
-            this.syncVideoPlayback();
+            this.videoSync.syncVideoPlayback();
             document.querySelector('#waiting-screen video').classList.add('opacity-100');
             document.querySelector('#waiting-screen video').classList.remove('opacity-0');
         } else {
@@ -615,60 +636,8 @@ export class CoffeeProfileQuiz {
         }
 
         // Update activity tracking
-        this.lastActivity = Date.now();
+        this.activityTracker.resetActivity();
     }
 
-    syncVideoPlayback() {
-        const video = document.querySelector('#waiting-screen video');
-        if (!video) return;
-
-        // Ensure video duration is valid and finite
-        if (!this.videoDuration || !isFinite(this.videoDuration) || this.videoDuration <= 0) {
-            console.log('Video duration not ready yet, skipping sync');
-            return;
-        }
-
-        // Calculate synchronized playback time
-        const currentTime = Date.now();
-        const timeSinceEpoch = currentTime - this.syncEpoch;
-
-        // Convert to seconds and modulo by video duration to get loop position
-        const synchronizedTime = (timeSinceEpoch / 1000) % this.videoDuration;
-
-        // Ensure synchronized time is finite and valid
-        if (!isFinite(synchronizedTime) || synchronizedTime < 0) {
-            console.log('Invalid synchronized time, skipping sync');
-            return;
-        }
-
-        // Set video to synchronized time
-        video.currentTime = synchronizedTime;
-
-        console.log('Video synced to time:', synchronizedTime.toFixed(2), 'seconds');
-
-        // Ensure video is playing
-        if (video.paused) {
-            video.play().catch(e => console.log('Video play failed:', e));
-        }
-    }
-
-    initializeVideoSync() {
-        const video = document.querySelector('#waiting-screen video');
-        if (!video) return;
-
-        // Wait for video metadata to load
-        video.addEventListener('loadedmetadata', () => {
-            this.videoDuration = video.duration;
-            console.log('Video metadata loaded. Duration:', this.videoDuration, 'seconds');
-
-            // Initial sync
-            this.syncVideoPlayback();
-        });
-
-        // Handle video load errors
-        video.addEventListener('error', (e) => {
-            console.error('Video load error:', e);
-        });
-    }
 }
 
