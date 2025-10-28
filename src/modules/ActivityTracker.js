@@ -10,6 +10,11 @@ export class ActivityTracker {
         this.activityListenersSetup = false;
         this.timeoutCallback = null;
         this.countdownCallback = null;
+        this.config = {};
+    }
+
+    setConfig(config) {
+        this.config = config;
     }
 
     setCallbacks(timeoutCallback, countdownCallback) {
@@ -63,11 +68,17 @@ export class ActivityTracker {
             clearTimeout(this.timeoutTimer);
         }
 
+        // Clear any running countdown timer
+        if (this.countdownTimer) {
+            clearInterval(this.countdownTimer);
+            this.countdownTimer = null;
+        }
+
         this.timeoutTimer = setTimeout(() => {
             if (this.timeoutCallback) {
                 this.timeoutCallback();
             }
-        }, 30000);
+        }, (this.config.countdownSeconds || 30) * 1000);
     }
 
     resetActivity() {
@@ -76,7 +87,7 @@ export class ActivityTracker {
     }
 
     startCountdown() {
-        let countdown = 15;
+        let countdown = this.config.countdownPopupSeconds || 15;
         document.getElementById('countdown-number').textContent = countdown;
 
         this.countdownTimer = setInterval(() => {
@@ -94,11 +105,8 @@ export class ActivityTracker {
     }
 
     dismissTimeout() {
-        if (this.countdownTimer) {
-            clearInterval(this.countdownTimer);
-        }
         this.hideTimeout();
-        this.resetActivity();
+        this.resetTimeout();
     }
 
     hideTimeout() {

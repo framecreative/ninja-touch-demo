@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 /* Custom app CSS */
+@import "./styles/transitions.css";
 @import "./styles/app.css";
 
 /* Tailwind theme customization */

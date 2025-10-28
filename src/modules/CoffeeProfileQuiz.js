@@ -43,17 +43,16 @@ export class CoffeeProfileQuiz {
         this.questions = [];
         this.profiles = {};
 
+        this.activityTracker = new ActivityTracker();
+
         // Initialize video synchronization
         this.videoSync = new VideoSync();
 
-        // Initialize activity tracking
-        this.activityTracker = new ActivityTracker();
-        this.activityTracker.setCallbacks(
-            () => this.showTimeout(),
-            () => this.resetToWaiting()
-        );
+        // Configs placeholder
+        this.config = {};
 
         this.screens = {
+            waitingScreen: document.getElementById('waiting-screen'),
             introScreen: document.getElementById('intro-screen'),
             questionScreen: document.getElementById('question-screen'),
             proofpointScreen: document.getElementById('proofpoint-screen'),
@@ -62,11 +61,21 @@ export class CoffeeProfileQuiz {
             profileRevealScreen: document.getElementById('profile-reveal-screen'),
             profileDetailsScreen: document.getElementById('profile-details-screen'),
             thankYouScreen: document.getElementById('thank-you-screen'),
-            waitingScreen: document.getElementById('waiting-screen'),
+            // hidden screens:
             timeoutScreen: document.getElementById('timeout-screen'),
         };
 
-        this.loadData();
+        // Load data and initialize activity tracking with the fetched configs
+        this.loadData().then(() => {
+            this.activityTracker.setConfig(this.config);
+            this.activityTracker.setCallbacks(
+                () => this.showTimeout(),
+                () => this.resetToWaiting()
+            );
+
+            this.init();
+        });
+
     }
 
     async loadData() {
@@ -78,6 +87,7 @@ export class CoffeeProfileQuiz {
 
             if (gistResponse.ok) {
                 const gistData = await gistResponse.json();
+                this.config = gistData.config || {};
                 this.questions = gistData.questions;
                 this.profiles = gistData.profiles;
                 this.proofpoints = gistData.proofpoints;
@@ -92,6 +102,7 @@ export class CoffeeProfileQuiz {
                 // Fallback to local data.json
                 const localResponse = await fetch('data.json');
                 const localData = await localResponse.json();
+                this.config = localData.config || {};
                 this.questions = localData.questions;
                 this.profiles = localData.profiles;
                 this.proofpoints = localData.proofpoints;
@@ -101,14 +112,14 @@ export class CoffeeProfileQuiz {
                 // Do something else here?
             }
         }
-        this.init();
     }
 
     init() {
         this.bindEvents();
         this.activityTracker.startActivityTracking();
         this.videoSync.initializeVideoSync();
-        this.showScreen('waiting-screen');
+
+        this.resetAllScreenVisibility(this.screens.waitingScreen);
 
         // Motion animation declarations:
         // Spinners:
@@ -172,7 +183,6 @@ export class CoffeeProfileQuiz {
 
         // Profile next button - shows the profile details
         document.getElementById('profile-next-btn').addEventListener('click', () => {
-            console.log('showProfileDetails called, profile:', this.profile);
             this.showProfileDetails();
         });
 
@@ -197,16 +207,15 @@ export class CoffeeProfileQuiz {
         });
     }
 
-    showIntro() {
-        console.log('showIntro called', this.screens);
-        this.slideScreen(this.screens.introScreen, this.screens.waitingScreen, 'up');
-    }
-
     startQuiz() {
         this.currentQuestion = 0;
         this.answers = [];
         this.populateQuestionScreen();
-        this.slideScreen(this.screens.questionScreen, this.screens.introScreen, 'up');
+        this.transitionToScreen(this.screens.questionScreen, this.screens.introScreen, 'slideup');
+    }
+
+    showIntro() {
+        this.transitionToScreen(this.screens.introScreen, this.screens.waitingScreen, 'slideup');
     }
 
     populateQuestionScreen() {
@@ -272,13 +281,17 @@ export class CoffeeProfileQuiz {
                 value: this.selectedOption.value,
                 weight: this.selectedOption.weight
             });
-            this.showProofpointScreen();
-            // this.continueToNextQuestion();
+            this.populateProofpointContent();
+            this.transitionToScreen(this.screens.proofpointScreen, this.screens.questionScreen, 'fade', null, () => {
+                this.showProofpointContent();
+            });
         }
     }
 
-    showProofpointScreen() {
-        // populate the proofpoint data first:
+    /**
+     * Populates the proofpoint content.
+     */
+    populateProofpointContent() {
         const selectedProofpoint = this.proofpoints.filter(proofpoint => proofpoint.id === this.selectedOption.proofpoint)[0];
         if (!selectedProofpoint) {
             console.warn('No proofpoint found for selected option, skipping to next question...');
@@ -289,21 +302,15 @@ export class CoffeeProfileQuiz {
         document.getElementById('proofpoint-title').textContent = selectedProofpoint.title;
         document.getElementById('proofpoint-subtitle').textContent = selectedProofpoint.subtitle || '';
         document.getElementById('proofpoint-description').textContent = selectedProofpoint.description || '';
+    }
 
-        this.screens.proofpointScreen.classList.add('active');
+    /**
+     * Animates in the proofpoint content.
+     */
+    showProofpointContent() {
         this.screens.proofpointContent.classList.remove('hidden');
-
-        // this.showScreen('proofpoint-screen', 'question-screen');
         // fade in the proofpoint screen and then animate in the content.
         Motion.animate([
-            // fade in the screen
-            [ this.screens.proofpointScreen, {
-                opacity: [0, 1]
-            }, {
-                ease: "easeInOut",
-                delay: 0,
-                duration: 0.3
-            }],
             // animate in the content
             [ this.screens.proofpointContent, {
                 y: ["150%", "0%"]
@@ -315,38 +322,68 @@ export class CoffeeProfileQuiz {
         ])
     }
 
+    /**
+     * Animates out the proofpoint content.
+     */
+    hideProofpointContent() {
+        return Motion.animate(this.screens.proofpointContent, {
+            y: ["0%", "150%"]
+        }, {
+            ease: "easeInOut",
+            delay: 0.15,
+            duration: 0.7
+        }).then(() => {
+            this.screens.proofpointContent.classList.add('hidden');
+        });
+    }
+
+    /**
+     * Continue after viewing a proofpoint.
+     */
     continueToNextQuestion() {
         if ((this.currentQuestion + 1) < this.questions.length) {
-            console.log(`going to question number: ${this.currentQuestion + 2} of ${this.questions.length}`);
             // Slide out the proofpoint content, and recalc the next question:
-            Motion.animate(this.screens.proofpointContent, {
-                y: ["0%", "150%"]
-            }, {
-                ease: "easeInOut",
-                delay: 0.15,
-                duration: 0.7
-            }).then(() => {
-                this.screens.proofpointContent.classList.add('hidden');
-            }).then(() => {
+            this.hideProofpointContent().then(() => {
                 this.currentQuestion++;
                 this.populateQuestionScreen();
-                this.slideScreen(this.screens.questionScreen, this.screens.proofpointScreen, 'up');
+                this.transitionToScreen(
+                    this.screens.questionScreen, 
+                    this.screens.proofpointScreen, 
+                    'slideup', 
+                    // the updateCallback:
+                    () => {
+                        // console.log('updateCallback called');
+                    },
+                    // the postTransitionCallback:
+                    () => {
+                        // console.log('postTransitionCallback called');
+                    }
+                );
             })
+
         } else {
             console.log('All questions done. calculating profile and showing profile calculation screen');
+            this.screens.proofpointScreen.classList.remove('z-20');
             // Calculate the profile and show the profile calculation screen:
             this.calculateProfile();
             this.showProfileCalculationScreen();
         }
     }
 
+    /*
+     * Go back to the previous question, or back to the intro screen if on Q1.
+     */
     goBack() {
         if (this.currentQuestion > 0) {
             this.currentQuestion--;
             this.answers.pop();
+
             this.populateQuestionScreen();
+            this.transitionToScreen(this.screens.proofpointScreen, this.screens.questionScreen, 'slidedown', null, () => {
+                this.showProofpointContent();
+            });
         } else {
-            this.showScreen('intro-screen', 'question-screen');
+            this.transitionToScreen(this.screens.introScreen, this.screens.questionScreen, 'slidedown');
         }
     }
 
@@ -444,11 +481,9 @@ export class CoffeeProfileQuiz {
     }
 
     showProfileCalculationScreen() {
-        // this.showScreen('profile-calculation-screen', 'question-screen');
+        // Populate the users profile reveal content:
         this.populateProfileReveal();
-
-        this.screens.questionScreen.classList.remove('active');
-        this.slideScreen(this.screens.profileCalculationScreen, this.screens.proofpointScreen, 'down', true);
+        this.transitionToScreen(this.screens.profileCalculationScreen, this.screens.proofpointScreen, 'dramaticfade');
 
         const calcContent = document.querySelector('.profile-calculate-content');
         Motion.animate(calcContent, {
@@ -487,29 +522,29 @@ export class CoffeeProfileQuiz {
     }
 
     showProfileReveal() {
-        this.showScreen('profile-reveal-screen', 'profile-calculation-screen');
+        this.transitionToScreen(this.screens.profileRevealScreen, this.screens.profileCalculationScreen, 'fade');
     }
 
     showProfileDetails() {
-        document.getElementById('profile-details-description').textContent = this.profile.description1;
-        this.showScreen('profile-details-screen', 'profile-reveal-screen');
+        this.transitionToScreen(this.screens.profileDetailsScreen, this.screens.profileRevealScreen, 'slideup');
     }
 
     showThankYou() {
-        this.showScreen('thank-you-screen', 'profile-details-screen');
+        this.transitionToScreen(this.screens.thankYouScreen, this.screens.profileDetailsScreen, 'slideup');
     }
 
     showTimeout() {
         // Only show timeout if not on the waiting screen
-        const currentScreen = document.querySelector('.screen:not(.opacity-0)');
+        const currentScreen = document.querySelector('.screen.active');
         if (currentScreen && currentScreen.id === 'waiting-screen') {
-            // Don't show timeout on waiting screen, just reset
-            this.resetToWaiting();
+            // Don't show timeout on waiting screen, just reset the timer over and over again.
+            // this.resetToWaiting();
+            this.activityTracker.startCountdown();
             return;
         }
 
         // Show timeout overlay
-        document.getElementById('timeout-screen').classList.remove('opacity-0', 'pointer-events-none');
+        this.screens.timeoutScreen.classList.remove('opacity-0', 'pointer-events-none');
         this.activityTracker.startCountdown();
     }
 
@@ -519,7 +554,7 @@ export class CoffeeProfileQuiz {
         this.answers = [];
         this.profile = null;
         this.activityTracker.hideTimeout(); // Hide timeout overlay if visible
-        this.showScreen('waiting-screen', 'thank-you-screen');
+        this.transitionToScreen(this.screens.waitingScreen, this.screens.thankYouScreen, 'fade');
         this.activityTracker.startActivityTracking();
     }
 
@@ -541,102 +576,73 @@ export class CoffeeProfileQuiz {
         }
     }
 
-    setActiveScreen(screenId) {
-        const others = document.querySelectorAll('.screen');
-        others.forEach(screen => {
+    /**
+     * Transition between screens using the View Transition API
+     * @param {HTMLElement} nextScreen - The screen to transition to
+     * @param {HTMLElement} prevScreen - The screen to transition from
+     * @param {string} transitionType - Type of transition: 'slideup', 'slidedown', 'dramaticfade', or 'fade'
+     * @param {Function} updateCallback - Optional callback to run during the transition
+     * @param {Function} postTransitionCallback - Optional callback to run after the transition completes
+     */
+    transitionToScreen(nextScreen, prevScreen, transitionType = 'slideup', updateCallback = null, postTransitionCallback = null) {
+        console.log('transitionToScreen', {
+            prev: prevScreen?.id,
+            next: nextScreen.id,
+            type: transitionType
+        });
+
+        // Set view-transition-name on next screen BEFORE the transition starts
+        // This ensures the browser can capture both old and new states properly
+        if (prevScreen) {
+            prevScreen.style.viewTransitionName = `${transitionType}_old`;
+        }
+
+        // Use View Transition API if available
+        const viewTransition = document.startViewTransition(() => {
+
+            // The assignment of the VT name to the new element INSIDE this function 
+            // is critical, to avoid a flash of content once the transition completes.
+            nextScreen.style.viewTransitionName = `${transitionType}_new`;
+            // Reset the DOM state to what it should be next:
+            this.resetAllScreenVisibility(nextScreen);
+
+            // console.info('prevScreen:', prevScreen);
+            // console.info('nextScreen:', nextScreen);
+
+            // Run optional callback
+            if (updateCallback) {
+                updateCallback();
+            }
+        });
+
+        // Clean up after transition completes
+        viewTransition.finished.then(() => {
+            // Remove view-transition-name from next screen
+            console.log('Transition finished, cleaned up names');
+            prevScreen.style.viewTransitionName = 'none';
+            nextScreen.style.viewTransitionName = 'none';
+            if (postTransitionCallback) {
+                console.log('Post transition callback was supplied, executing.');
+                postTransitionCallback();
+            }
+        });
+
+        return viewTransition;
+    }
+
+    /**
+     * Utility functions (stuff to make life easier)
+     * 
+     */
+
+    // resets all screens to hidden, and if a screen element is provided, makes it active
+    resetAllScreenVisibility(activeScreen = null) {
+        Object.values(this.screens).forEach(screen => {
             screen.classList.remove('active');
         });
-        console.log('setting active screen state for:', screenId);
-        const activeScreen = document.getElementById(screenId);
-        activeScreen.classList.add('active');
-    }
-
-    resetOtherScreens(screenId) {
-        const otherScreens = document.querySelectorAll('.screen:not(#' + screenId + ')');
-        otherScreens.forEach(screen => {
-            screen.classList.remove('active', 'z-20');
-        });
-    }
-
-    slideScreen(nextScreenEl, prevScreenEl, direction = 'up', reverse = false) {
-        console.log('slideScreen', {
-            "prev": prevScreenEl.id, 
-            "next": nextScreenEl.id,
-            "direction": direction,
-            "reverse": reverse,
-        });
-        let movementScheme, elementToSlide;
-
-        if (reverse) {
-            elementToSlide = prevScreenEl;
-            movementScheme = ['0%', (direction === 'up' ? '-100%' : '100%')]
-            prevScreenEl.classList.add('active', 'z-20');
-            nextScreenEl.classList.add('active', 'z-10');
-        } else {
-            elementToSlide = nextScreenEl;
-            movementScheme = [(direction === 'up' ? '100%' : '-100%'), '0%']
-            // make sure the next screen is off-page before applying the 'active' and animating (prevents flickering)
-            nextScreenEl.style.transform = (direction === 'up')? 'translateY(100%)' : 'translateY(-100%)';
-            nextScreenEl.classList.add('active', 'z-20');
+        if (activeScreen) {
+            activeScreen.classList.add('active');
         }
-
-        // This will either:
-        // - slide the 'next screen' element IN as the foreground screen, or; 
-        // - slide the 'previous screen' element OUT as the foreground screen, revealing the 'next screen' element behind.
-        Motion.animate(elementToSlide, {
-            y: movementScheme
-        }, {
-            ease: "easeInOut",
-            delay: 0.1,
-            duration: 0.5
-        }).then(() => {
-            if (reverse) {
-                prevScreenEl.classList.remove('active', 'z-20');
-                nextScreenEl.classList.remove('z-10');
-            } else {
-                nextScreenEl.classList.remove('z-20');
-                prevScreenEl.classList.remove('active', 'z-20');
-            }
-        })
-    }
-
-    // TODO: likely delete this function
-    showScreen(screenId, previousScreenId = false) {
-
-        const nextScreen = document.getElementById(screenId);
-        // apply 'active' class to the next screen before doing anything else
-        this.setActiveScreen(screenId);
-
-        // if (!previousScreenId) {
-        //     // Hide all other screens
-        //     document.querySelectorAll('.screen').forEach(screen => {
-        //         screen.classList.add('opacity-0', 'pointer-events-none');
-        //     });
-        //     // Show the next screen
-        //     nextScreen.classList.remove('opacity-0', 'pointer-events-none');
-        // } else {
-        //     // Animate the two screens in a sequence
-        //     const previousScreen = document.getElementById(previousScreenId);
-        //     const sequence = [
-        //         [previousScreen, {opacity: 0}, {duration: 0.2}],
-        //         [nextScreen, {opacity: 1}, {duration: 0.2}]
-        //     ]
-        //     Motion.animate(sequence);
-        //     console.log('Animating screens in sequence:', previousScreenId, '->', screenId);
-        // }
-
-        // Handle video synchronization & fading in/out for waiting screen
-        if (screenId === 'waiting-screen') {
-            this.videoSync.syncVideoPlayback();
-            document.querySelector('#waiting-screen video').classList.add('opacity-100');
-            document.querySelector('#waiting-screen video').classList.remove('opacity-0');
-        } else {
-            document.querySelector('#waiting-screen video').classList.add('opacity-0');
-            document.querySelector('#waiting-screen video').classList.remove('opacity-100');
-        }
-
-        // Update activity tracking
-        this.activityTracker.resetActivity();
     }
 
 }

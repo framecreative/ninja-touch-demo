@@ -1,0 +1,116 @@
+/* Keyframes for View Transition animations */
+@keyframes slide-in-from-bottom {
+	from {
+		transform: translateY(100%);
+	}
+
+	to {
+		transform: translateY(0);
+	}
+}
+
+@keyframes slide-out-to-top {
+	from {
+		transform: translateY(0);
+	}
+
+	to {
+		transform: translateY(-100%);
+	}
+}
+
+@keyframes slide-in-from-top {
+	from {
+		transform: translateY(-100%);
+	}
+
+	to {
+		transform: translateY(0);
+	}
+}
+
+@keyframes slide-out-to-bottom {
+	from {
+		transform: translateY(0);
+	}
+
+	to {
+		transform: translateY(100%);
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fade-out {
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes do-nothing {
+	from {
+		transform: translateY(-10%);
+	}
+
+	to {
+		transform: translateY(0%);
+	}
+}
+
+/* View Transition API Styles */
+/* Slide-up animation (forward navigation) */
+html::view-transition-new(slideup_new) {
+	animation: slide-in-from-bottom 0.5s ease-in-out;
+}
+
+html::view-transition-old(slideup_old) {
+	animation: slide-out-to-top 0.5s ease-in-out;
+}
+
+/* Slide-down animation (backward navigation) */
+html::view-transition-new(slidedown_new) {
+	animation: slide-in-from-top 0.5s ease-in-out;
+}
+
+html::view-transition-old(slidedown_old) {
+	animation: slide-out-to-bottom 0.5s ease-in-out;
+}
+
+/* Slide-down revelal animation (foreground reveals background) */
+html::view-transition-new(slidedownreveal_new) {
+	animation: do-nothing 1.6s ease-in-out;
+}
+
+html::view-transition-old(slidedownreveal_old) {
+	animation: slide-out-to-bottom 1.6s ease-in-out;
+}
+
+/* Fade animation */
+html::view-transition-new(fade_new) {
+	animation: fade-in 0.3s ease-in-out;
+}
+
+html::view-transition-old(fade_old) {
+	animation: fade-out 0.3s ease-in-out;
+}
+
+/* Dramatic Fade animation */
+html::view-transition-new(dramaticfade_new) {
+	animation: fade-in 0.8s ease-in-out;
+}
+
+html::view-transition-old(dramaticfade_old) {
+	animation: fade-out 0.8s ease-in-out;
+}

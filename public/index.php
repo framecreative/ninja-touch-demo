@@ -267,7 +267,7 @@ function vite_assets() {
         </div>
 
         <!-- Timeout Overlay -->
-        <div id="timeout-screen" class="timeout-screen">
+        <div id="timeout-screen" class="timeout-screen opacity-0 pointer-events-none">
             <div class="bg-tan rounded-xl p-12 w-[80vw] h-[80vh] mx-4 text-center">
                 <!-- Timeout Icon -->
                 <div class="mb-8">

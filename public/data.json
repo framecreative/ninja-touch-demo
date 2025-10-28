@@ -1,4 +1,8 @@
 {
+  "config": {
+    "countdownSeconds": 10,
+    "countdownPopupSeconds": 5
+  },
   "questions": [
     {
       "text": "Your morning coffee is…",

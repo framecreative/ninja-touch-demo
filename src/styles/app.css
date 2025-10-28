@@ -27,6 +27,6 @@
 
     /* Timeout screen styles */
     .timeout-screen {
-        @apply absolute inset-0 bg-washed-black flex items-center justify-center z-50 opacity-0 pointer-events-none;
+        @apply absolute inset-0 bg-washed-black flex items-center justify-center z-50;
     }
 }
