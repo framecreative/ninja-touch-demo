@@ -184,9 +184,12 @@ function vite_assets() {
         <!-- Profile Calculation Screen -->
         <div id="profile-calculation-screen" class="screen bg-black">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <div class="profile-calculate-content w-full mx-auto px-[11.85%] text-center opacity-0">
-                    <div class="rounded-xl flex justify-center items-center">
-                        <div class="spinner"></div>
+                <div class="profile-calculate-content translate-y-1/5 w-full grid grid-cols-6 mx-auto text-center opacity-0">
+                    <div class="col-span-4 col-start-2 rounded-xl flex justify-center items-center px-8 backdrop-blur-[75px] h-[130px] backdrop-filter bg-washed-black">
+                        <span class="t-button text-tan mx-auto">CALCULATING</span>
+                        <div class="relative">
+                            <div class="spinner"></div>
+                        </div>
                     </div>
                 </div>
             </div>
