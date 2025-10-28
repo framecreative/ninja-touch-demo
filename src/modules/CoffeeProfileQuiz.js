@@ -50,6 +50,9 @@ export class CoffeeProfileQuiz {
 
         // Configs placeholder
         this.config = {};
+        
+        // Timer for auto-continue
+        this.continueTimer = null;
 
         this.screens = {
             waitingScreen: document.getElementById('waiting-screen'),
@@ -117,7 +120,7 @@ export class CoffeeProfileQuiz {
     init() {
         this.bindEvents();
         this.activityTracker.startActivityTracking();
-        this.videoSync.initializeVideoSync();
+        // this.videoSync.initializeVideoSync();
 
         this.resetAllScreenVisibility(this.screens.waitingScreen);
 
@@ -173,6 +176,7 @@ export class CoffeeProfileQuiz {
 
         // Proofpoint confirmation button ('continue' button)
         document.getElementById('continue-btn').addEventListener('click', () => {
+            this.clearContinueTimer();
             this.continueToNextQuestion();
         });
 
@@ -320,6 +324,9 @@ export class CoffeeProfileQuiz {
                 duration: 0.7
             }]
         ])
+        
+        // Start 10-second timer to auto-continue
+        this.startContinueTimer();
     }
 
     /**
@@ -338,9 +345,35 @@ export class CoffeeProfileQuiz {
     }
 
     /**
+     * Starts the 10-second timer that auto-continues to the next question.
+     */
+    startContinueTimer() {
+        // Clear any existing timer
+        this.clearContinueTimer();
+        
+        // Start new 10-second timer
+        this.continueTimer = setTimeout(() => {
+            this.continueToNextQuestion();
+        }, 10000);
+    }
+
+    /**
+     * Clears the continue timer if it exists.
+     */
+    clearContinueTimer() {
+        if (this.continueTimer) {
+            clearTimeout(this.continueTimer);
+            this.continueTimer = null;
+        }
+    }
+
+    /**
      * Continue after viewing a proofpoint.
      */
     continueToNextQuestion() {
+        // Clear the timer since we're continuing
+        this.clearContinueTimer();
+        
         if ((this.currentQuestion + 1) < this.questions.length) {
             // Slide out the proofpoint content, and recalc the next question:
             this.hideProofpointContent().then(() => {
@@ -374,6 +407,9 @@ export class CoffeeProfileQuiz {
      * Go back to the previous question, or back to the intro screen if on Q1.
      */
     goBack() {
+        // Clear the continue timer when navigating back
+        this.clearContinueTimer();
+        
         if (this.currentQuestion > 0) {
             this.currentQuestion--;
             this.answers.pop();
