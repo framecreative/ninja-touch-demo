@@ -2,6 +2,7 @@
 
 /* Custom app CSS */
 @import "./styles/app.css";
+@import "./styles/utilities.css";
 
 /* Tailwind theme customization */
 @theme {
@@ -10,7 +11,11 @@
   --color-washed-black: #1e1d1c;
   --color-buff: #f2e9db;
   --color-tan: #d1c6b5;
+  --color-caramel: #E2CBAF;
   --color-gradient-from: #f3e8d8;
   --color-gradient-to: #d7b792;
+
+
+  --spacing-base: 15vh;
 }
 

@@ -22,11 +22,13 @@
         @apply hover:cursor-pointer;
     }
     .answer-btn {
-        @apply w-full h-[200px] bg-buff rounded-xl transition-all duration-200 text-washed-black font-semibold text-4xl leading-tight text-center flex items-center justify-center;
+        @apply w-full h-[200px] bg-buff rounded-xl transition-all duration-200 text-washed-black font-semibold text-4xl leading-tight text-center flex items-center justify-center px-8;
     }
 
     /* Timeout screen styles */
     .timeout-screen {
         @apply absolute inset-0 bg-washed-black flex items-center justify-center z-50 opacity-0 pointer-events-none;
     }
+
+    
 }
