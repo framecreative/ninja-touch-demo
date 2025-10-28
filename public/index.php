@@ -95,9 +95,9 @@ function vite_assets() {
                         <img src='/assets/images/image_ninja_luxe_logo.png' class="max-w-112">
 
                         <div>
-                            <p class="mb-4 t-copy-lg">You bring the personality,<br>we'll bring the crema.</p>
-                            <p class="mb-4 t-copy-lg">&nbsp;</p>
-                            <p class="mb-4 t-copy-lg">Four questions.<br>One brew identity.<br>Let's find your coffee match.</p>
+                            <p class=" t-copy-lg">You bring the personality,<br>we'll bring the crema.</p>
+                            <p class=" t-copy-lg">&nbsp;</p>
+                            <p class=" t-copy-lg">Four questions.<br>One brew identity.<br>Let's find your coffee match.</p>
                         </div>
 
                     </div>
@@ -310,28 +310,23 @@ function vite_assets() {
         </div>
 
         <!-- Timeout Overlay -->
-        <div id="timeout-screen" class="timeout-screen">
-            <div class="bg-tan rounded-xl p-12 w-[80vw] h-[80vh] mx-4 text-center">
-                <!-- Timeout Icon -->
-                <div class="mb-8">
-                    <img src="/Users/leighgibson/Sites/test/ninja-touch/4a8d527f94fdd11281a715ff2df93e015c6d253c.svg"
-                        alt="Timeout icon"
-                        class="w-[99px] h-[99px] mx-auto">
+        <div id="timeout-screen" class="timeout-screen ">
+            <div class="absolute grid grid-cols-6 gap-y-26 w-full">
+                <div class="col-span-2 col-start-3 flex flex-col items-center gap-6 ">
+                    <div class="relative w-fit">
+                        <div class="spinner"></div>
+                    </div>
+    
+                    <!-- Countdown Text -->
+                    <p id="countdown-text" class="text-[30px] font-extrabold text-center leading-[42px] tracking-[9px] uppercase text-tan">
+                        Restarting<br>in <span id="countdown-number">15</span>
+                    </p>
                 </div>
-
-                <div class="relative mb-6">
-                    <div class="spinner"></div>
-                </div>
-
-                <!-- Countdown Text -->
-                <p id="countdown-text" class="text-[56px] font-extrabold text-washed-black mb-16 text-center leading-[72px] tracking-[9px] uppercase">
-                    Restarting<br>in <span id="countdown-number">15</span>
-                </p>
 
                 <!-- Dismiss Button -->
                 <button
                     id="dismiss-btn"
-                    class="t-button bg-washed-black text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                    class="t-button col-span-4 col-start-2 h-[130px] bg-[#292928] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
                     DISMISS
                 </button>
             </div>
