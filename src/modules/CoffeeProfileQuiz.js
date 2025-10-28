@@ -1,5 +1,6 @@
 import { VideoSync } from './VideoSync.js';
 import { ActivityTracker } from './ActivityTracker.js';
+import { animate } from 'motion';
 
 /**
  * Coffee Profile Quiz
@@ -42,6 +43,7 @@ export class CoffeeProfileQuiz {
         this.profile = null;
         this.questions = [];
         this.profiles = {};
+        this.timerAnimation = null;
 
         this.activityTracker = new ActivityTracker();
 
@@ -121,22 +123,7 @@ export class CoffeeProfileQuiz {
 
         this.resetAllScreenVisibility(this.screens.waitingScreen);
 
-        // Motion animation declarations:
-        // Spinners:
-        // const spinners = document.querySelectorAll(".spinner");
-        // if (spinners.length > 0) {
-        //     spinners.forEach(spinner => {
-        //         Motion.animate(
-        //             spinner, {
-        //                 rotate: 360
-        //             }, {
-        //                 duration: 1.5,
-        //                 repeat: Infinity,
-        //                 ease: "linear",
-        //             }
-        //         )
-        //     });
-        // }
+        
 
         // Global button press state:
         Motion.press("button", (element) => {
@@ -284,7 +271,53 @@ export class CoffeeProfileQuiz {
             this.populateProofpointContent();
             this.transitionToScreen(this.screens.proofpointScreen, this.screens.questionScreen, 'fade', null, () => {
                 this.showProofpointContent();
+
+                this.startTimer(this.screens.proofpointScreen, this.activityTracker.proofpointerSeconds, (() => {this.continueToNextQuestion()}));
             });
+        }
+    }
+
+    startTimer(parent, duration, callback) {
+        let spinner = parent.querySelector('.progress-circle');
+
+        if (spinner) {
+            const circle = spinner.querySelector('#progress-indicator');
+
+            const radius = circle.r.baseVal.value;
+            const circumference = 2 * Math.PI * radius;
+
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            circle.style.strokeDashoffset = circumference;
+
+            const targetValue = 100;
+
+            //Remove hidden class on gradient circle if applied
+            circle.setAttribute('class', '');
+
+            let timerAnimation = animate(0, targetValue, {
+                duration,
+                easing: "easeInOut",
+                onUpdate(latest) {
+                    const offset = circumference - (latest / 100) * circumference;
+                    circle.style.strokeDashoffset = offset;
+                },
+            });
+
+            document.addEventListener('stopTimers', () => {
+                timerAnimation.stop();
+                setTimeout(() => {
+                    circle.setAttribute('class', 'hidden');
+                }, 1000);
+            })
+
+            timerAnimation.then(() => {
+                callback();
+
+                setTimeout(() => {
+                    circle.setAttribute('class', 'hidden');
+                }, 1000);
+            });
+            
         }
     }
 
@@ -319,7 +352,7 @@ export class CoffeeProfileQuiz {
                 delay: 0.35,
                 duration: 0.7
             }]
-        ])
+        ]);
     }
 
     /**
@@ -341,6 +374,10 @@ export class CoffeeProfileQuiz {
      * Continue after viewing a proofpoint.
      */
     continueToNextQuestion() {
+
+        const stopTimers = new CustomEvent("stopTimers");
+        document.dispatchEvent(stopTimers);
+
         if ((this.currentQuestion + 1) < this.questions.length) {
             // Slide out the proofpoint content, and recalc the next question:
             this.hideProofpointContent().then(() => {
@@ -381,6 +418,8 @@ export class CoffeeProfileQuiz {
             this.populateQuestionScreen();
             this.transitionToScreen(this.screens.proofpointScreen, this.screens.questionScreen, 'slidedown', null, () => {
                 this.showProofpointContent();
+
+                this.startTimer(this.screens.proofpointScreen, this.activityTracker.proofpointerSeconds, (() => {this.continueToNextQuestion()}));
             });
         } else {
             this.transitionToScreen(this.screens.introScreen, this.screens.questionScreen, 'slidedown');
@@ -493,19 +532,24 @@ export class CoffeeProfileQuiz {
             delay: 0.3,
             duration: 0.8
         }).then(() => {
+            //Start countdown timer 
+            this.startTimer(this.screens.profileCalculationScreen, 2, (() => {
+                Motion.animate(calcContent, {
+                    opacity: 0,
+                    scale: [1, 0.9]
+                }, {
+                    delay: 0,
+                    duration: 0.8
+                }).then(() => {
+                    setTimeout(() => {
+                        this.showProfileReveal();
+                    }, 200);
+                })
+            }));
             // animate back out after a 2s delay, before changing to the next page:
-            Motion.animate(calcContent, {
-                opacity: 0,
-                scale: [1, 0.9]
-            }, {
-                delay: 2,
-                duration: 0.8
-            }).then(() => {
-                setTimeout(() => {
-                    this.showProfileReveal();
-                }, 200);
-            })
-        })
+        });
+
+        
     }
 
     populateProfileReveal() {
@@ -523,7 +567,9 @@ export class CoffeeProfileQuiz {
     }
 
     showProfileReveal() {
-        this.transitionToScreen(this.screens.profileRevealScreen, this.screens.profileCalculationScreen, 'fade');
+        this.transitionToScreen(this.screens.profileRevealScreen, this.screens.profileCalculationScreen, 'fade', null, () => {
+            this.startTimer(this.screens.profileRevealScreen, this.activityTracker.finalScreenSeconds, (() => {this.resetToWaiting()}));
+        });
     }
 
     showProfileDetails() {
