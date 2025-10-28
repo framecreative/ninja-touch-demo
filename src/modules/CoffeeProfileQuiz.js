@@ -516,12 +516,12 @@ export class CoffeeProfileQuiz {
 
 
     resetToWaiting() {
-        // this.currentQuestion = 0;
-        // this.answers = [];
-        // this.profile = null;
-        // this.activityTracker.hideTimeout(); // Hide timeout overlay if visible
-        // this.showScreen('waiting-screen', 'thank-you-screen');
-        // this.activityTracker.startActivityTracking();
+        this.currentQuestion = 0;
+        this.answers = [];
+        this.profile = null;
+        this.activityTracker.hideTimeout(); // Hide timeout overlay if visible
+        this.showScreen('waiting-screen', 'thank-you-screen');
+        this.activityTracker.startActivityTracking();
     }
 
     shareProfile() {
