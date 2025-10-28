@@ -476,7 +476,8 @@ export class CoffeeProfileQuiz {
     populateProfileReveal() {
         document.querySelector('.profile-icon').src = `assets/images/${this.profile.icon}`;
         document.getElementById('profile-title').innerHTML = this.profile.title;
-        document.getElementById('profile-tagline').textContent = this.profile.tagline;
+        // document.getElementById('profile-tagline').textContent = this.profile.tagline;
+        document.getElementById('profile-description').textContent = this.profile.description1;
 
         // Update profile icon dynamically
         const profileIcon = document.querySelector('#profile-reveal-screen img');

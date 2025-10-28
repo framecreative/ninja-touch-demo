@@ -172,7 +172,7 @@ function vite_assets() {
                                 NEXT
                             </span>
 
-                            <div>
+                            <div class="relative">
                                 <div class="spinner"></div>
                             </div>
                         </button>
@@ -182,13 +182,13 @@ function vite_assets() {
         </div>
 
         <!-- Profile Calculation Screen -->
-        <div id="profile-calculation-screen" class="screen bg-black">
+        <div id="profile-calculation-screen" class="screen bg-washed-black">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="profile-calculate-content translate-y-1/5 w-full grid grid-cols-6 mx-auto text-center opacity-0">
-                    <div class="col-span-4 col-start-2 rounded-xl flex justify-center items-center px-8 backdrop-blur-[75px] h-[130px] backdrop-filter bg-washed-black">
+                    <div class="col-span-4 col-start-2 rounded-xl flex justify-center items-center px-8 backdrop-blur-[75px] h-[130px] backdrop-filter bg-[#292928]">
                         <span class="t-button text-tan mx-auto">CALCULATING</span>
                         <div class="relative">
-                            <div class="spinner"></div>
+                            <div class="spinner-light"></div>
                         </div>
                     </div>
                 </div>
@@ -208,18 +208,22 @@ function vite_assets() {
                         </div>
     
                         <!-- Profile Title -->
-                        <h1 id="profile-title" class="text-[56px] font-extrabold text-washed-black mb-4 text-center leading-[72px] tracking-[9px] uppercase">
+                        <h1 id="profile-title" class="text-[30px] font-extrabold text-washed-black mb-19 text-center leading-[72px] tracking-[9px] uppercase">
                             The<br>...
                         </h1>
 
                         <!-- Profile Tagline -->
-                        <p id="profile-tagline" class="text-[44px] font-extrabold text-washed-black mb-16 text-center leading-[72px]">
+                        <!-- <p id="profile-tagline" class="text-[44px] font-extrabold text-washed-black mb-16 text-center leading-[72px]">
                             Your coffee profile tagline will load here..
+                        </p> -->
+
+                        <p id="profile-description" class="t-copy-md text-washed-black text-center">
+                            Your coffee description will load here..
                         </p>
                     </div>
 
 
-                    <div class="col-span-4 col-start-2 bg-caramel p-20 flex flex-row justify-between rounded-xl">
+                    <div class="col-span-4 col-start-2 bg-caramel p-20 flex flex-row justify-between items-center rounded-xl h-74">
                         <div>
                             QR
                         </div>
@@ -236,8 +240,14 @@ function vite_assets() {
                         </button> -->
                         <button
                             id="profile-next-btn"
-                            class="t-button w-full bg-washed-black h-[130px] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
-                            RESTART
+                            class="flex items-center t-button w-full bg-washed-black h-[130px] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                            <span class="t-button text-tan mx-auto">
+                                RESTART
+                            </span>
+
+                            <div class="relative">
+                                <div class="spinner"></div>
+                            </div>
                         </button>
                     </div>
                 </div>
@@ -307,6 +317,10 @@ function vite_assets() {
                     <img src="/Users/leighgibson/Sites/test/ninja-touch/4a8d527f94fdd11281a715ff2df93e015c6d253c.svg"
                         alt="Timeout icon"
                         class="w-[99px] h-[99px] mx-auto">
+                </div>
+
+                <div class="relative mb-6">
+                    <div class="spinner"></div>
                 </div>
 
                 <!-- Countdown Text -->

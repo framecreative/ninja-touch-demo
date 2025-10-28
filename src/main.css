@@ -17,5 +17,7 @@
 
 
   --spacing-base: 15vh;
+
+  --animate-rotate: rotate 1.25s linear infinite;
 }
 
