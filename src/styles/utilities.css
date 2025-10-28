@@ -1,0 +1,19 @@
+@layer utilities {
+    .t-button {
+        @apply text-3xl font-extrabold leading-[42.778px] tracking-[9px];
+    }
+    
+    .t-copy-md {
+        @apply text-[26px] font-semibold leading-[38px] tracking-[0.6px]
+    }
+
+    .t-copy {
+        @apply text-3xl font-bold leading-[37.5px] tracking-[0.6px]
+    }
+
+
+    .t-copy-lg {
+        @apply text-[40px] font-semibold leading-[51px] tracking-[0.6px]
+    }
+
+}

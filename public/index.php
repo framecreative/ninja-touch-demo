@@ -1,8 +1,9 @@
 <?php
 // Vite helper function
-function vite_assets() {
+function vite_assets()
+{
     $isDev = file_exists(__DIR__ . '/../node_modules');
-    
+
     // Check if Vite dev server is running by testing the connection
     $devServerRunning = false;
     if ($isDev) {
@@ -15,7 +16,7 @@ function vite_assets() {
         $result = @file_get_contents('http://localhost:5173/@vite/client', false, $context);
         $devServerRunning = ($result !== false);
     }
-    
+
     if ($isDev && $devServerRunning) {
         // Development mode - use Vite dev server
         return <<<HTML
@@ -31,11 +32,11 @@ function vite_assets() {
         if (!file_exists($manifestPath)) {
             return '<!-- Vite manifest not found. Run "npm run build" first. -->';
         }
-        
+
         $manifest = json_decode(file_get_contents($manifestPath), true);
         $mainJs = $manifest['src/main.js']['file'] ?? '';
         $mainCss = $manifest['src/main.js']['css'][0] ?? '';
-        
+
         $html = '';
         if ($mainCss) {
             $html .= '<link rel="stylesheet" href="/dist/' . $mainCss . '">';
@@ -63,7 +64,7 @@ function vite_assets() {
 
         <!-- Waiting/Touch Screen -->
         <div id="waiting-screen" class="screen active bg-buff">
-            <div class="absolute inset-0 flex items-center justify-center bg-washed-black">
+            <div class="absolute inset-0  flex items-center justify-center bg-washed-black">
                 <video
                     src="assets/video/homepage.mp4"
                     class="transition-all duration-200 opacity-0 absolute inset-0 w-full h-full object-cover object-top-right"
@@ -73,12 +74,12 @@ function vite_assets() {
                     preload="auto">
                 </video>
             </div>
-            <div class="absolute inset-0 flex items-center justify-center">
-                <div class="w-full mx-auto px-[11.85%]">
-                    <div class="backdrop-blur-[75px] backdrop-filter bg-white bg-opacity-[0.02] h-[130px] rounded-xl flex items-center justify-center">
+            <div class="absolute inset-0  flex items-center justify-center">
+                <div class="w-full grid grid-cols-6 translate-y-1/5 gap-5">
+                    <div class="col-span-2 col-start-3">
                         <button
                             id="touch-btn"
-                            class="text-tan text-4xl font-extrabold tracking-[9px] hover:opacity-70 transition-opacity duration-200">
+                            class="t-button text-tan hover:opacity-70 transition-opacity duration-200 backdrop-blur-[75px] backdrop-filter bg-white/2 h-[130px] w-full rounded-xl flex items-center justify-center">
                             TOUCH ME
                         </button>
                     </div>
@@ -89,16 +90,22 @@ function vite_assets() {
         <!-- Intro Screen -->
         <div id="intro-screen" class="screen bg-gradient-to-b from-[#f3e8d8] to-[#d7b792]">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <div class="w-full mx-auto px-[11.85%] text-center">
-                    <div class="font-semibold text-washed-black text-5xl leading-[52px] mb-16">
-                        <p class="mb-4">You bring the personality,<br>we'll bring the crema.</p>
-                        <p class="mb-4">&nbsp;</p>
-                        <p class="mb-4">Four questions.<br>One brew identity.<br>Let's find your coffee match.</p>
+                <div class="w-full grid grid-cols-6 gap-x-4 text-center">
+
+                    <div class="col-span-4 col-start-2 flex flex-col items-center gap-44 font-semibold text-washed-black text-5xl leading-[52px] mb-34">
+                        <img src='/assets/images/image_ninja_luxe_logo.png' class="max-w-112">
+
+                        <div>
+                            <p class=" t-copy-lg">You bring the personality,<br>we'll bring the crema.</p>
+                            <p class=" t-copy-lg">&nbsp;</p>
+                            <p class=" t-copy-lg">Four questions.<br>One brew identity.<br>Let's find your coffee match.</p>
+                        </div>
+
                     </div>
                     <button
                         id="intro-next-btn"
-                        class="bg-buff text-washed-black px-12 py-4 rounded-xl text-4xl font-extrabold tracking-[9px] hover:opacity-90 transition-opacity duration-200 will-change-opacity">
-                        NEXT
+                        class="t-button col-span-2 col-start-3 bg-buff text-washed-black rounded-xl h-[130px] hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                        BEGIN
                     </button>
                 </div>
             </div>
@@ -106,28 +113,30 @@ function vite_assets() {
 
         <!-- Question Screens -->
         <div id="question-screen" class="screen bg-tan">
-            <div class="absolute inset-0 flex flex-col justify-center items-center">
-                <div class="w-full mx-auto px-[11.85%] will-change-contents">
+            <div class="absolute bottom-base w-full flex flex-col justify-center items-center">
+                <div class="w-full grid grid-cols-6 gap-x-4 will-change-contents">
                     <!-- Question -->
-                    <h2 id="question-text" class="text-5xl font-semibold text-washed-black mb-16 text-center leading-tight">
+                    <h2 id="question-text" class="col-span-4 col-start-2 text-5xl font-semibold text-washed-black mb-42 text-center leading-tight">
                         <!-- Question text will be dynamically generated -->
                     </h2>
 
                     <!-- Answer Options -->
-                    <div id="answer-options" class="space-y-12 mb-36">
+                    <div id="answer-options" class="col-span-4 col-start-2 space-y-7.5 mb-36">
                         <!-- Options will be dynamically generated -->
                     </div>
 
                     <!-- Navigation -->
-                    <div class="flex justify-between items-center space-x-12">
+                    <div class="col-span-4 col-start-2 grid grid-cols-4 gap-5">
                         <button
                             id="back-btn"
-                            class="block flex-grow py-[1.75vh] text-washed-black hover:opacity-70 transition-opacity duration-200 text-7xl font-semibold will-change-opacity">
-                            ←
+                            class="bg-buff col-span-1 rounded-xl grow h-[130px] text-washed-black hover:opacity-70 transition-opacity duration-200 will-change-opacity flex flex-row items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="20" viewBox="0 0 32 20" fill="none">
+                                <path d="M31.1016 8.34875L31.1016 11.8348L6.92781 11.8347L12.9038 17.8107L10.7873 19.9687L0.889558 10.071L10.7873 0.17325L12.9038 2.33125L6.88631 8.34875L31.1016 8.34875Z" fill="#1E1D1C" />
+                            </svg>
                         </button>
                         <button
                             id="next-btn"
-                            class="block w-[66%] py-[1.75vh] bg-washed-black text-buff rounded-xl font-extrabold text-7xl tracking-widest hover:opacity-90 transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed will-change-opacity"
+                            class="t-button col-span-3 block  h-[130px] bg-washed-black text-buff rounded-xl tracking-widest hover:opacity-90 transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed will-change-opacity"
                             disabled>
                             NEXT
                         </button>
@@ -138,37 +147,50 @@ function vite_assets() {
 
         <!-- Proofpoint Display Screens -->
         <div id="proofpoint-screen" class="screen bg-gradient-to-b from-[#f3e8d8] to-[#d7b792]">
-            <div class="absolute inset-0 flex flex-col items-center justify-center will-change-contents">
-                <div class="proofpoint-content hidden w-full mx-auto px-[11.85%] text-center will-change-transform">
-                    <div class="mb-8">
-                        <div class="w-full h-auto bg-buff flex items-center justify-center">
-                            <img id="proofpoint-image" src="" alt="Proofpoint image" class="w-full h-full object-contain">
+            <div class="absolute flex flex-col items-center justify-center h-full will-change-contents">
+                <div class="proofpoint-content hidden w-full text-center h-full will-change-transform">
+                    <div class="grid grid-cols-6 grid-rows-[auto_1fr_auto] h-full pb-base">
+                        <div class="col-span-full px-7.5 pt-7.5">
+                            <div class="w-full h-auto bg-buff flex items-center justify-center rounded-xl overflow-hidden">
+                                <img id="proofpoint-image" src="" alt="Proofpoint image" class="w-full h-full object-contain ">
+                            </div>
                         </div>
+                        <div class="col-span-4 col-start-2 flex flex-col justify-center">
+                            <h2 id="proofpoint-title" class="text-5xl font-bold text-washed-black mb-9">
+                                <!-- Proofpoint title will be dynamically generated -->
+                            </h2>
+                            <p id="proofpoint-subtitle" class="text-3xl text-washed-black">
+                                <!-- Proofpoint subtitle will be dynamically generated -->
+                            </p>
+                            <p id="proofpoint-description" class="t-copy text-center text-washed-black">
+                                <!-- Proofpoint description will be dynamically generated -->
+                            </p>
+                        </div>
+                        <button
+                            id="continue-btn"
+                            class="flex flex-row justify-between items-center col-span-4 col-start-2 t-button mt-auto w-full bg-washed-black text-buff px-10 py-4 h-[130px] rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                            <span class="m-auto">
+                                NEXT
+                            </span>
+
+                            <div class="relative">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
                     </div>
-                    <h2 id="proofpoint-title" class="text-5xl font-bold text-washed-black mb-4">
-                        <!-- Proofpoint title will be dynamically generated -->
-                    </h2>
-                    <p id="proofpoint-subtitle" class="text-3xl text-washed-black mb-8">
-                        <!-- Proofpoint subtitle will be dynamically generated -->
-                    </p>
-                    <p id="proofpoint-description" class="text-xl text-washed-black mb-12 leading-relaxed">
-                        <!-- Proofpoint description will be dynamically generated -->
-                    </p>
-                    <button
-                        id="continue-btn"
-                        class="bg-washed-black text-buff px-8 py-4 rounded-xl text-xl font-semibold hover:opacity-90 transition-opacity duration-200 will-change-opacity">
-                        Continue
-                    </button>
                 </div>
             </div>
         </div>
 
         <!-- Profile Calculation Screen -->
-        <div id="profile-calculation-screen" class="screen bg-black">
+        <div id="profile-calculation-screen" class="screen bg-washed-black">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <div class="profile-calculate-content w-full mx-auto px-[11.85%] text-center opacity-0">
-                    <div class="rounded-xl flex justify-center items-center">
-                        <div class="spinner"></div>
+                <div class="profile-calculate-content translate-y-1/5 w-full grid grid-cols-6 mx-auto text-center opacity-0">
+                    <div class="col-span-4 col-start-2 rounded-xl flex justify-center items-center px-8 backdrop-blur-[75px] h-[130px] backdrop-filter bg-[#292928]">
+                        <span class="t-button text-tan mx-auto">CALCULATING</span>
+                        <div class="relative">
+                            <div class="spinner-light"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -176,27 +198,42 @@ function vite_assets() {
 
         <!-- Profile Reveal Screen -->
         <div id="profile-reveal-screen" class="screen bg-tan">
-            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <div class="w-full mx-auto px-[11.85%] text-center">
-                    <!-- Profile Icon -->
-                    <div class="mb-8">
-                        <img src=""
-                            alt="Profile icon"
-                            class="profile-icon w-[68px] h-[102px] mx-auto">
+            <div class="absolute bottom-base w-full flex flex-col items-center justify-center">
+                <div class="w-full grid grid-cols-6 gap-x-5 gap-y-16 text-center">
+                    <div class="col-span-4 col-start-2 bg-buff px-23 pb-39 pt-44 rounded-xl">
+                        <!-- Profile Icon -->
+                        <div class="mb-9">
+                            <img src=""
+                                alt="Profile icon"
+                                class="profile-icon w-[68px] h-[102px] mx-auto">
+                        </div>
+
+                        <!-- Profile Title -->
+                        <h1 id="profile-title" class="text-[30px] font-extrabold text-washed-black mb-19 text-center leading-[72px] tracking-[9px] uppercase">
+                            The<br>...
+                        </h1>
+
+                        <!-- Profile Tagline -->
+                        <!-- <p id="profile-tagline" class="text-[44px] font-extrabold text-washed-black mb-16 text-center leading-[72px]">
+                            Your coffee profile tagline will load here..
+                        </p> -->
+
+                        <p id="profile-description" class="t-copy-md text-washed-black text-center">
+                            Your coffee description will load here..
+                        </p>
                     </div>
 
-                    <!-- Profile Title -->
-                    <h1 id="profile-title" class="text-[56px] font-extrabold text-washed-black mb-4 text-center leading-[72px] tracking-[9px] uppercase">
-                        The<br>...
-                    </h1>
 
-                    <!-- Profile Tagline -->
-                    <p id="profile-tagline" class="text-[44px] font-extrabold text-washed-black mb-16 text-center leading-[72px]">
-                        Your coffee profile tagline will load here..
-                    </p>
+                    <div class="col-span-4 col-start-2 bg-caramel p-20 flex flex-row justify-between items-center rounded-xl h-74">
+                        <div>
+                            QR
+                        </div>
+                        <span class="t-button">SCAN & SHARE </span>
+                    </div>
+
 
                     <!-- Navigation -->
-                    <div class="flex justify-center items-center">
+                    <div class="col-span-4 col-start-2 flex justify-center items-center">
                         <!-- <button
                             id="profile-back-btn"
                             class="text-washed-black hover:opacity-70 transition-opacity duration-200 text-xl font-semibold">
@@ -204,8 +241,14 @@ function vite_assets() {
                         </button> -->
                         <button
                             id="profile-next-btn"
-                            class="bg-washed-black text-buff px-12 py-4 rounded-xl text-4xl font-extrabold tracking-[9px] hover:opacity-90 transition-opacity duration-200 will-change-opacity">
-                            NEXT
+                            class="flex items-center t-button w-full bg-washed-black h-[130px] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                            <span class="t-button text-tan mx-auto">
+                                RESTART
+                            </span>
+
+                            <div class="relative">
+                                <div class="spinner"></div>
+                            </div>
                         </button>
                     </div>
                 </div>
@@ -226,6 +269,7 @@ function vite_assets() {
                         </p> -->
                     </div>
 
+
                     <!-- Navigation -->
                     <div class="flex justify-between items-center">
                         <button
@@ -235,7 +279,7 @@ function vite_assets() {
                         </button>
                         <button
                             id="details-next-btn"
-                            class="bg-washed-black text-buff px-12 py-4 rounded-xl text-4xl font-extrabold tracking-[9px] hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                            class="t-button bg-washed-black text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
                             NEXT
                         </button>
                     </div>
@@ -259,7 +303,7 @@ function vite_assets() {
                     <!-- Start Over Button -->
                     <button
                         id="start-over-btn"
-                        class="bg-washed-black text-buff px-12 py-4 rounded-xl text-4xl font-extrabold tracking-[9px] hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                        class="t-button bg-washed-black text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
                         START OVER
                     </button>
                 </div>
@@ -268,23 +312,22 @@ function vite_assets() {
 
         <!-- Timeout Overlay -->
         <div id="timeout-screen" class="timeout-screen opacity-0 pointer-events-none">
-            <div class="bg-tan rounded-xl p-12 w-[80vw] h-[80vh] mx-4 text-center">
-                <!-- Timeout Icon -->
-                <div class="mb-8">
-                    <img src="/Users/leighgibson/Sites/test/ninja-touch/4a8d527f94fdd11281a715ff2df93e015c6d253c.svg"
-                        alt="Timeout icon"
-                        class="w-[99px] h-[99px] mx-auto">
-                </div>
+            <div class="absolute grid grid-cols-6 gap-y-26 w-full">
+                <div class="col-span-2 col-start-3 flex flex-col items-center gap-6 ">
+                    <div class="relative w-fit">
+                        <div class="spinner"></div>
+                    </div>
 
-                <!-- Countdown Text -->
-                <p id="countdown-text" class="text-[56px] font-extrabold text-washed-black mb-16 text-center leading-[72px] tracking-[9px] uppercase">
-                    Restarting<br>in <span id="countdown-number">15</span>
-                </p>
+                    <!-- Countdown Text -->
+                    <p id="countdown-text" class="text-[30px] font-extrabold text-center leading-[42px] tracking-[9px] uppercase text-tan">
+                        Restarting<br>in <span id="countdown-number">15</span>
+                    </p>
+                </div>
 
                 <!-- Dismiss Button -->
                 <button
                     id="dismiss-btn"
-                    class="bg-washed-black text-buff px-12 py-4 rounded-xl text-4xl font-extrabold tracking-[9px] hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                    class="t-button col-span-4 col-start-2 h-[130px] bg-[#292928] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
                     DISMISS
                 </button>
             </div>
