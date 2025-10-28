@@ -112,20 +112,20 @@ export class CoffeeProfileQuiz {
 
         // Motion animation declarations:
         // Spinners:
-        const spinners = document.querySelectorAll(".spinner");
-        if (spinners.length > 0) {
-            spinners.forEach(spinner => {
-                Motion.animate(
-                    spinner, {
-                        rotate: 360
-                    }, {
-                        duration: 1.5,
-                        repeat: Infinity,
-                        ease: "linear",
-                    }
-                )
-            });
-        }
+        // const spinners = document.querySelectorAll(".spinner");
+        // if (spinners.length > 0) {
+        //     spinners.forEach(spinner => {
+        //         Motion.animate(
+        //             spinner, {
+        //                 rotate: 360
+        //             }, {
+        //                 duration: 1.5,
+        //                 repeat: Infinity,
+        //                 ease: "linear",
+        //             }
+        //         )
+        //     });
+        // }
 
         // Global button press state:
         Motion.press("button", (element) => {

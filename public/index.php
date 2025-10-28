@@ -167,8 +167,14 @@ function vite_assets() {
                         </div>
                         <button
                             id="continue-btn"
-                            class="col-span-4 col-start-2 t-button mt-auto w-full bg-washed-black text-buff px-8 py-4 h-[130px] rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
-                            NEXT
+                            class="flex flex-row justify-between items-center col-span-4 col-start-2 t-button mt-auto w-full bg-washed-black text-buff px-10 py-4 h-[130px] rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                            <span class="m-auto">
+                                NEXT
+                            </span>
+
+                            <div>
+                                <div class="spinner"></div>
+                            </div>
                         </button>
                     </div>
                 </div>
