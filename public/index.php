@@ -150,8 +150,8 @@ function vite_assets() {
                 <div class="proofpoint-content hidden w-full text-center h-full will-change-transform">
                     <div class="grid grid-cols-6 grid-rows-[auto_1fr_auto] h-full pb-base">
                         <div class="col-span-full px-7.5 pt-7.5">
-                            <div class="w-full h-auto bg-buff flex items-center justify-center">
-                                <img id="proofpoint-image" src="" alt="Proofpoint image" class="w-full h-full object-contain rounded-xl">
+                            <div class="w-full h-auto bg-buff flex items-center justify-center rounded-xl overflow-hidden">
+                                <img id="proofpoint-image" src="" alt="Proofpoint image" class="w-full h-full object-contain ">
                             </div>
                         </div>
                         <div class="col-span-4 col-start-2 flex flex-col justify-center">
