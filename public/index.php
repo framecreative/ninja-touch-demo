@@ -114,16 +114,17 @@
                             </div>
                         </div>
                         <div class="col-span-4 col-start-2 flex flex-col justify-center">
+                            <span if="proofpoint-preheading" class="text-2xl font-extrabold tracking-[7.2px] uppercase text-center mb-9">[YOUR FEATURE POINT]</span>
                             <h2 id="proofpoint-title" class="text-5xl font-bold text-washed-black mb-9">
                                 <!-- Proofpoint title will be dynamically generated -->
                             </h2>
                             <p id="proofpoint-subtitle" class="text-3xl text-washed-black">
                                 <!-- Proofpoint subtitle will be dynamically generated -->
                             </p>
-                            <p id="proofpoint-description" class="t-copy text-center text-washed-black">
+                            <p id="proofpoint-description" class="text-3xl font-extrabold leading-[43px] text-center text-washed-black">
                                 <!-- Proofpoint description will be dynamically generated -->
                             </p>
-                        </div>
+                        </div>`
                         <button
                             data-continue-btn
                             class="flex flex-row justify-between items-center col-span-4 col-start-2 t-button mt-auto w-full bg-washed-black text-buff px-10 py-4 h-[130px] rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
@@ -202,7 +203,7 @@
                         </h1>
 
                         <!-- Profile Tagline -->
-                        <p id="profile-tagline" class="t-copy-md text-washed-black text-center text-washed-black mb-10 text-center leading-[72px]">
+                        <p id="profile-tagline" class="t-copy text-washed-black text-center mb-10 leading-[72px]">
                             Your coffee profile tagline will load here..
                         </p>
 
