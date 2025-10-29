@@ -34,6 +34,7 @@
                             id="touch-btn"
                             class="t-button text-tan hover:opacity-70 transition-opacity duration-200 backdrop-blur-[75px] backdrop-filter bg-white/2 h-[130px] w-full rounded-xl flex items-center justify-center">
                             TOUCH ME
+                            
                         </button>
                     </div>
                 </div>
@@ -129,8 +130,23 @@
                                 NEXT
                             </span>
 
-                            <div class="relative">
-                                <div class="spinner"></div>
+                            <div class="progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
+                                <svg
+                                    class="-rotate-90" width="60" height="60"
+                                >
+                                    <defs>
+                                        <linearGradient id="globalGradient" x1="18.7588" y1="56.2744" x2="56.2725" y2="18.7607" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#F3E8D8"/>
+                                        <stop offset="1" stop-color="#D7B792"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- background track -->
+                                    <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent" ></circle>
+
+                                    <!-- animated progress stroke -->
+                                    <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#globalGradient)" stroke-width="6" fill="transparent" stroke-linecap="round"
+                                    ></circle>
+                                </svg>
                             </div>
                         </button>
                     </div>
@@ -144,8 +160,23 @@
                 <div class="profile-calculate-content translate-y-1/5 w-full grid grid-cols-6 mx-auto text-center opacity-0">
                     <div class="col-span-4 col-start-2 rounded-xl flex justify-center items-center px-8 backdrop-blur-[75px] h-[130px] backdrop-filter bg-[#292928]">
                         <span class="t-button text-tan mx-auto">CALCULATING</span>
-                        <div class="relative">
-                            <div class="spinner-light"></div>
+                        <div class="progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
+                            <svg
+                                class="-rotate-90" width="60" height="60"
+                            >
+                                <defs>
+                                    <linearGradient id="globalGradient" x1="18.7588" y1="56.2744" x2="56.2725" y2="18.7607" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#F3E8D8"/>
+                                    <stop offset="1" stop-color="#D7B792"/>
+                                    </linearGradient>
+                                </defs>
+                                <!-- background track -->
+                                <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent" ></circle>
+
+                                <!-- animated progress stroke -->
+                                <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#globalGradient)" stroke-width="6" fill="transparent" stroke-linecap="round" class="hidden"
+                                ></circle>
+                            </svg>
                         </div>
                     </div>
                 </div>
@@ -156,7 +187,7 @@
         <div id="profile-reveal-screen" class="screen bg-tan">
             <div class="absolute bottom-base w-full flex flex-col items-center justify-center">
                 <div class="w-full grid grid-cols-6 gap-x-5 gap-y-16 text-center">
-                    <div class="col-span-4 col-start-2 bg-buff px-23 pb-39 pt-44 rounded-xl">
+                    <div class="col-span-4 col-start-2 bg-buff px-23 pb-60 pt-80 rounded-xl">
                         <!-- Profile Icon -->
                         <div class="mb-9">
                             <img src=""
@@ -165,26 +196,18 @@
                         </div>
 
                         <!-- Profile Title -->
-                        <h1 id="profile-title" class="text-[30px] font-extrabold text-washed-black mb-19 text-center leading-[72px] tracking-[9px] uppercase">
+                        <h1 id="profile-title" class="text-[30px] font-extrabold text-washed-black mb-32 text-center leading-[72px] tracking-[9px] uppercase">
                             The<br>...
                         </h1>
 
                         <!-- Profile Tagline -->
-                        <!-- <p id="profile-tagline" class="text-[44px] font-extrabold text-washed-black mb-16 text-center leading-[72px]">
+                        <p id="profile-tagline" class="t-copy-md text-washed-black text-center text-washed-black mb-10 text-center leading-[72px]">
                             Your coffee profile tagline will load here..
-                        </p> -->
+                        </p>
 
                         <p id="profile-description" class="t-copy-md text-washed-black text-center">
                             Your coffee description will load here..
                         </p>
-                    </div>
-
-
-                    <div class="col-span-4 col-start-2 bg-caramel p-20 flex flex-row justify-between items-center rounded-xl h-74">
-                        <div>
-                            QR
-                        </div>
-                        <span class="t-button">SCAN & SHARE </span>
                     </div>
 
 
@@ -202,8 +225,23 @@
                                 RESTART
                             </span>
 
-                            <div class="relative">
-                                <div class="spinner"></div>
+                            <div class="progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
+                                <svg
+                                    class="-rotate-90" width="60" height="60"
+                                >
+                                    <defs>
+                                        <linearGradient id="globalGradient" x1="18.7588" y1="56.2744" x2="56.2725" y2="18.7607" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#F3E8D8"/>
+                                        <stop offset="1" stop-color="#D7B792"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- background track -->
+                                    <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent" ></circle>
+
+                                    <!-- animated progress stroke -->
+                                    <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#globalGradient)" stroke-width="6" fill="transparent" stroke-linecap="round" class="hidden"
+                                    ></circle>
+                                </svg>
                             </div>
                         </button>
                     </div>
@@ -213,10 +251,27 @@
 
         <!-- Timeout Overlay -->
         <div id="timeout-screen" class="timeout-screen opacity-0 pointer-events-none">
-            <div class="absolute grid grid-cols-6 gap-y-26 w-full">
-                <div class="col-span-2 col-start-3 flex flex-col items-center gap-6 ">
-                    <div class="relative w-fit">
-                        <div class="spinner"></div>
+            <div class="absolute grid grid-cols-6 gap-y-6 w-full">
+                <div class="col-span-2 col-start-3 flex flex-col items-center gap-6 pb-20">
+                    <div class="countdown-progress-circle relative flex items-center justify-center w-[60px] h-[60px] ">
+                        <svg
+                            class="-rotate-90" width="60" height="60"
+                        >
+
+
+                            <defs>
+                                <linearGradient id="timeout" x1="18.7588" y1="56.2744" x2="56.2725" y2="18.7607" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#F3E8D8"/>
+                                <stop offset="1" stop-color="#D7B792"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- background track -->
+                            <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent" ></circle>
+
+                            <!-- animated progress stroke -->
+                            <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#timeout)" stroke-width="6" fill="transparent" stroke-linecap="round" class="hidden"
+                            ></circle>
+                        </svg>
                     </div>
 
                     <!-- Countdown Text -->
@@ -228,8 +283,15 @@
                 <!-- Dismiss Button -->
                 <button
                     id="dismiss-btn"
-                    class="t-button col-span-4 col-start-2 h-[130px] bg-[#292928] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                    class="t-button col-span-4 col-start-2 h-[130px] bg-tan text-washed-black px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
                     DISMISS
+                </button>
+
+                <!-- Restart Button -->
+                <button
+                    id="restart-btn"
+                    class="t-button col-span-4 col-start-2 h-[130px] bg-[#292928] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                    RESTART
                 </button>
             </div>
         </div>

@@ -1,3 +1,5 @@
+import { animate } from "motion";
+
 /**
  * Activity Tracking Module
  * Handles user activity monitoring and timeout functionality
@@ -11,6 +13,10 @@ export class ActivityTracker {
         this.timeoutCallback = null;
         this.countdownCallback = null;
         this.config = {};
+        this.countdownSeconds = this.config.countdownSeconds || 25;
+        this.countdownPopupSeconds = this.config.countdownPopupSeconds || 15;
+        this.proofpointerSeconds = this.config.proofpointerSeconds || 10;
+        this.finalScreenSeconds = this.config.finalScreenSeconds || 20; 
     }
 
     setConfig(config) {
@@ -78,7 +84,7 @@ export class ActivityTracker {
             if (this.timeoutCallback) {
                 this.timeoutCallback();
             }
-        }, (this.config.countdownSeconds || 30) * 1000);
+        }, (this.countdownSeconds) * 1000);
     }
 
     resetActivity() {
@@ -87,26 +93,81 @@ export class ActivityTracker {
     }
 
     startCountdown() {
-        let countdown = this.config.countdownPopupSeconds || 15;
+        let countdown = this.countdownPopupSeconds;
         document.getElementById('countdown-number').textContent = countdown;
 
-        this.countdownTimer = setInterval(() => {
-            countdown--;
+        let spinner = document.querySelector('.countdown-progress-circle');
+
+        if (spinner) {
+            const circle = spinner.querySelector('#progress-indicator');
+
+            const radius = circle.r.baseVal.value;
+            const circumference = 2 * Math.PI * radius;
+
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            circle.style.strokeDashoffset = circumference;
+
+            const targetValue = 100;
+
+            //Remove hidden class on gradient circle if applied
+            circle.setAttribute('class', '');
+
             document.getElementById('countdown-number').textContent = countdown;
 
-            if (countdown <= 0) {
-                clearInterval(this.countdownTimer);
+            let animation = null;
+
+            animation = animate(0, targetValue, {
+                duration: this.countdownPopupSeconds,
+                easing: "easeInOut",
+                onUpdate(latest) {
+                    const offset = circumference - (latest / 100) * circumference;
+                    circle.style.strokeDashoffset = offset;
+
+                    //Update timer based on current time of animation
+                    const currentSecond = animation.duration - Math.floor(animation.time);
+                    
+                    if(currentSecond < countdown) {
+                        countdown = currentSecond;
+                        document.getElementById('countdown-number').textContent = countdown;
+
+                    } 
+                },
+            });
+
+            document.addEventListener('clearTimeoutAnimation', () => {
+                circle.setAttribute('class', 'hidden');
+                animation.stop();
+            })
+
+            animation.then(() => {
+                circle.setAttribute('class', 'hidden');
+                
                 this.hideTimeout();
-                if (this.countdownCallback) {
+                if(this.countdownCallback()){
                     this.countdownCallback();
                 }
-            }
-        }, 1000);
+            });
+            
+        }
+
+        
+
+    }
+
+    reduceTimer(el){
+            
     }
 
     dismissTimeout() {
         this.hideTimeout();
         this.resetTimeout();
+
+        this.clearTimeoutAnimation();
+    }
+
+    clearTimeoutAnimation(){
+        let clearTimeoutAnimation = new Event('clearTimeoutAnimation');
+        document.dispatchEvent(clearTimeoutAnimation);
     }
 
     hideTimeout() {
