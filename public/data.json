@@ -1,7 +1,9 @@
 {
   "config": {
     "countdownSeconds": 30,
-    "countdownPopupSeconds": 15
+    "countdownPopupSeconds": 15,
+    "proofpointerSeconds": 10,
+    "finalScreenSeconds": 20
   },
   "questions": [
     {
