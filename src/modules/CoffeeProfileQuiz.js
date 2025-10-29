@@ -188,6 +188,12 @@ export class CoffeeProfileQuiz {
             this.resetToWaiting();
         });
 
+        document.getElementById('restart-btn').addEventListener('click', () => {
+            this.activityTracker.hideTimeout();
+            this.activityTracker.countdownCallback();
+            this.activityTracker.clearTimeoutAnimation();
+        });
+
         // Dismiss button - dismisses the timeout overlay
         document.getElementById('dismiss-btn').addEventListener('click', () => {
             this.activityTracker.dismissTimeout();

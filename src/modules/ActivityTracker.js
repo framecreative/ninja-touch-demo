@@ -13,10 +13,10 @@ export class ActivityTracker {
         this.timeoutCallback = null;
         this.countdownCallback = null;
         this.config = {};
-        this.countdownSeconds = this.config.countdownSeconds || 30;
+        this.countdownSeconds = this.config.countdownSeconds || 2;
         this.countdownPopupSeconds = this.config.countdownPopupSeconds || 15;
         this.proofpointerSeconds = this.config.proofpointerSeconds || 10;
-        this.finalScreenSeconds = this.config.finalScreenSeconds || 20;
+        this.finalScreenSeconds = this.config.finalScreenSeconds || 20; 
     }
 
     setConfig(config) {
@@ -114,8 +114,9 @@ export class ActivityTracker {
 
             document.getElementById('countdown-number').textContent = countdown;
 
+            let animation = null;
 
-            let animation = animate(0, targetValue, {
+            animation = animate(0, targetValue, {
                 duration: this.countdownPopupSeconds,
                 easing: "easeInOut",
                 onUpdate(latest) {
@@ -133,14 +134,14 @@ export class ActivityTracker {
                 },
             });
 
-            document.addEventListener('stopTimers', () => {
+            document.addEventListener('clearTimeoutAnimation', () => {
                 circle.setAttribute('class', 'hidden');
                 animation.stop();
             })
 
             animation.then(() => {
                 circle.setAttribute('class', 'hidden');
-                console.log('completed')
+                
                 this.hideTimeout();
                 if(this.countdownCallback()){
                     this.countdownCallback();
@@ -160,6 +161,13 @@ export class ActivityTracker {
     dismissTimeout() {
         this.hideTimeout();
         this.resetTimeout();
+
+        this.clearTimeoutAnimation();
+    }
+
+    clearTimeoutAnimation(){
+        let clearTimeoutAnimation = new Event('clearTimeoutAnimation');
+        document.dispatchEvent(clearTimeoutAnimation);
     }
 
     hideTimeout() {

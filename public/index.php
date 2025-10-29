@@ -184,7 +184,7 @@
         <div id="profile-reveal-screen" class="screen bg-tan">
             <div class="absolute bottom-base w-full flex flex-col items-center justify-center">
                 <div class="w-full grid grid-cols-6 gap-x-5 gap-y-16 text-center">
-                    <div class="col-span-4 col-start-2 bg-buff px-23 pb-39 pt-44 rounded-xl">
+                    <div class="col-span-4 col-start-2 bg-buff px-23 pb-60 pt-80 rounded-xl">
                         <!-- Profile Icon -->
                         <div class="mb-9">
                             <img src=""
@@ -193,26 +193,18 @@
                         </div>
 
                         <!-- Profile Title -->
-                        <h1 id="profile-title" class="text-[30px] font-extrabold text-washed-black mb-19 text-center leading-[72px] tracking-[9px] uppercase">
+                        <h1 id="profile-title" class="text-[30px] font-extrabold text-washed-black mb-32 text-center leading-[72px] tracking-[9px] uppercase">
                             The<br>...
                         </h1>
 
                         <!-- Profile Tagline -->
-                        <!-- <p id="profile-tagline" class="text-[44px] font-extrabold text-washed-black mb-16 text-center leading-[72px]">
+                        <p id="profile-tagline" class="t-copy-md text-washed-black text-center text-washed-black mb-10 text-center leading-[72px]">
                             Your coffee profile tagline will load here..
-                        </p> -->
+                        </p>
 
                         <p id="profile-description" class="t-copy-md text-washed-black text-center">
                             Your coffee description will load here..
                         </p>
-                    </div>
-
-
-                    <div class="col-span-4 col-start-2 bg-caramel p-20 flex flex-row justify-between items-center rounded-xl h-74">
-                        <div>
-                            QR
-                        </div>
-                        <span class="t-button">SCAN & SHARE </span>
                     </div>
 
 
@@ -311,9 +303,9 @@
 
         <!-- Timeout Overlay -->
         <div id="timeout-screen" class="timeout-screen opacity-0 pointer-events-none">
-            <div class="absolute grid grid-cols-6 gap-y-26 w-full">
-                <div class="col-span-2 col-start-3 flex flex-col items-center gap-6 ">
-                    <div class="countdown-progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
+            <div class="absolute grid grid-cols-6 gap-y-6 w-full">
+                <div class="col-span-2 col-start-3 flex flex-col items-center gap-6 pb-20">
+                    <div class="countdown-progress-circle relative flex items-center justify-center w-[60px] h-[60px] ">
                         <svg
                             class="-rotate-90" width="60" height="60"
                         >
@@ -343,8 +335,15 @@
                 <!-- Dismiss Button -->
                 <button
                     id="dismiss-btn"
-                    class="t-button col-span-4 col-start-2 h-[130px] bg-[#292928] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                    class="t-button col-span-4 col-start-2 h-[130px] bg-tan text-washed-black px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
                     DISMISS
+                </button>
+
+                <!-- Restart Button -->
+                <button
+                    id="restart-btn"
+                    class="t-button col-span-4 col-start-2 h-[130px] bg-[#292928] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                    RESTART
                 </button>
             </div>
         </div>
