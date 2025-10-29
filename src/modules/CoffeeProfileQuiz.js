@@ -315,7 +315,7 @@ export class CoffeeProfileQuiz {
 
             let timerAnimation = animate(0, targetValue, {
                 duration,
-                easing: "easeInOut",
+                ease: "linear",
                 onUpdate(latest) {
                     const offset = circumference - (latest / 100) * circumference;
                     circle.style.strokeDashoffset = offset;

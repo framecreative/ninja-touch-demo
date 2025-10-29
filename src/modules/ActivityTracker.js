@@ -118,13 +118,14 @@ export class ActivityTracker {
 
             animation = animate(0, targetValue, {
                 duration: this.countdownPopupSeconds,
-                easing: "easeInOut",
+                ease: "linear",
                 onUpdate(latest) {
-                    const offset = circumference - (latest / 100) * circumference;
+                    const offset = circumference - ((latest / 100) * circumference);
                     circle.style.strokeDashoffset = offset;
-
+                    
                     //Update timer based on current time of animation
                     const currentSecond = animation.duration - Math.floor(animation.time);
+                    console.log(latest, circumference)
                     
                     if(currentSecond < countdown) {
                         countdown = currentSecond;
