@@ -6,17 +6,13 @@ import { animate } from "motion";
  */
 export class ActivityTracker {
     constructor() {
-        this.timeoutTimer = null;
-        this.countdownTimer = null;
+        this.timeoutTimer = null; // the timeout before showing the timeout screen
+        this.countdownTimer = null; // the countdown timer that is started when the timeout screen is shown
         this.lastActivity = Date.now();
         this.activityListenersSetup = false;
         this.timeoutCallback = null;
         this.countdownCallback = null;
         this.config = {};
-        this.countdownSeconds = this.config.countdownSeconds || 25;
-        this.countdownPopupSeconds = this.config.countdownPopupSeconds || 15;
-        this.proofpointerSeconds = this.config.proofpointerSeconds || 10;
-        this.finalScreenSeconds = this.config.finalScreenSeconds || 20; 
     }
 
     setConfig(config) {
@@ -60,12 +56,12 @@ export class ActivityTracker {
             this.activityListenersSetup = true;
         }
 
-        // Set timeout for 30 seconds
+        // Set timeout for the countdown seconds
         this.timeoutTimer = setTimeout(() => {
             if (this.timeoutCallback) {
                 this.timeoutCallback();
             }
-        }, 30000);
+        }, (this.config.countdownSeconds || 30) * 1000);
     }
 
     resetTimeout() {
@@ -84,7 +80,7 @@ export class ActivityTracker {
             if (this.timeoutCallback) {
                 this.timeoutCallback();
             }
-        }, (this.countdownSeconds) * 1000);
+        }, (this.config.countdownSeconds || 30) * 1000);
     }
 
     resetActivity() {
@@ -92,89 +88,72 @@ export class ActivityTracker {
         this.resetTimeout();
     }
 
+    // This is the countdown timer inside the global timeout overlay
     startCountdown() {
-        let countdown = this.countdownPopupSeconds;
-        document.getElementById('countdown-number').textContent = countdown;
+        let countdown = this.config.countdownPopupSeconds || 15;
+        const countdownNumber = document.getElementById('countdown-number');
+        const spinner = document.getElementById('timeout-screen').querySelector('.countdown-progress-circle');
+        countdownNumber.textContent = countdown;
 
-        let spinner = document.querySelector('.countdown-progress-circle');
+        console.log(`starting countdown for ${countdown} seconds`);
+
+        this.countdownTimer = setInterval(() => {
+            countdown--;
+            countdownNumber.textContent = countdown;
+
+            if (countdown <= 0) {
+                this.resetTimeout();
+
+                this.hideTimeoutScreen();
+                if (this.countdownCallback) {
+                    this.countdownCallback();
+                }
+            }
+        }, 1000);
 
         if (spinner) {
             const circle = spinner.querySelector('#progress-indicator');
-
-            const radius = circle.r.baseVal.value;
-            const circumference = 2 * Math.PI * radius;
-
+            const circumference = 2 * Math.PI * (circle.r.baseVal.value);
             circle.style.strokeDasharray = `${circumference} ${circumference}`;
             circle.style.strokeDashoffset = circumference;
 
-            const targetValue = 100;
-
             //Remove hidden class on gradient circle if applied
-            circle.setAttribute('class', '');
+            circle.setAttribute('class', 'bg-error');
 
-            document.getElementById('countdown-number').textContent = countdown;
-
-            let animation = null;
-
-            animation = animate(0, targetValue, {
-                duration: this.countdownPopupSeconds,
+            let animation = animate(0, 100, {
+                duration: (this.config.countdownPopupSeconds || 15) * 1000,
                 easing: "easeInOut",
                 onUpdate(latest) {
                     const offset = circumference - (latest / 100) * circumference;
                     circle.style.strokeDashoffset = offset;
 
-                    //Update timer based on current time of animation
+                    // Update this countdown timer based on current time of animation
                     const currentSecond = animation.duration - Math.floor(animation.time);
                     
                     if(currentSecond < countdown) {
                         countdown = currentSecond;
-                        document.getElementById('countdown-number').textContent = countdown;
-
+                        countdownNumber.textContent = countdown;
                     } 
                 },
             });
 
-            document.addEventListener('clearTimeoutAnimation', () => {
-                circle.setAttribute('class', 'hidden');
-                animation.stop();
-            })
-
             animation.then(() => {
                 circle.setAttribute('class', 'hidden');
-                
-                this.hideTimeout();
-                if(this.countdownCallback()){
-                    this.countdownCallback();
-                }
             });
-            
         }
-
-        
-
-    }
-
-    reduceTimer(el){
-            
     }
 
     dismissTimeout() {
-        this.hideTimeout();
+        this.hideTimeoutScreen();
         this.resetTimeout();
-
-        this.clearTimeoutAnimation();
     }
 
-    clearTimeoutAnimation(){
-        let clearTimeoutAnimation = new Event('clearTimeoutAnimation');
-        document.dispatchEvent(clearTimeoutAnimation);
-    }
-
-    hideTimeout() {
+    hideTimeoutScreen() {
         document.getElementById('timeout-screen').classList.add('opacity-0', 'pointer-events-none');
     }
 
-    clearTimers() {
+    clearTimeoutTimers() {
+        console.log('clearing timeout timers');
         if (this.timeoutTimer) {
             clearTimeout(this.timeoutTimer);
         }

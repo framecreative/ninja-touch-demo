@@ -1,6 +1,6 @@
 {
   "config": {
-    "countdownSeconds": 30,
+    "countdownSeconds": 15,
     "countdownPopupSeconds": 15,
     "proofpointerSeconds": 10,
     "finalScreenSeconds": 20

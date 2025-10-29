@@ -131,7 +131,7 @@
                                 NEXT
                             </span>
 
-                            <div class="progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
+                            <div class="timer-progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
                                 <svg
                                     class="-rotate-90" width="60" height="60"
                                 >
@@ -161,7 +161,7 @@
                 <div class="profile-calculate-content translate-y-1/5 w-full grid grid-cols-6 mx-auto text-center opacity-0">
                     <div class="col-span-4 col-start-2 rounded-xl flex justify-center items-center px-8 backdrop-blur-[75px] h-[130px] backdrop-filter bg-[#292928]">
                         <span class="t-button text-tan mx-auto">CALCULATING</span>
-                        <div class="progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
+                        <div class="timer-progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
                             <svg
                                 class="-rotate-90" width="60" height="60"
                             >
@@ -226,7 +226,7 @@
                                 RESTART
                             </span>
 
-                            <div class="progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
+                            <div class="timer-progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
                                 <svg
                                     class="-rotate-90" width="60" height="60"
                                 >
@@ -254,12 +254,10 @@
         <div id="timeout-screen" class="timeout-screen opacity-0 pointer-events-none">
             <div class="absolute grid grid-cols-6 gap-y-6 w-full">
                 <div class="col-span-2 col-start-3 flex flex-col items-center gap-6 pb-20">
-                    <div class="countdown-progress-circle relative flex items-center justify-center w-[60px] h-[60px] ">
+                    <div class="countdown-timer-progress-circle relative flex items-center justify-center w-[60px] h-[60px] ">
                         <svg
                             class="-rotate-90" width="60" height="60"
                         >
-
-
                             <defs>
                                 <linearGradient id="timeout" x1="18.7588" y1="56.2744" x2="56.2725" y2="18.7607" gradientUnits="userSpaceOnUse">
                                 <stop stop-color="#F3E8D8"/>
@@ -268,7 +266,6 @@
                             </defs>
                             <!-- background track -->
                             <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent" ></circle>
-
                             <!-- animated progress stroke -->
                             <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#timeout)" stroke-width="6" fill="transparent" stroke-linecap="round" class="hidden"
                             ></circle>

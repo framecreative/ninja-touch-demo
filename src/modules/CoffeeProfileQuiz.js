@@ -52,9 +52,6 @@ export class CoffeeProfileQuiz {
 
         // Configs placeholder
         this.config = {};
-        
-        // Timer for auto-continue buttons
-        this.continueTimer = null;
 
         this.appWrapper = document.getElementById('app');
 
@@ -164,7 +161,6 @@ export class CoffeeProfileQuiz {
 
         // Proofpoint confirmation button ('continue' button)
         this.screens.proofpointScreen.querySelector('[data-continue-btn]').addEventListener('click', () => {
-            this.clearContinueTimer();
             this.continueToNextQuestion();
         });
 
@@ -179,9 +175,8 @@ export class CoffeeProfileQuiz {
         });
 
         document.getElementById('restart-btn').addEventListener('click', () => {
-            this.activityTracker.hideTimeout();
-            this.activityTracker.countdownCallback();
-            this.activityTracker.clearTimeoutAnimation();
+            this.activityTracker.hideTimeoutScreen();
+            this.activityTracker.resetTimeout();
         });
 
         // Dismiss button - dismisses the timeout overlay
@@ -286,9 +281,12 @@ export class CoffeeProfileQuiz {
             }
 
             if (hasProofpoint) {
+                // Clear any existing timeout timers, as everything is now automated from here:
+                this.activityTracker.clearTimeoutTimers();
+
                 this.transitionToScreen(this.screens.proofpointScreen, this.screens.questionScreen, 'fade', null, () => {
                     this.showProofpointContent();
-                    this.startTimer(this.screens.proofpointScreen, this.activityTracker.proofpointerSeconds, (() => { this.continueToNextQuestion() }));
+                    this.startProgressionTimer(this.screens.proofpointScreen, this.config.proofpointerSeconds, (() => { this.continueToNextQuestion() }));
                 });
             } else {
                 this.continueToNextQuestion(hasProofpoint);
@@ -296,24 +294,19 @@ export class CoffeeProfileQuiz {
         }
     }
 
-    startTimer(parent, duration, callback) {
-        let spinner = parent.querySelector('.progress-circle');
+    startProgressionTimer(parent, duration, callback) {
+        let spinner = parent.querySelector('.timer-progress-circle');
 
         if (spinner) {
             const circle = spinner.querySelector('#progress-indicator');
-
-            const radius = circle.r.baseVal.value;
-            const circumference = 2 * Math.PI * radius;
-
+            const circumference = 2 * Math.PI * (circle.r.baseVal.value);
             circle.style.strokeDasharray = `${circumference} ${circumference}`;
             circle.style.strokeDashoffset = circumference;
-
-            const targetValue = 100;
 
             //Remove hidden class on gradient circle if applied
             circle.setAttribute('class', '');
 
-            let timerAnimation = animate(0, targetValue, {
+            let timerAnimation = animate(0, 100, {
                 duration,
                 easing: "easeInOut",
                 onUpdate(latest) {
@@ -378,9 +371,6 @@ export class CoffeeProfileQuiz {
                 duration: 0.7
             }]
         ])
-        
-        // Start 10-second timer to auto-continue
-        this.startContinueTimer();
     }
 
     /**
@@ -399,29 +389,6 @@ export class CoffeeProfileQuiz {
     }
 
     /**
-     * Starts the 10-second timer that auto-continues to the next question.
-     */
-    startContinueTimer() {
-        // Clear any existing timer
-        this.clearContinueTimer();
-        
-        // Start new 10-second timer
-        this.continueTimer = setTimeout(() => {
-            this.continueToNextQuestion();
-        }, 10000);
-    }
-
-    /**
-     * Clears the continue timer if it exists.
-     */
-    clearContinueTimer() {
-        if (this.continueTimer) {
-            clearTimeout(this.continueTimer);
-            this.continueTimer = null;
-        }
-    }
-
-    /**
      * Continue after viewing a proofpoint.
      */
     continueToNextQuestion(fromProofpoint = true) {
@@ -429,14 +396,10 @@ export class CoffeeProfileQuiz {
         const stopTimers = new CustomEvent("stopTimers");
         document.dispatchEvent(stopTimers);
 
-        // Clear the timer since we're continuing
-        this.clearContinueTimer();
-
         if ((this.currentQuestion + 1) < this.questions.length) {
 
             if (fromProofpoint) {
-                // Clear the proofpoint button timer, slide out the proofpoint content, and recalc the next question:
-                this.clearContinueTimer();
+                // Slide out the proofpoint content, and recalc the next question:
                 this.hideProofpointContent().then(() => {
                     this.currentQuestion++;
                     this.populateQuestionScreen();
@@ -477,9 +440,6 @@ export class CoffeeProfileQuiz {
      * Go back to the previous question, or back to the intro screen if on Q1.
      */
     goBack() {
-        // Clear the continue timer when navigating back
-        this.clearContinueTimer();
-        
         if (this.currentQuestion > 0) {
             this.currentQuestion--;
             this.answers.pop();
@@ -487,7 +447,7 @@ export class CoffeeProfileQuiz {
             if (this.questionHasProofpoint(this.currentQuestion)) {
                 this.transitionToScreen(this.screens.proofpointScreen, this.screens.questionScreen, 'slidedown', null, () => {
                     this.showProofpointContent();
-                    this.startTimer(this.screens.proofpointScreen, this.activityTracker.proofpointerSeconds, (() => { this.continueToNextQuestion() }));
+                    this.startProgressionTimer(this.screens.proofpointScreen, this.config.proofpointerSeconds, (() => { this.continueToNextQuestion() }));
                 });
             } else {
                 this.createImposterQuestionScreen();
@@ -567,38 +527,6 @@ export class CoffeeProfileQuiz {
         return this.profile;
     }
 
-    getProfileKey(needState, styleProfile) {
-        // Profile matrix implementation
-        const profileMatrix = {
-            'mastery': {
-                'minimalist': 'precisionist',
-                'futurist': 'optimiser',
-                'trendy': 'roastician',
-                'classic': 'baristocrat'
-            },
-            'stability': {
-                'minimalist': 'classicist',
-                'futurist': 'smooth_operator',
-                'trendy': 'brewsmith',
-                'classic': 'home_brewer'
-            },
-            'independence': {
-                'minimalist': 'zen_brewer',
-                'futurist': 'mood_swinger',
-                'trendy': 'blendsetter',
-                'classic': 'ritualist'
-            },
-            'belonging': {
-                'minimalist': 'everybuddy',
-                'futurist': 'percolator',
-                'trendy': 'beanfluencer',
-                'classic': 'brewmantic'
-            }
-        };
-
-        return profileMatrix[needState]?.[styleProfile] || 'ritualist';
-    }
-
     showProfileCalculationScreen() {
         // Populate the users profile reveal content:
         this.populateProfileReveal();
@@ -613,7 +541,7 @@ export class CoffeeProfileQuiz {
             duration: 0.8
         }).then(() => {
             //Start countdown timer 
-            this.startTimer(this.screens.profileCalculationScreen, 2, (() => {
+            this.startProgressionTimer(this.screens.profileCalculationScreen, 2, (() => {
                 Motion.animate(calcContent, {
                     opacity: 0,
                     scale: [1, 0.9]
@@ -648,7 +576,7 @@ export class CoffeeProfileQuiz {
 
     showProfileReveal() {
         this.transitionToScreen(this.screens.profileRevealScreen, this.screens.profileCalculationScreen, 'fade', null, () => {
-            this.startTimer(this.screens.profileRevealScreen, this.activityTracker.finalScreenSeconds, (() => {this.resetToWaiting()}));
+            this.startProgressionTimer(this.screens.profileRevealScreen, this.config.finalScreenSeconds, (() => {this.resetToWaiting()}));
         });
     }
 
@@ -664,14 +592,14 @@ export class CoffeeProfileQuiz {
 
         // Show timeout overlay
         this.screens.timeoutScreen.classList.remove('opacity-0', 'pointer-events-none');
-        this.activityTracker.startCountdown();
+        this.activityTracker.startCountdown(); // teh final countdown timer
     }
 
     resetToWaiting() {
         this.currentQuestion = 0;
         this.answers = [];
         this.profile = null;
-        this.activityTracker.hideTimeout(); // Hide timeout overlay if visible
+        this.activityTracker.hideTimeoutScreen(); // Hide timeout overlay if visible
         this.activityTracker.startActivityTracking();
         this.screens.proofpointContent.classList.add('hidden');
         this.resetAllScreenVisibility(this.screens.waitingScreen);
@@ -785,6 +713,44 @@ export class CoffeeProfileQuiz {
      */
     questionHasProofpoint(questionIndex) {
         return this.questions[questionIndex].proofpoint !== null && typeof this.questions[questionIndex].proofpoint !== 'undefined';
+    }
+
+    /**
+     * Resolves the profile key based on the need state and style profile from the data.json file.
+     * @param {string} needState - The need state.
+     * @param {string} styleProfile - The style profile.
+     * @returns {string} - The profile key.
+     */
+    getProfileKey(needState, styleProfile) {
+        // Profile matrix implementation
+        const profileMatrix = {
+            'mastery': {
+                'minimalist': 'precisionist',
+                'futurist': 'optimiser',
+                'trendy': 'roastician',
+                'classic': 'baristocrat'
+            },
+            'stability': {
+                'minimalist': 'classicist',
+                'futurist': 'smooth_operator',
+                'trendy': 'brewsmith',
+                'classic': 'home_brewer'
+            },
+            'independence': {
+                'minimalist': 'zen_brewer',
+                'futurist': 'mood_swinger',
+                'trendy': 'blendsetter',
+                'classic': 'ritualist'
+            },
+            'belonging': {
+                'minimalist': 'everybuddy',
+                'futurist': 'percolator',
+                'trendy': 'beanfluencer',
+                'classic': 'brewmantic'
+            }
+        };
+
+        return profileMatrix[needState]?.[styleProfile] || 'ritualist';
     }
 
 }
