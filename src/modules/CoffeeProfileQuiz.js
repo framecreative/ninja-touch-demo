@@ -174,13 +174,12 @@ export class CoffeeProfileQuiz {
             this.resetToWaiting();
         });
 
-        document.getElementById('restart-btn').addEventListener('click', () => {
-            this.activityTracker.hideTimeoutScreen();
-            this.activityTracker.resetTimeout();
+        document.getElementById('timeout-restart-btn').addEventListener('click', () => {
+            this.resetToWaiting();
         });
 
         // Dismiss button - dismisses the timeout overlay
-        document.getElementById('dismiss-btn').addEventListener('click', () => {
+        document.getElementById('timeout-dismiss-btn').addEventListener('click', () => {
             this.activityTracker.dismissTimeout();
         });
     }
@@ -584,7 +583,7 @@ export class CoffeeProfileQuiz {
     showTimeout() {
         // Only show timeout if not on the waiting screen 
         const currentScreen = document.querySelector('.screen.active');
-        if (currentScreen && (currentScreen.id === 'waiting-screen' || currentScreen.id === 'profile-reveal-screen')) {
+        if (currentScreen && (currentScreen.id === 'waiting-screen')) {
             // Don't show timeout on waiting screen, just reset the timer over and over again.
             // this.resetToWaiting();
             this.activityTracker.startCountdown();

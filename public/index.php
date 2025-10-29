@@ -281,14 +281,14 @@
 
                 <!-- Dismiss Button -->
                 <button
-                    id="dismiss-btn"
+                    id="timeout-dismiss-btn"
                     class="t-button col-span-4 col-start-2 h-[130px] bg-tan text-washed-black px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
                     DISMISS
                 </button>
 
                 <!-- Restart Button -->
                 <button
-                    id="restart-btn"
+                    id="timeout-restart-btn"
                     class="t-button col-span-4 col-start-2 h-[130px] bg-[#292928] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
                     RESTART
                 </button>

@@ -6,6 +6,7 @@ import { animate } from "motion";
  */
 export class ActivityTracker {
     constructor() {
+        this.timerActive = true; // whether the timer is currently active
         this.timeoutTimer = null; // the timeout before showing the timeout screen
         this.countdownTimer = null; // the countdown timer that is started when the timeout screen is shown
         this.lastActivity = Date.now();
@@ -25,6 +26,8 @@ export class ActivityTracker {
     }
 
     startActivityTracking() {
+        this.timerActive = true;
+
         // Clear any existing timeout
         if (this.timeoutTimer) {
             clearTimeout(this.timeoutTimer);
@@ -65,6 +68,8 @@ export class ActivityTracker {
     }
 
     resetTimeout() {
+        if (!this.timerActive) return;
+        console.log('resetting timeout');
         // Clear existing timeout and set a new one
         if (this.timeoutTimer) {
             clearTimeout(this.timeoutTimer);
@@ -152,6 +157,7 @@ export class ActivityTracker {
 
     clearTimeoutTimers() {
         console.log('clearing timeout timers');
+        this.timerActive = false;
         if (this.timeoutTimer) {
             clearTimeout(this.timeoutTimer);
         }
