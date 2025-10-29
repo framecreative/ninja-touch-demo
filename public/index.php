@@ -20,7 +20,8 @@
             <div class="absolute inset-0  flex items-center justify-center bg-washed-black">
                 <video
                     src="assets/video/homepage.mp4"
-                    class="transition-all duration-200 opacity-0 absolute inset-0 w-full h-full object-cover object-top-right"
+                    class="transition-all duration-200 absolute inset-0 w-full h-full object-cover object-top-right"
+                    autoplay
                     muted
                     loop
                     playsinline

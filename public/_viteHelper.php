@@ -3,7 +3,7 @@
 function vite_assets()
 {
     // Fetch environment variable from .env file
-    $envFile = __DIR__ . '/.env';
+    $envFile = __DIR__ . '/../.env';
     if (file_exists($envFile)) {
         $env = parse_ini_file($envFile);
         $isDev = $env['ENVIRONMENT'] === 'development';

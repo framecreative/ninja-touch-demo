@@ -123,7 +123,7 @@ export class CoffeeProfileQuiz {
     init() {
         this.bindEvents();
         this.activityTracker.startActivityTracking();
-        this.videoSync.initializeVideoSync();
+        // this.videoSync.initializeVideoSync();
 
         this.resetAllScreenVisibility(this.screens.waitingScreen);
 
@@ -377,7 +377,10 @@ export class CoffeeProfileQuiz {
                 delay: 0.35,
                 duration: 0.7
             }]
-        ]);
+        ])
+        
+        // Start 10-second timer to auto-continue
+        this.startContinueTimer();
     }
 
     /**
@@ -396,12 +399,38 @@ export class CoffeeProfileQuiz {
     }
 
     /**
+     * Starts the 10-second timer that auto-continues to the next question.
+     */
+    startContinueTimer() {
+        // Clear any existing timer
+        this.clearContinueTimer();
+        
+        // Start new 10-second timer
+        this.continueTimer = setTimeout(() => {
+            this.continueToNextQuestion();
+        }, 10000);
+    }
+
+    /**
+     * Clears the continue timer if it exists.
+     */
+    clearContinueTimer() {
+        if (this.continueTimer) {
+            clearTimeout(this.continueTimer);
+            this.continueTimer = null;
+        }
+    }
+
+    /**
      * Continue after viewing a proofpoint.
      */
     continueToNextQuestion(fromProofpoint = true) {
 
         const stopTimers = new CustomEvent("stopTimers");
         document.dispatchEvent(stopTimers);
+
+        // Clear the timer since we're continuing
+        this.clearContinueTimer();
 
         if ((this.currentQuestion + 1) < this.questions.length) {
 
@@ -448,6 +477,9 @@ export class CoffeeProfileQuiz {
      * Go back to the previous question, or back to the intro screen if on Q1.
      */
     goBack() {
+        // Clear the continue timer when navigating back
+        this.clearContinueTimer();
+        
         if (this.currentQuestion > 0) {
             this.currentQuestion--;
             this.answers.pop();
