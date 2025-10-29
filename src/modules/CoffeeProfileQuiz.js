@@ -82,38 +82,65 @@ export class CoffeeProfileQuiz {
     }
 
     async loadData() {
+        let localData = null;
+        // Always load local data first, and ping remote data for updates:
         try {
-            // First try to fetch from GitHub Gist
-            console.log('Attempting to fetch data from remote...');
-            const timestamp = new Date().getTime();
-            const gistResponse = await fetch(`https://gist.githubusercontent.com/leighgibbo/5e86fcca79b39f5e7216c8a55a101de2/raw/touchscreen-data.json?t=${timestamp}`);
+            const localResponse = await fetch('data.json?t=' + new Date().getTime());
+            localData = await localResponse.json();
+            this.config = localData.config || {};
+            this.questions = localData.questions;
+            this.profiles = localData.profiles;
+            this.proofpoints = localData.proofpoints;
+            console.log('Successfully loaded data from local file');
+        } catch (localError) {
+            console.error('Failed to load local data:', localError);
+            throw localError; // Can't proceed without local data
+        }
 
-            if (gistResponse.ok) {
-                const gistData = await gistResponse.json();
-                this.config = gistData.config || {};
-                this.questions = gistData.questions;
-                this.profiles = gistData.profiles;
-                this.proofpoints = gistData.proofpoints;
-                console.log('Successfully loaded data from remote');
-            } else {
-                throw new Error(`Remote fetch failed with status: ${gistResponse.status}`);
-            }
-        } catch (gistError) {
-            console.warn('Failed to load from remote, falling back to local data:', gistError);
-
+        // Check internet connectivity and attempt to fetch remote data
+        if (this.checkInternetConnection()) {
+            let connectionTimeout;
             try {
-                // Fallback to local data.json
-                const localResponse = await fetch('data.json');
-                const localData = await localResponse.json();
-                this.config = localData.config || {};
-                this.questions = localData.questions;
-                this.profiles = localData.profiles;
-                this.proofpoints = localData.proofpoints;
-                console.log('Successfully loaded data from local file');
-            } catch (localError) {
-                console.error('Failed to load both Gist and local data:', localError);
-                // Do something else here?
+                console.log('Internet connection detected, checking for remote updates...');
+                const timestamp = new Date().getTime();
+                
+                // Create abort controller for timeout (with fallback for older browsers)
+                const controller = new AbortController();
+                connectionTimeout = setTimeout(() => controller.abort(), 5000);
+                
+                const remoteResponse = await fetch(`https://gist.githubusercontent.com/leighgibbo/5e86fcca79b39f5e7216c8a55a101de2/raw/touchscreen-data.json?t=${timestamp}`, {
+                    signal: controller.signal
+                });
+                
+                clearTimeout(connectionTimeout);
+
+                if (remoteResponse.ok) {
+                    const jsonData = await remoteResponse.json();
+                    
+                    // Compare local and remote data
+                    if (this.shouldUseRemoteData(localData, jsonData)) {
+                        console.log('Remote data differs from local, using remote data');
+                        this.config = jsonData.config || {};
+                        this.questions = jsonData.questions;
+                        this.profiles = jsonData.profiles;
+                        this.proofpoints = jsonData.proofpoints;
+                    } else {
+                        console.log('Remote data matches local, continuing with local data');
+                    }
+                } else {
+                    console.warn(`Remote fetch failed with status: ${remoteResponse.status}, continuing with local data`);
+                }
+            } catch (error) {
+                clearTimeout(connectionTimeout); // Ensure timeout is cleared on error
+                // Network errors are expected (offline, timeout, etc.)
+                if (error.name === 'AbortError' || error.name === 'TypeError') {
+                    console.warn('Remote fetch failed (likely no internet), continuing with local data:', error.message);
+                } else {
+                    console.warn('Remote fetch error, continuing with local data:', error);
+                }
             }
+        } else {
+            console.log('No internet connection detected, using local data only');
         }
     }
 
@@ -121,10 +148,7 @@ export class CoffeeProfileQuiz {
         this.bindEvents();
         this.activityTracker.startActivityTracking();
         // this.videoSync.initializeVideoSync();
-
         this.resetAllScreenVisibility(this.screens.waitingScreen);
-
-        
 
         // Global button press state:
         Motion.press("button", (element) => {
@@ -182,6 +206,20 @@ export class CoffeeProfileQuiz {
         document.getElementById('timeout-dismiss-btn').addEventListener('click', () => {
             this.activityTracker.dismissTimeout();
         });
+    }
+
+    /**
+     * Resets the quiz to the initial waiting screen.
+     * This will also clear any existing timeout timers, and start the activity tracking again.
+     */
+    resetToWaiting() {
+        this.currentQuestion = 0;
+        this.answers = [];
+        this.profile = null;
+        this.activityTracker.hideTimeoutScreen(); // Hide timeout overlay if visible
+        this.activityTracker.startActivityTracking();
+        this.screens.proofpointContent.classList.add('hidden');
+        this.resetAllScreenVisibility(this.screens.waitingScreen);
     }
 
     startQuiz() {
@@ -595,16 +633,6 @@ export class CoffeeProfileQuiz {
         this.activityTracker.startCountdown(); // teh final countdown timer
     }
 
-    resetToWaiting() {
-        this.currentQuestion = 0;
-        this.answers = [];
-        this.profile = null;
-        this.activityTracker.hideTimeoutScreen(); // Hide timeout overlay if visible
-        this.activityTracker.startActivityTracking();
-        this.screens.proofpointContent.classList.add('hidden');
-        this.resetAllScreenVisibility(this.screens.waitingScreen);
-    }
-
     shareProfile() {
         const profileTitle = this.profile.title.replace('<br>', ' ');
         const shareText = `I'm a ${profileTitle}! ${this.profile.description1}`;
@@ -677,6 +705,41 @@ export class CoffeeProfileQuiz {
      * Utility functions (stuff to make life easier)
      * ================================
      */
+
+    /**
+     * Checks if an internet connection is available
+     * @returns {boolean} - True if internet connection appears to be available
+     */
+    checkInternetConnection() {
+        // Check navigator.onLine (basic check, not always reliable)
+        if (navigator.onLine === false) {
+            return false;
+        }
+        // navigator.onLine can be true even when offline, so we'll attempt the fetch
+        // and handle errors gracefully
+        return true;
+    }
+
+    /**
+     * Compares local and remote data to determine if remote should be used
+     * @param {Object} localData - The locally loaded data
+     * @param {Object} remoteData - The remotely fetched data
+     * @returns {boolean} - True if remote data should override local data
+     */
+    shouldUseRemoteData(localData, remoteData) {
+        // Simple JSON string comparison (fastest method)
+        // This will catch any differences in structure or content
+        const localJson = JSON.stringify(localData);
+        const remoteJson = JSON.stringify(remoteData);
+
+        if (localJson !== remoteJson) {
+            // Files differ - use remote
+            return true;
+        }
+
+        // Files are identical - keep local
+        return false;
+    }
 
     /**
      * Creates a copy of the current question, and flips it in place of the real one (which becomes inactive/hidden), so that we can then 
