@@ -16,7 +16,7 @@ export class ActivityTracker {
         this.countdownSeconds = this.config.countdownSeconds || 25;
         this.countdownPopupSeconds = this.config.countdownPopupSeconds || 15;
         this.proofpointerSeconds = this.config.proofpointerSeconds || 10;
-        this.finalScreenSeconds = this.config.finalScreenSeconds || 20; 
+        this.finalScreenSeconds = this.config.finalScreenSeconds || 15; 
     }
 
     setConfig(config) {
@@ -125,7 +125,6 @@ export class ActivityTracker {
                     
                     //Update timer based on current time of animation
                     const currentSecond = animation.duration - Math.floor(animation.time);
-                    console.log(latest, circumference)
                     
                     if(currentSecond < countdown) {
                         countdown = currentSecond;
