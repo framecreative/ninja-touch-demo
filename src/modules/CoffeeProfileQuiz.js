@@ -654,9 +654,9 @@ export class CoffeeProfileQuiz {
     }
 
     showTimeout() {
-        // Only show timeout if not on the waiting screen
+        // Only show timeout if not on the waiting screen 
         const currentScreen = document.querySelector('.screen.active');
-        if (currentScreen && currentScreen.id === 'waiting-screen') {
+        if (currentScreen && (currentScreen.id === 'waiting-screen' || currentScreen.id === 'profile-reveal-screen')) {
             // Don't show timeout on waiting screen, just reset the timer over and over again.
             // this.resetToWaiting();
             this.activityTracker.startCountdown();
