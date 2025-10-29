@@ -95,8 +95,6 @@ export class ActivityTracker {
         const spinner = document.getElementById('timeout-screen').querySelector('.countdown-progress-circle');
         countdownNumber.textContent = countdown;
 
-        console.log(`starting countdown for ${countdown} seconds`);
-
         this.countdownTimer = setInterval(() => {
             countdown--;
             countdownNumber.textContent = countdown;
@@ -118,18 +116,18 @@ export class ActivityTracker {
             circle.style.strokeDashoffset = circumference;
 
             //Remove hidden class on gradient circle if applied
-            circle.setAttribute('class', 'bg-error');
+            circle.setAttribute('class', '');
 
             let animation = animate(0, 100, {
                 duration: (this.config.countdownPopupSeconds || 15) * 1000,
-                easing: "easeInOut",
+                ease: "linear",
                 onUpdate(latest) {
-                    const offset = circumference - (latest / 100) * circumference;
+                    const offset = circumference - ((latest / 100) * circumference);
                     circle.style.strokeDashoffset = offset;
 
-                    // Update this countdown timer based on current time of animation
+                    //Update timer based on current time of animation
                     const currentSecond = animation.duration - Math.floor(animation.time);
-                    
+
                     if(currentSecond < countdown) {
                         countdown = currentSecond;
                         countdownNumber.textContent = countdown;

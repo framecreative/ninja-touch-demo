@@ -308,7 +308,7 @@ export class CoffeeProfileQuiz {
 
             let timerAnimation = animate(0, 100, {
                 duration,
-                easing: "easeInOut",
+                ease: "linear",
                 onUpdate(latest) {
                     const offset = circumference - (latest / 100) * circumference;
                     circle.style.strokeDashoffset = offset;
@@ -348,6 +348,7 @@ export class CoffeeProfileQuiz {
             return false;
         }
         document.getElementById('proofpoint-image').src = `assets/images/${selectedProofpoint.image}`;
+        // document.getElementById('proofpoint-preheading').textContent = selectedProofpoint.title;
         document.getElementById('proofpoint-title').textContent = selectedProofpoint.title;
         document.getElementById('proofpoint-subtitle').textContent = selectedProofpoint.subtitle || '';
         document.getElementById('proofpoint-description').textContent = selectedProofpoint.description || '';
@@ -581,9 +582,9 @@ export class CoffeeProfileQuiz {
     }
 
     showTimeout() {
-        // Only show timeout if not on the waiting screen
+        // Only show timeout if not on the waiting screen 
         const currentScreen = document.querySelector('.screen.active');
-        if (currentScreen && currentScreen.id === 'waiting-screen') {
+        if (currentScreen && (currentScreen.id === 'waiting-screen' || currentScreen.id === 'profile-reveal-screen')) {
             // Don't show timeout on waiting screen, just reset the timer over and over again.
             // this.resetToWaiting();
             this.activityTracker.startCountdown();
