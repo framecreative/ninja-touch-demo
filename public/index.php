@@ -64,31 +64,34 @@
             </div>
         </div>
 
-        <!-- Question Screens -->
+        <!-- Temporary Question Screen -->
+        <div id="temp-question-screen" class="screen bg-tan"><!-- content gets injected here when we need to perform a question-to-question transition--></div>
+
+        <!-- Current Question Screen -->
         <div id="question-screen" class="screen bg-tan">
             <div class="absolute bottom-base w-full flex flex-col justify-center items-center">
                 <div class="w-full grid grid-cols-6 gap-x-4 will-change-contents">
                     <!-- Question -->
-                    <h2 id="question-text" class="col-span-4 col-start-2 text-5xl font-semibold text-washed-black mb-42 text-center leading-tight">
+                    <h2 data-question-text class="col-span-4 col-start-2 text-5xl font-semibold text-washed-black mb-42 text-center leading-tight">
                         <!-- Question text will be dynamically generated -->
                     </h2>
 
                     <!-- Answer Options -->
-                    <div id="answer-options" class="col-span-4 col-start-2 space-y-7.5 mb-36">
+                    <div data-answer-options class="col-span-4 col-start-2 space-y-7.5 mb-36">
                         <!-- Options will be dynamically generated -->
                     </div>
 
                     <!-- Navigation -->
                     <div class="col-span-4 col-start-2 grid grid-cols-4 gap-5">
                         <button
-                            id="back-btn"
+                            data-back-button
                             class="bg-buff col-span-1 rounded-xl grow h-[130px] text-washed-black hover:opacity-70 transition-opacity duration-200 will-change-opacity flex flex-row items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="20" viewBox="0 0 32 20" fill="none">
                                 <path d="M31.1016 8.34875L31.1016 11.8348L6.92781 11.8347L12.9038 17.8107L10.7873 19.9687L0.889558 10.071L10.7873 0.17325L12.9038 2.33125L6.88631 8.34875L31.1016 8.34875Z" fill="#1E1D1C" />
                             </svg>
                         </button>
                         <button
-                            id="next-btn"
+                            data-next-btn
                             class="t-button col-span-3 block  h-[130px] bg-washed-black text-buff rounded-xl tracking-widest hover:opacity-90 transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed will-change-opacity"
                             disabled>
                             NEXT
@@ -120,9 +123,9 @@
                             </p>
                         </div>
                         <button
-                            id="continue-btn"
+                            data-continue-btn
                             class="flex flex-row justify-between items-center col-span-4 col-start-2 t-button mt-auto w-full bg-washed-black text-buff px-10 py-4 h-[130px] rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
-                            <span class="m-auto">
+                            <span class="m-auto" id="continue-btn-text">
                                 NEXT
                             </span>
 
@@ -193,7 +196,7 @@
                             ←
                         </button> -->
                         <button
-                            id="profile-next-btn"
+                            id="start-over-btn"
                             class="flex items-center t-button w-full bg-washed-black h-[130px] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
                             <span class="t-button text-tan mx-auto">
                                 RESTART
@@ -204,61 +207,6 @@
                             </div>
                         </button>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Profile Details Screen -->
-        <div id="profile-details-screen" class="screen bg-tan">
-            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <div class="w-full mx-auto px-[11.85%] text-center">
-                    <div class="mb-16">
-                        <p id="profile-description-1" class="text-[44px] font-extrabold text-washed-black mb-8 leading-[72px]">
-                            Your coffee profile description will load here..
-                        </p>
-                        <!-- Proof Point (do we need to show this?) -->
-                        <!-- <p id="profile-proof-point" class="text-[44px] font-extrabold text-washed-black mb-8 leading-[72px]">
-                            Weight-based dosing and active temperature control keep every variable locked, so the details stay as dialled as you are.
-                        </p> -->
-                    </div>
-
-
-                    <!-- Navigation -->
-                    <div class="flex justify-between items-center">
-                        <button
-                            id="details-back-btn"
-                            class="text-washed-black hover:opacity-70 transition-opacity duration-200 text-xl font-semibold will-change-opacity">
-                            ←
-                        </button>
-                        <button
-                            id="details-next-btn"
-                            class="t-button bg-washed-black text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
-                            NEXT
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Thank You Screen -->
-        <div id="thank-you-screen" class="screen bg-tan">
-            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <div class="w-full mx-auto px-[11.85%] text-center">
-                    <div class="mb-16">
-                        <h1 class="text-[56px] font-extrabold text-washed-black mb-8 text-center leading-[72px] tracking-[9px] uppercase">
-                            Thank You
-                        </h1>
-                        <p class="text-[44px] font-extrabold text-washed-black mb-8 text-center leading-[72px]">
-                            We hope you enjoyed<br>discovering your coffee profile!
-                        </p>
-                    </div>
-
-                    <!-- Start Over Button -->
-                    <button
-                        id="start-over-btn"
-                        class="t-button bg-washed-black text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
-                        START OVER
-                    </button>
                 </div>
             </div>
         </div>

@@ -50,17 +50,21 @@ export class CoffeeProfileQuiz {
 
         // Configs placeholder
         this.config = {};
+        
+        // Timer for auto-continue buttons
+        this.continueTimer = null;
+
+        this.appWrapper = document.getElementById('app');
 
         this.screens = {
             waitingScreen: document.getElementById('waiting-screen'),
             introScreen: document.getElementById('intro-screen'),
             questionScreen: document.getElementById('question-screen'),
+            tempQuestionScreen: document.getElementById('temp-question-screen'),
             proofpointScreen: document.getElementById('proofpoint-screen'),
             proofpointContent: document.querySelector('.proofpoint-content'),
             profileCalculationScreen: document.getElementById('profile-calculation-screen'),
             profileRevealScreen: document.getElementById('profile-reveal-screen'),
-            profileDetailsScreen: document.getElementById('profile-details-screen'),
-            thankYouScreen: document.getElementById('thank-you-screen'),
             // hidden screens:
             timeoutScreen: document.getElementById('timeout-screen'),
         };
@@ -81,9 +85,9 @@ export class CoffeeProfileQuiz {
     async loadData() {
         try {
             // First try to fetch from GitHub Gist
-            console.log('Attempting to fetch data from GitHub Gist...');
+            console.log('Attempting to fetch data from remote...');
             const timestamp = new Date().getTime();
-            const gistResponse = await fetch(`https://gist.githubusercontent.com/leighgibbo/5e86fcca79b39f5e7216c8a55a101de2/raw/touchscreen-data.json?t=${timestamp}`);
+            const gistResponse = await fetch(`https://gist.githubusercontent.com/leighgibbos/5e86fcca79b39f5e7216c8a55a101de2/raw/touchscreen-data.json?t=${timestamp}`);
 
             if (gistResponse.ok) {
                 const gistData = await gistResponse.json();
@@ -91,12 +95,12 @@ export class CoffeeProfileQuiz {
                 this.questions = gistData.questions;
                 this.profiles = gistData.profiles;
                 this.proofpoints = gistData.proofpoints;
-                console.log('Successfully loaded data from GitHub Gist');
+                console.log('Successfully loaded data from remote');
             } else {
-                throw new Error(`Gist fetch failed with status: ${gistResponse.status}`);
+                throw new Error(`Remote fetch failed with status: ${gistResponse.status}`);
             }
         } catch (gistError) {
-            console.warn('Failed to load from GitHub Gist, falling back to local data:', gistError);
+            console.warn('Failed to load from remote, falling back to local data:', gistError);
 
             try {
                 // Fallback to local data.json
@@ -162,17 +166,18 @@ export class CoffeeProfileQuiz {
         });
 
         // Standard back button - goes back to the previous question
-        document.getElementById('back-btn').addEventListener('click', () => {
+        this.screens.questionScreen.querySelector('[data-back-button]').addEventListener('click', () => {
             this.goBack();
         });
 
         // Standard next button - goes to the next question
-        document.getElementById('next-btn').addEventListener('click', () => {
+        this.screens.questionScreen.querySelector('[data-next-btn]').addEventListener('click', () => {
             this.nextQuestion();
         });
 
         // Proofpoint confirmation button ('continue' button)
-        document.getElementById('continue-btn').addEventListener('click', () => {
+        this.screens.proofpointScreen.querySelector('[data-continue-btn]').addEventListener('click', () => {
+            this.clearContinueTimer();
             this.continueToNextQuestion();
         });
 
@@ -180,21 +185,6 @@ export class CoffeeProfileQuiz {
         // document.getElementById('profile-back-btn').addEventListener('click', () => {
         //     this.goBack();
         // });
-
-        // Profile next button - shows the profile details
-        document.getElementById('profile-next-btn').addEventListener('click', () => {
-            this.showProfileDetails();
-        });
-
-        // Profile details back button - goes back to the profile reveal
-        document.getElementById('details-back-btn').addEventListener('click', () => {
-            this.showProfileReveal();
-        });
-
-        // Profile details next button - shows the thank you screen
-        document.getElementById('details-next-btn').addEventListener('click', () => {
-            this.showThankYou();
-        });
 
         // Start over button (shown on the final thank you screen) - resets the quiz to the waiting screen
         document.getElementById('start-over-btn').addEventListener('click', () => {
@@ -218,14 +208,15 @@ export class CoffeeProfileQuiz {
         this.transitionToScreen(this.screens.introScreen, this.screens.waitingScreen, 'slideup');
     }
 
-    populateQuestionScreen() {
-        const question = this.questions[this.currentQuestion];
+    populateQuestionScreen(screenName = 'questionScreen', questionIndex = null) {
+        const screen = this.screens[screenName];
+        const question = this.questions[questionIndex || this.currentQuestion];
 
         // Update question text
-        document.getElementById('question-text').textContent = question.text;
+        screen.querySelector('[data-question-text]').textContent = question.text;
 
         // Generate answer options
-        const optionsContainer = document.getElementById('answer-options');
+        const optionsContainer = screen.querySelector('[data-answer-options]');
         optionsContainer.innerHTML = '';
 
         question.options.forEach((option, index) => {
@@ -243,9 +234,7 @@ export class CoffeeProfileQuiz {
         });
 
         // Reset next button
-        document.getElementById('next-btn').disabled = true;
-
-        // this.showScreen('question-screen');
+        screen.querySelector('[data-next-btn]').disabled = true;
 
         // stagger-animate the answer options buttons in:
         // Motion.animate("#answer-options button", {
@@ -258,7 +247,7 @@ export class CoffeeProfileQuiz {
 
     selectOption(element, option, weight = 1) {
         // Remove previous selection
-        document.querySelectorAll('#answer-options button').forEach(btn => {
+        document.querySelectorAll('div[data-answer-options] button').forEach(btn => {
             btn.classList.remove('bg-gradient-to-b', 'from-[#f3e8d8]', 'to-[#d7b792]');
         });
 
@@ -266,7 +255,7 @@ export class CoffeeProfileQuiz {
         element.classList.add('bg-gradient-to-b', 'from-[#f3e8d8]', 'to-[#d7b792]');
 
         // Enable next button
-        document.getElementById('next-btn').disabled = false;
+        this.screens.questionScreen.querySelector('[data-next-btn]').disabled = false;
 
         // Store selection with weight
         this.selectedOption = {
@@ -281,27 +270,58 @@ export class CoffeeProfileQuiz {
                 value: this.selectedOption.value,
                 weight: this.selectedOption.weight
             });
-            this.populateProofpointContent();
-            this.transitionToScreen(this.screens.proofpointScreen, this.screens.questionScreen, 'fade', null, () => {
-                this.showProofpointContent();
-            });
+
+            const isLastQuestion = (this.currentQuestion + 1) == this.questions.length;
+            let hasProofpoint = false;
+
+            // *** NOTE: Oct 29, 2025 -LG ***
+            // We are running this calc earlier now, as the client has assigned proof points to final archetypes, rather than to specific questions.
+            // (This calc used to be run after the last proofpoint was shown, right before we displayed the 'calculating' screen)
+            // This means: 
+            // 1. We are only showing a proof point card after the very last question, not after each.
+            // 2. We therefore need to calculate the profile as soon as we have the last answer, so we can load the appropriate proofpoint for the archetype.
+            // 3. This also means we are also adding a temporary proofpoint relationship to each of the archetypes in the data.json file, ignoring those assigned to the questions.
+            // 4. Once we have more proofpoints created to assign back to the questions, we can remove the temporary proofpoint relationships from the data.json file, and switch back to showing a proofpoint card after each question.
+
+            if (isLastQuestion) {
+                // TEMPORARY: After the last question, calculate the profile and get the proofpoint from the resulting archetype:
+                const profile = this.calculateProfile();
+                hasProofpoint = this.populateProofpointContent(profile.proofpoint);
+            } else {
+                // The standard question-by-question proofpoint display (if defined on a question):
+                hasProofpoint = this.populateProofpointContent();
+            }
+
+            if (hasProofpoint) {
+                this.transitionToScreen(this.screens.proofpointScreen, this.screens.questionScreen, 'fade', null, () => {
+                    this.showProofpointContent();
+                });
+            } else {
+                this.continueToNextQuestion(hasProofpoint);
+            }
         }
     }
 
     /**
      * Populates the proofpoint content.
+     * @param {string} proofpointId - The ID of the proofpoint to populate. If null, the selected quiz option's proofpoint will be used.
+     * @returns {boolean} - True if a proofpoint was found and populated, false if not.
      */
-    populateProofpointContent() {
-        const selectedProofpoint = this.proofpoints.filter(proofpoint => proofpoint.id === this.selectedOption.proofpoint)[0];
-        if (!selectedProofpoint) {
+    populateProofpointContent(proofpointId = null) {
+        const pp = proofpointId || this.selectedOption.proofpoint;
+        const selectedProofpoint = this.proofpoints.filter(proofpoint => proofpoint.id === pp)[0];
+
+        if (!selectedProofpoint || typeof selectedProofpoint === 'undefined') {
             console.warn('No proofpoint found for selected option, skipping to next question...');
-            this.continueToNextQuestion();
-            return;
+            // this.continueToNextQuestion();
+            return false;
         }
         document.getElementById('proofpoint-image').src = `assets/images/${selectedProofpoint.image}`;
         document.getElementById('proofpoint-title').textContent = selectedProofpoint.title;
         document.getElementById('proofpoint-subtitle').textContent = selectedProofpoint.subtitle || '';
         document.getElementById('proofpoint-description').textContent = selectedProofpoint.description || '';
+        document.getElementById('continue-btn-text').textContent = (this.currentQuestion + 1 == this.questions.length) ? 'REVEAL' : 'NEXT';
+        return true;
     }
 
     /**
@@ -313,7 +333,7 @@ export class CoffeeProfileQuiz {
         Motion.animate([
             // animate in the content
             [ this.screens.proofpointContent, {
-                y: ["150%", "0%"]
+                y: ["100%", "0%"]
             }, {
                 ease: "easeInOut",
                 delay: 0.35,
@@ -327,7 +347,7 @@ export class CoffeeProfileQuiz {
      */
     hideProofpointContent() {
         return Motion.animate(this.screens.proofpointContent, {
-            y: ["0%", "150%"]
+            y: ["0%", "100%"]
         }, {
             ease: "easeInOut",
             delay: 0.15,
@@ -340,32 +360,45 @@ export class CoffeeProfileQuiz {
     /**
      * Continue after viewing a proofpoint.
      */
-    continueToNextQuestion() {
+    continueToNextQuestion(fromProofpoint = true) {
+
         if ((this.currentQuestion + 1) < this.questions.length) {
-            // Slide out the proofpoint content, and recalc the next question:
-            this.hideProofpointContent().then(() => {
+
+            if (fromProofpoint) {
+                // Clear the proofpoint button timer, slide out the proofpoint content, and recalc the next question:
+                this.clearContinueTimer();
+                this.hideProofpointContent().then(() => {
+                    this.currentQuestion++;
+                    this.populateQuestionScreen();
+                    this.transitionToScreen(
+                        this.screens.questionScreen, 
+                        this.screens.proofpointScreen, 
+                        'slideup', 
+                        // the updateCallback:
+                        () => {
+                            // console.log('updateCallback called');
+                        },
+                        // the postTransitionCallback:
+                        () => {
+                            // console.log('postTransitionCallback called');
+                        }
+                    );
+                })
+            } else {
+                // No proofpoint for the last question, so create an imposter question screen and transition to it:
+                this.createImposterQuestionScreen();
                 this.currentQuestion++;
                 this.populateQuestionScreen();
                 this.transitionToScreen(
                     this.screens.questionScreen, 
-                    this.screens.proofpointScreen, 
+                    this.screens.tempQuestionScreen, 
                     'slideup', 
-                    // the updateCallback:
-                    () => {
-                        // console.log('updateCallback called');
-                    },
-                    // the postTransitionCallback:
-                    () => {
-                        // console.log('postTransitionCallback called');
-                    }
                 );
-            })
+            }
 
         } else {
             console.log('All questions done. calculating profile and showing profile calculation screen');
             this.screens.proofpointScreen.classList.remove('z-20');
-            // Calculate the profile and show the profile calculation screen:
-            this.calculateProfile();
             this.showProfileCalculationScreen();
         }
     }
@@ -378,16 +411,26 @@ export class CoffeeProfileQuiz {
             this.currentQuestion--;
             this.answers.pop();
 
-            this.populateQuestionScreen();
-            this.transitionToScreen(this.screens.proofpointScreen, this.screens.questionScreen, 'slidedown', null, () => {
-                this.showProofpointContent();
-            });
+            if (this.questionHasProofpoint(this.currentQuestion)) {
+                this.transitionToScreen(this.screens.proofpointScreen, this.screens.questionScreen, 'slidedown', null, () => {
+                    this.showProofpointContent();
+                });
+            } else {
+                this.createImposterQuestionScreen();
+                this.populateQuestionScreen();
+                this.transitionToScreen(this.screens.questionScreen, this.screens.tempQuestionScreen, 'slidedown');
+            }
         } else {
             this.transitionToScreen(this.screens.introScreen, this.screens.questionScreen, 'slidedown');
         }
     }
 
+    /**
+     * Calculates the profile based on the answers.
+     * @returns {Object} - The calculated profile object.
+     */
     calculateProfile() {
+        console.log('🧪 Calculating profile...');
         // Score Q1-Q3 for core need states (Mastery, Stability, Independence, Belonging)
         const needStateScores = {
             'mastery': 0,
@@ -446,6 +489,8 @@ export class CoffeeProfileQuiz {
         console.log('Final profile key:', profileKey);
 
         this.profile = this.profiles[profileKey];
+
+        return this.profile;
     }
 
     getProfileKey(needState, styleProfile) {
@@ -526,14 +571,6 @@ export class CoffeeProfileQuiz {
         this.transitionToScreen(this.screens.profileRevealScreen, this.screens.profileCalculationScreen, 'fade');
     }
 
-    showProfileDetails() {
-        this.transitionToScreen(this.screens.profileDetailsScreen, this.screens.profileRevealScreen, 'slideup');
-    }
-
-    showThankYou() {
-        this.transitionToScreen(this.screens.thankYouScreen, this.screens.profileDetailsScreen, 'slideup');
-    }
-
     showTimeout() {
         // Only show timeout if not on the waiting screen
         const currentScreen = document.querySelector('.screen.active');
@@ -549,14 +586,14 @@ export class CoffeeProfileQuiz {
         this.activityTracker.startCountdown();
     }
 
-
     resetToWaiting() {
         this.currentQuestion = 0;
         this.answers = [];
         this.profile = null;
         this.activityTracker.hideTimeout(); // Hide timeout overlay if visible
-        this.transitionToScreen(this.screens.waitingScreen, this.screens.thankYouScreen, 'fade');
         this.activityTracker.startActivityTracking();
+        this.screens.proofpointContent.classList.add('hidden');
+        this.resetAllScreenVisibility(this.screens.waitingScreen);
     }
 
     shareProfile() {
@@ -600,15 +637,11 @@ export class CoffeeProfileQuiz {
 
         // Use View Transition API if available
         const viewTransition = document.startViewTransition(() => {
-
             // The assignment of the VT name to the new element INSIDE this function 
             // is critical, to avoid a flash of content once the transition completes.
             nextScreen.style.viewTransitionName = `${transitionType}_new`;
             // Reset the DOM state to what it should be next:
             this.resetAllScreenVisibility(nextScreen);
-
-            // console.info('prevScreen:', prevScreen);
-            // console.info('nextScreen:', nextScreen);
 
             // Run optional callback
             if (updateCallback) {
@@ -619,11 +652,10 @@ export class CoffeeProfileQuiz {
         // Clean up after transition completes
         viewTransition.finished.then(() => {
             // Remove view-transition-name from next screen
-            console.log('Transition finished, cleaned up names');
             prevScreen.style.viewTransitionName = 'none';
             nextScreen.style.viewTransitionName = 'none';
             if (postTransitionCallback) {
-                console.log('Post transition callback was supplied, executing.');
+                console.info('Post transition callback was supplied, executing...');
                 postTransitionCallback();
             }
         });
@@ -632,18 +664,46 @@ export class CoffeeProfileQuiz {
     }
 
     /**
+     * ================================
      * Utility functions (stuff to make life easier)
-     * 
+     * ================================
      */
 
-    // resets all screens to hidden, and if a screen element is provided, makes it active
+    /**
+     * Creates a copy of the current question, and flips it in place of the real one (which becomes inactive/hidden), so that we can then 
+     * run a standard viewTransition from this old question to the new one (which can be populated with new questions after the imposter is created)
+     */
+    createImposterQuestionScreen() {
+        // copy the real question screen content into the imposter screen:
+        this.screens.tempQuestionScreen.innerHTML = this.screens.questionScreen.innerHTML;
+
+        // sneakily flip the real question screen and temp screen visibility before we animate it all back again:
+        this.screens.questionScreen.classList.remove('active');
+        this.screens.tempQuestionScreen.classList.add('active');
+    }
+
+    /**
+     * Resets all screens to hidden, and if a screen element is provided, makes it active
+     * @param {HTMLElement} activeScreen - The screen to make active.
+     */
     resetAllScreenVisibility(activeScreen = null) {
         Object.values(this.screens).forEach(screen => {
-            screen.classList.remove('active');
+            if (typeof screen !== 'undefined' && screen !== null) {
+                screen.classList.remove('active');
+            }
         });
         if (activeScreen) {
             activeScreen.classList.add('active');
         }
+    }
+
+    /**
+     * Checks if the question has a proofpoint assigned to it.
+     * @param {number} questionIndex - The index of the question to check.
+     * @returns {boolean} - True if the question has a proofpoint assigned to it, false if not.
+     */
+    questionHasProofpoint(questionIndex) {
+        return this.questions[questionIndex].proofpoint !== null && typeof this.questions[questionIndex].proofpoint !== 'undefined';
     }
 
 }
