@@ -13,7 +13,7 @@ export class ActivityTracker {
         this.timeoutCallback = null;
         this.countdownCallback = null;
         this.config = {};
-        this.countdownSeconds = this.config.countdownSeconds || 2;
+        this.countdownSeconds = this.config.countdownSeconds || 25;
         this.countdownPopupSeconds = this.config.countdownPopupSeconds || 15;
         this.proofpointerSeconds = this.config.proofpointerSeconds || 10;
         this.finalScreenSeconds = this.config.finalScreenSeconds || 20; 
