@@ -385,7 +385,7 @@ export class CoffeeProfileQuiz {
             return false;
         }
         document.getElementById('proofpoint-image').src = `dist/assets/images/${selectedProofpoint.image}`;
-        // document.getElementById('proofpoint-preheading').textContent = selectedProofpoint.title;
+        document.getElementById('proofpoint-feature').textContent = selectedProofpoint.feature;
         document.getElementById('proofpoint-title').textContent = selectedProofpoint.title;
         document.getElementById('proofpoint-subtitle').textContent = selectedProofpoint.subtitle || '';
         document.getElementById('proofpoint-description').textContent = selectedProofpoint.description || '';
