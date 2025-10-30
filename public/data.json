@@ -114,45 +114,115 @@
   "proofpoints": [
     {
       "id": "proofpoint-1",
-      "image": "proofpoint-demo.webp",
+      "image": "pp_baristocrat.webp",
       "feature": "[Your feature point]",
       "title": "Proofpoint 1 Title",
       "description": "Proofpoint 1 Description"
     },
     {
       "id": "proofpoint-2",
-      "image": "proofpoint-demo.webp",
+      "image": "pp_brewmantic.webp",
       "feature": "[Your feature point]",
       "title": "Proofpoint 2 Title",
       "description": "Proofpoint 2 Description"
     },
     {
       "id": "proofpoint-3",
-      "image": "proofpoint-demo.webp",
+      "image": "pp_everybuddy.webp",
       "feature": "[Your feature point]",
       "title": "Proofpoint 3 Title",
       "description": "Proofpoint 3 Description"
     },
     {
       "id": "proofpoint-4",
-      "image": "proofpoint-demo.webp",
+      "image": "pp_mood_swinger.webp",
       "feature": "[Your feature point]",
       "title": "Proofpoint 4 Title",
       "description": "Proofpoint 4 Description"
     },
     {
       "id": "proofpoint-5",
-      "image": "proofpoint-demo.webp",
+      "image": "pp_roastician.webp",
       "feature": "[Your feature point]",
       "title": "Proofpoint 5 Title",
       "description": "Proofpoint 5 Description"
     },
     {
       "id": "proofpoint-6",
-      "image": "proofpoint-demo.webp",
+      "image": "pp_smooth_operator.webp",
       "feature": "[Your feature point]",
       "title": "Proofpoint 6 Title",
       "description": "Proofpoint 6 Description"
+    },
+    {
+      "id": "proofpoint-7",
+      "image": "pp_beanfluencer.webp",
+      "feature": "[Your feature point]",
+      "title": "Proofpoint 7 Title",
+      "description": "Proofpoint 7 Description"
+    },
+    {
+      "id": "proofpoint-8",
+      "image": "pp_blendsetter.webp",
+      "feature": "[Your feature point]",
+      "title": "Proofpoint 8 Title",
+      "description": "Proofpoint 8 Description"
+    },
+    {
+      "id": "proofpoint-9",
+      "image": "pp_brewsmith.webp",
+      "feature": "[Your feature point]",
+      "title": "Proofpoint 9 Title",
+      "description": "Proofpoint 9 Description"
+    },
+    {
+      "id": "proofpoint-10",
+      "image": "pp_classicist.webp",
+      "feature": "[Your feature point]",
+      "title": "Proofpoint 10 Title",
+      "description": "Proofpoint 10 Description"
+    },
+    {
+      "id": "proofpoint-11",
+      "image": "pp_home_brewer.webp",
+      "feature": "[Your feature point]",
+      "title": "Proofpoint 11 Title",
+      "description": "Proofpoint 11 Description"
+    },
+    {
+    "id": "proofpoint-12",
+      "image": "pp_optimiser.webp",
+      "feature": "[Your feature point]",
+      "title": "Proofpoint 12 Title",
+      "description": "Proofpoint 12 Description"
+    },
+    {
+      "id": "proofpoint-13",
+      "image": "pp_percolator.webp",
+      "feature": "[Your feature point]",
+      "title": "Proofpoint 13 Title",
+      "description": "Proofpoint 13 Description"
+    },
+    {
+      "id": "proofpoint-14",
+      "image": "pp_precisionist.webp",
+      "feature": "[Your feature point]",
+      "title": "Proofpoint 14 Title",
+      "description": "Proofpoint 14 Description"
+    },
+    {
+      "id": "proofpoint-15",
+      "image": "pp_ritualist.webp",
+      "feature": "[Your feature point]",
+      "title": "Proofpoint 15 Title",
+      "description": "Proofpoint 15 Description"
+    },
+    {
+      "id": "proofpoint-16",
+      "image": "pp_zen_brewer.webp",
+      "feature": "[Your feature point]",
+      "title": "Proofpoint 16 Title",
+      "description": "Proofpoint 16 Description"
     }
   ],
   "profiles": {
@@ -161,35 +231,35 @@
       "title": "The<br>precisionist",
       "tagline": "Every detail, dialled.",
       "description1": "You know perfection doesn't happen by accident it happens one micro-adjustment at a time. You're the type to notice when the crema's two seconds late.",
-      "proofpoint": "proofpoint-1"
+      "proofpoint": "proofpoint-14"
     },
     "optimiser": {
       "icon": "icon_optimiser.png",
       "title": "The<br>optimiser",
       "tagline": "Better, every time.",
       "description1": "You can’t leave well enough alone — and that’s the point. You tweak, refine, and shave seconds until routine becomes art.",
-      "proofpoint": "proofpoint-2"
+      "proofpoint": "proofpoint-12"
     },
     "roastician": {
       "icon": "icon_roastician.png",
       "title": "The<br>roastician",
       "tagline": "Intuition meets alchemy.",
       "description1": "You don’t follow recipes — you follow feeling. You trust your nose, your timing, your gut, and somehow the magic always lands in the cup.",
-      "proofpoint": "proofpoint-3"
+      "proofpoint": "proofpoint-5"
     },
     "baristocrat": {
       "icon": "icon_baristocrat.png",
       "title": "The<br>baristocrat",
       "tagline": "Poise in every pour.",
       "description1": "You’re all polish and preference — a little ceremony, a lot of confidence. Refinement isn’t an act; it’s how you wake up.",
-      "proofpoint": "proofpoint-4"
+      "proofpoint": "proofpoint-1"
     },
     "classicist": {
       "icon": "icon_classicist.png",
       "title": "The<br>classicist",
       "tagline": "Simple. Honest. Time-tested.",
       "description1": "You trust tradition over trends — believing that quality endures and restraint is its own reward.",
-      "proofpoint": "proofpoint-5"
+      "proofpoint": "proofpoint-10"
     },
     "smooth_operator": {
       "icon": "icon_smooth_operator.png",
@@ -203,21 +273,21 @@
       "title": "The<br>brewsmith",
       "tagline": "Craft in every cup.",
       "description1": "You trust your hands and your tools. For you, craft is care — process is the point, and control is comfort.",
-      "proofpoint": "proofpoint-1"
+      "proofpoint": "proofpoint-9"
     },
     "home_brewer": {
       "icon": "icon_home_brewer.png",
       "title": "The<br>home brewer",
       "tagline": "Comfort, on repeat.",
       "description1": "You make coffee the heart of your home — warm, familiar, and always ready to share. Your kitchen smells like belonging.",
-      "proofpoint": "proofpoint-2"
+      "proofpoint": "proofpoint-11"
     },
     "zen_brewer": {
       "icon": "icon_zen_brewer.png",
       "title": "The<br>zen brewer",
       "tagline": "Focus. Flow. Freedom.",
       "description1": "You find calm in motion — patient, present, and precise. The process is your meditation; the pour, your pause.",
-      "proofpoint": "proofpoint-3"
+      "proofpoint": "proofpoint-16"
     },
     "mood_swinger": {
       "icon": "icon_mood_swinger.png",
@@ -231,42 +301,42 @@
       "title": "The<br>blendsetter",
       "tagline": "Always one brew ahead.",
       "description1": "You see coffee as a canvas — remixing, experimenting, setting the tone before anyone else catches on. Innovation’s just your comfort zone.",
-      "proofpoint": "proofpoint-5"
+      "proofpoint": "proofpoint-8"
     },
     "ritualist": {
       "icon": "icon_ritualist.png",
       "title": "The<br>ritualist",
       "tagline": "Same time, same place, same joy.",
       "description1": "For you, coffee isn’t just a drink — it’s an anchor. You find calm in consistency, comfort in repetition, and strength in keeping the ritual alive.",
-      "proofpoint": "proofpoint-6"
+      "proofpoint": "proofpoint-15"
     },
     "everybuddy": {
       "icon": "icon_everybuddy.png",
       "title": "The<br>everybuddy",
       "tagline": "Never drinks alone.",
       "description1": "You make coffee a social ritual — the chat before work, the refill that becomes a catch-up, the reason to linger just a bit longer.",
-      "proofpoint": "proofpoint-1"
+      "proofpoint": "proofpoint-3"
     },
     "percolator": {
       "icon": "icon_percolator.png",
       "title": "The<br>percolator",
       "tagline": "Keeps the good things bubbling.",
       "description1": "You’re the energy source — warm, curious, always connecting people over a pour. When you’re around, the conversation never runs dry.",
-      "proofpoint": "proofpoint-2"
+      "proofpoint": "proofpoint-13"
     },
     "beanfluencer": {
       "icon": "icon_beanfluencer.png",
       "title": "The<br>beanfluencer",
       "tagline": "Social by nature, caffeinated by choice.",
       "description1": "You know what’s trending before it’s poured — talkative, tuned-in, contagiously upbeat. You don’t just make coffee; you make it a movement.",
-      "proofpoint": "proofpoint-3"
+      "proofpoint": "proofpoint-7"
     },
     "brewmantic": {
       "icon": "icon_brewmantic.png",
       "title": "The<br>brewmantic",
       "tagline": "Coffee with feeling.",
       "description1": "You pour your heart into every cup, the way some people write love letters. A swirl of nostalgia, a dash of foam, and suddenly the morning feels cinematic.",
-      "proofpoint": "proofpoint-4"
+      "proofpoint": "proofpoint-2"
     }
   }
 }
