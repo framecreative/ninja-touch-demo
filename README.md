@@ -21,7 +21,16 @@ npm run dev
 ```
 
 The dev server runs on `http://localhost:5173`. The PHP app will read the value of `ENVIRONMENT` in the `.env` file, to serve assets either via the `dist/` directory, or the Vite dev server.
+
 When we run a build, the assets in `src/assets` are copied over to `dist/assets` for quick testing of the final compiled package, but these are not committed to version control, as we instead pull these assets remotely via a bash script when the touchscreens boot up (see 'Touchscreen Builds' below)
+
+
+## Staging
+
+Any commits made to the `staging` branch will automatically get pushed to the [Staging environment on Frame's Laravel Forge account](https://forge.laravel.com/frame-creative/frame-staging/2898440).
+
+Upon deployment, the staging server automatically syncs the image/video assets into the staging app, from the luxe-cafe production Dropbox app (again, see 'Touchscreen Builds' below).
+
 
 ## Production Build
 
@@ -120,7 +129,10 @@ The following methods are utilised for content-synchronisation:
 
 ## Assets Sync
 
-Images and videos are synced from a remote (public) dropbox URL via a local bash/powershell scripts that:
+Images and videos are synced from a remote (public) dropbox URL.  The Dropbox prohect can be found at:
+https://www.dropbox.com/home/sharkninja_luxe-cafe_touchscreens
+
+The files are synced from Dropbox down to the app via local bash/powershell scripts that:
 1. Download the dropbox assets as an `assets.zip` file in the local app.
 2. Uncompresses the archive into a temporary `/temp/assets` directory.
 
