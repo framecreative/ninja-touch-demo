@@ -114,37 +114,43 @@
   "proofpoints": [
     {
       "id": "proofpoint-1",
-      "image": "proofpoint-demo.png",
+      "image": "proofpoint-demo.webp",
+      "feature": "[Your feature point]",
       "title": "Proofpoint 1 Title",
       "description": "Proofpoint 1 Description"
     },
     {
       "id": "proofpoint-2",
-      "image": "proofpoint-demo.png",
+      "image": "proofpoint-demo.webp",
+      "feature": "[Your feature point]",
       "title": "Proofpoint 2 Title",
       "description": "Proofpoint 2 Description"
     },
     {
       "id": "proofpoint-3",
-      "image": "proofpoint-demo.png",
+      "image": "proofpoint-demo.webp",
+      "feature": "[Your feature point]",
       "title": "Proofpoint 3 Title",
       "description": "Proofpoint 3 Description"
     },
     {
       "id": "proofpoint-4",
-      "image": "proofpoint-demo.png",
+      "image": "proofpoint-demo.webp",
+      "feature": "[Your feature point]",
       "title": "Proofpoint 4 Title",
       "description": "Proofpoint 4 Description"
     },
     {
       "id": "proofpoint-5",
-      "image": "proofpoint-demo.png",
+      "image": "proofpoint-demo.webp",
+      "feature": "[Your feature point]",
       "title": "Proofpoint 5 Title",
       "description": "Proofpoint 5 Description"
     },
     {
       "id": "proofpoint-6",
-      "image": "proofpoint-demo.png",
+      "image": "proofpoint-demo.webp",
+      "feature": "[Your feature point]",
       "title": "Proofpoint 6 Title",
       "description": "Proofpoint 6 Description"
     }
