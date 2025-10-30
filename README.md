@@ -121,6 +121,16 @@ animate('.element', { opacity: [0, 1] });
 We are hosting this app on each touchscreen's PC/machine, via a local installation of Laravel Herd. 
 For this reason, we pre-compile all JS/CSS to minified packages, and commit these to github, so that we can simply run `git pull` on each machine and we have all required files locally.  This can even be set up as a script that can run on machine boot, if required.
 
+#### Initial installation of app:
+```bash
+cd path\to\my\herd-dir && git clone git@github.com:framecreative/ninja-touch-demo.git
+```
+
+#### Daily codebase pull:
+```bash
+cd path\to\my\herd-dir\ninja-touch-demo && git checkout production && git pull
+```
+
 Each touchscreen boots into a Windows 11 kiosk-mode, loading up Microsoft Edge (also in fullscreen kiosk-mode) with the local app URL pre-set.
 
 For content and assets, we are treating the touchscreens as if they have zero/limited internet, so the focus is local-first for data, with some options to sync content/assets from remote resources wherever possible.  
@@ -144,6 +154,7 @@ https://www.dropbox.com/scl/fo/ssb5t8k6kka9xo9s7t5ui/AFV24EQJtQhA4wEr9pWrulE?rlk
 ```
 
 #### Bash Sync Scripts
+The following bash scripts can be run at anytime to pull assets down from Dropbox, but may be worth including in the system boot scripts.
 To run the bash version, open a terminal and execute the following scripts to pull the files down, and then copy the assets over:
 ```
 ./pull_assets.sh && ./update_assets.sh
@@ -158,4 +169,4 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 
 ## Content Sync
 
-Content for the app (text, configs etc) is stored locally in a `data.json` file.  The app currently pings a remote github Gist to see if there's a more updated version to use for content, however we may switch over to pulling the `data.json` file down with the rest of the assets in the future.
+Content for the app (text, configs etc) is stored locally in a `data.json` file.  The app currently pings a [remote github Gist](https://gist.github.com/FrameShared/0ee640b463dc2a21910800afa14f5162) to see if there's a more updated version to use for content, however we may switch over to pulling the `data.json` file down with the rest of the assets in the future?
