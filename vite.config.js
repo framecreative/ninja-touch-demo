@@ -21,6 +21,9 @@ export default defineConfig(({ mode }) => {
         ]
       })
     ],
+    // Prevent copying files from the `public/` folder into `public/dist`
+    // This stops index.php, _viteHelper.php, data.json from being emitted to dist
+    publicDir: false,
     build: {
       outDir: 'public/dist',
       emptyOutDir: true,

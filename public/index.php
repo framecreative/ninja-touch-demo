@@ -226,25 +226,6 @@
                             <span class="t-button text-tan mx-auto">
                                 RESTART
                             </span>
-
-                            <div class="timer-progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
-                                <svg
-                                    class="-rotate-90" width="60" height="60"
-                                >
-                                    <defs>
-                                        <linearGradient id="globalGradient" x1="18.7588" y1="56.2744" x2="56.2725" y2="18.7607" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#F3E8D8"/>
-                                        <stop offset="1" stop-color="#D7B792"/>
-                                        </linearGradient>
-                                    </defs>
-                                    <!-- background track -->
-                                    <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent" ></circle>
-
-                                    <!-- animated progress stroke -->
-                                    <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#globalGradient)" stroke-width="6" fill="transparent" stroke-linecap="round" class="hidden"
-                                    ></circle>
-                                </svg>
-                            </div>
                         </button>
                     </div>
                 </div>

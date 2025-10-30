@@ -613,9 +613,9 @@ export class CoffeeProfileQuiz {
     }
 
     showProfileReveal() {
-        this.transitionToScreen(this.screens.profileRevealScreen, this.screens.profileCalculationScreen, 'fade', null, () => {
-            this.startProgressionTimer(this.screens.profileRevealScreen, this.config.finalScreenSeconds, (() => {this.resetToWaiting()}));
-        });
+        // We re-enable the timeout overlay just for this final screen:
+        this.activityTracker.startActivityTracking();
+        this.transitionToScreen(this.screens.profileRevealScreen, this.screens.profileCalculationScreen, 'fade');
     }
 
     showTimeout() {
