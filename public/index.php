@@ -114,7 +114,7 @@
                             </div>
                         </div>
                         <div class="col-span-4 col-start-2 flex flex-col justify-center">
-                            <span if="proofpoint-feature" class="text-2xl font-extrabold tracking-[7.2px] uppercase text-center mb-9">
+                            <span id="proofpoint-feature" class="text-2xl font-extrabold tracking-[7.2px] uppercase text-center mb-9">
                                 <!-- Proofpoint feature will be dynamically generated -->
                             </span>
                             <h2 id="proofpoint-title" class="text-5xl font-bold text-washed-black mb-9">
