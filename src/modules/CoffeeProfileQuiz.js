@@ -108,7 +108,7 @@ export class CoffeeProfileQuiz {
                 const controller = new AbortController();
                 connectionTimeout = setTimeout(() => controller.abort(), 5000);
                 
-                const remoteResponse = await fetch(`https://gist.githubusercontent.com/leighgibbo/5e86fcca79b39f5e7216c8a55a101de2/raw/touchscreen-data.json?t=${timestamp}`, {
+                const remoteResponse = await fetch(`https://gist.githubusercontent.com/FrameShared/0ee640b463dc2a21910800afa14f5162/raw/touchscreen-data.json?t=${timestamp}`, {
                     signal: controller.signal
                 });
                 
