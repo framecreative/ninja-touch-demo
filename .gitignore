@@ -1,9 +1,20 @@
 # Dependencies
 node_modules
 
-# Build output
-public/dist
-.vite
+# Temp directory for syncing assets
+temp/*
+temp/**
+!temp/.gitkeep
+temp/assets.zip
+
+# Build output 
+# (in this app, we actually comit built JS/CSS/ & the Vite manifest, 
+# but pull img/videos assets via a separate script on the end device)
+public/dist/assets/images/*
+public/dist/assets/videos/*
+
+!public/dist/assets/images/.gitkeep
+!public/dist/assets/videos/.gitkeep
 
 # Environment files
 .env

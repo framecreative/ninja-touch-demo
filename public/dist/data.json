@@ -1,0 +1,266 @@
+{
+  "config": {
+    "countdownSeconds": 15,
+    "countdownPopupSeconds": 15,
+    "proofpointerSeconds": 10,
+    "finalScreenSeconds": 20
+  },
+  "questions": [
+    {
+      "text": "Your morning coffee is…",
+      "weight": 1.5,
+      "options": [
+        {
+          "text": "My daily anchor\nSame mug same moment, same me.",
+          "value": "stability",
+          "proofpoint": null
+        },
+        {
+          "text": "A precision test\nI'm chasing god-tier crema.",
+          "value": "mastery",
+          "proofpoint": null
+        },
+        {
+          "text": "A wild card\nDepends who I wake up as today.",
+          "value": "independence",
+          "proofpoint": null
+        },
+        {
+          "text": "A shared ritual\nHalf the joy's in who I drink it with.",
+          "value": "belonging",
+          "proofpoint": null
+        }
+      ]
+    },
+    {
+      "text": "When it comes to taste, you’re drawn to…",
+      "weight": 1,
+      "options": [
+        {
+          "text": "Smooth and steady\nthe comfort playlist of coffee.",
+          "value": "stability",
+          "proofpoint": null
+        },
+        {
+          "text": "Bold and balanced\npure craft, zero shortcuts.",
+          "value": "mastery",
+          "proofpoint": null
+        },
+        {
+          "text": "Whatever fits the mood\nvariety keeps things interesting.",
+          "value": "independence",
+          "proofpoint": null
+        },
+        {
+          "text": "The easy crowd-pleaser\nhits the spot without overthinking it.",
+          "value": "belonging",
+          "proofpoint": null
+        }
+      ]
+    },
+    {
+      "text": "When you’re at the machine, you…",
+      "weight": 1,
+      "options": [
+        {
+          "text": "Geek out\npressure, grind, and tamp like it’s performance art.",
+          "value": "stability",
+          "proofpoint": null
+        },
+        {
+          "text": "Hit brew, zone out and trust the machine.",
+          "value": "mastery",
+          "proofpoint": null
+        },
+        {
+          "text": "Treat it like a creative outlet\nfollow the recipe once, then make it yours.",
+          "value": "independence",
+          "proofpoint": null
+        },
+        {
+          "text": "Take everyone’s order\ncoffee diplomacy is your love language.",
+          "value": "belonging",
+          "proofpoint": null
+        }
+      ]
+    },
+    {
+      "text": "When your cup hits the bench, it usually…",
+      "weight": 1,
+      "options": [
+        {
+          "text": "Keeps it stripped-back\nblack, white, and effortlessly unfussy.",
+          "value": "minimalist",
+          "proofpoint": null
+        },
+        {
+          "text": "Looks engineered by NASA\nprecision, poise, serious intent.",
+          "value": "futurist",
+          "proofpoint": null
+        },
+        {
+          "text": "Could start a micro-trend on TikTok\nconfident pour, main-character energy.",
+          "value": "trendy",
+          "proofpoint": null
+        },
+        {
+          "text": "Feels like home\nwarm, familiar and a little nostalgic.",
+          "value": "classic",
+          "proofpoint": null
+        }
+      ]
+    }
+  ],
+  "proofpoints": [
+    {
+      "id": "proofpoint-1",
+      "image": "proofpoint-demo.png",
+      "title": "Proofpoint 1 Title",
+      "description": "Proofpoint 1 Description"
+    },
+    {
+      "id": "proofpoint-2",
+      "image": "proofpoint-demo.png",
+      "title": "Proofpoint 2 Title",
+      "description": "Proofpoint 2 Description"
+    },
+    {
+      "id": "proofpoint-3",
+      "image": "proofpoint-demo.png",
+      "title": "Proofpoint 3 Title",
+      "description": "Proofpoint 3 Description"
+    },
+    {
+      "id": "proofpoint-4",
+      "image": "proofpoint-demo.png",
+      "title": "Proofpoint 4 Title",
+      "description": "Proofpoint 4 Description"
+    },
+    {
+      "id": "proofpoint-5",
+      "image": "proofpoint-demo.png",
+      "title": "Proofpoint 5 Title",
+      "description": "Proofpoint 5 Description"
+    },
+    {
+      "id": "proofpoint-6",
+      "image": "proofpoint-demo.png",
+      "title": "Proofpoint 6 Title",
+      "description": "Proofpoint 6 Description"
+    }
+  ],
+  "profiles": {
+    "precisionist": {
+      "icon": "icon_precisionist.png",
+      "title": "The<br>precisionist",
+      "tagline": "Every detail, dialled.",
+      "description1": "You know perfection doesn't happen by accident it happens one micro-adjustment at a time. You're the type to notice when the crema's two seconds late.",
+      "proofpoint": "proofpoint-1"
+    },
+    "optimiser": {
+      "icon": "icon_optimiser.png",
+      "title": "The<br>optimiser",
+      "tagline": "Better, every time.",
+      "description1": "You can’t leave well enough alone — and that’s the point. You tweak, refine, and shave seconds until routine becomes art.",
+      "proofpoint": "proofpoint-2"
+    },
+    "roastician": {
+      "icon": "icon_roastician.png",
+      "title": "The<br>roastician",
+      "tagline": "Intuition meets alchemy.",
+      "description1": "You don’t follow recipes — you follow feeling. You trust your nose, your timing, your gut, and somehow the magic always lands in the cup.",
+      "proofpoint": "proofpoint-3"
+    },
+    "baristocrat": {
+      "icon": "icon_baristocrat.png",
+      "title": "The<br>baristocrat",
+      "tagline": "Poise in every pour.",
+      "description1": "You’re all polish and preference — a little ceremony, a lot of confidence. Refinement isn’t an act; it’s how you wake up.",
+      "proofpoint": "proofpoint-4"
+    },
+    "classicist": {
+      "icon": "icon_classicist.png",
+      "title": "The<br>classicist",
+      "tagline": "Simple. Honest. Time-tested.",
+      "description1": "You trust tradition over trends — believing that quality endures and restraint is its own reward.",
+      "proofpoint": "proofpoint-5"
+    },
+    "smooth_operator": {
+      "icon": "icon_smooth_operator.png",
+      "title": "The<br>smooth operator",
+      "tagline": "Calm. Consistent. In control.",
+      "description1": "You keep everything humming — steady tempo, effortless flow. Nothing flusters you; every pour feels like muscle memory.",
+      "proofpoint": "proofpoint-6"
+    },
+    "brewsmith": {
+      "icon": "icon_brewsmith.png",
+      "title": "The<br>brewsmith",
+      "tagline": "Craft in every cup.",
+      "description1": "You trust your hands and your tools. For you, craft is care — process is the point, and control is comfort.",
+      "proofpoint": "proofpoint-1"
+    },
+    "home_brewer": {
+      "icon": "icon_home_brewer.png",
+      "title": "The<br>home brewer",
+      "tagline": "Comfort, on repeat.",
+      "description1": "You make coffee the heart of your home — warm, familiar, and always ready to share. Your kitchen smells like belonging.",
+      "proofpoint": "proofpoint-2"
+    },
+    "zen_brewer": {
+      "icon": "icon_zen_brewer.png",
+      "title": "The<br>zen brewer",
+      "tagline": "Focus. Flow. Freedom.",
+      "description1": "You find calm in motion — patient, present, and precise. The process is your meditation; the pour, your pause.",
+      "proofpoint": "proofpoint-3"
+    },
+    "mood_swinger": {
+      "icon": "icon_mood_swinger.png",
+      "title": "The<br>mood swinger",
+      "tagline": "No rules, just vibes.",
+      "description1": "No rules, just vibes. You brew by instinct - espresso at dawn, cold brew at noon, maybe an affogato for dinner. Consistency’s overrated anyway.",
+      "proofpoint": "proofpoint-4"
+    },
+    "blendsetter": {
+      "icon": "icon_blendsetter.png",
+      "title": "The<br>blendsetter",
+      "tagline": "Always one brew ahead.",
+      "description1": "You see coffee as a canvas — remixing, experimenting, setting the tone before anyone else catches on. Innovation’s just your comfort zone.",
+      "proofpoint": "proofpoint-5"
+    },
+    "ritualist": {
+      "icon": "icon_ritualist.png",
+      "title": "The<br>ritualist",
+      "tagline": "Same time, same place, same joy.",
+      "description1": "For you, coffee isn’t just a drink — it’s an anchor. You find calm in consistency, comfort in repetition, and strength in keeping the ritual alive.",
+      "proofpoint": "proofpoint-6"
+    },
+    "everybuddy": {
+      "icon": "icon_everybuddy.png",
+      "title": "The<br>everybuddy",
+      "tagline": "Never drinks alone.",
+      "description1": "You make coffee a social ritual — the chat before work, the refill that becomes a catch-up, the reason to linger just a bit longer.",
+      "proofpoint": "proofpoint-1"
+    },
+    "percolator": {
+      "icon": "icon_percolator.png",
+      "title": "The<br>percolator",
+      "tagline": "Keeps the good things bubbling.",
+      "description1": "You’re the energy source — warm, curious, always connecting people over a pour. When you’re around, the conversation never runs dry.",
+      "proofpoint": "proofpoint-2"
+    },
+    "beanfluencer": {
+      "icon": "icon_beanfluencer.png",
+      "title": "The<br>beanfluencer",
+      "tagline": "Social by nature, caffeinated by choice.",
+      "description1": "You know what’s trending before it’s poured — talkative, tuned-in, contagiously upbeat. You don’t just make coffee; you make it a movement.",
+      "proofpoint": "proofpoint-3"
+    },
+    "brewmantic": {
+      "icon": "icon_brewmantic.png",
+      "title": "The<br>brewmantic",
+      "tagline": "Coffee with feeling.",
+      "description1": "You pour your heart into every cup, the way some people write love letters. A swirl of nostalgia, a dash of foam, and suddenly the morning feels cinematic.",
+      "proofpoint": "proofpoint-4"
+    }
+  }
+}

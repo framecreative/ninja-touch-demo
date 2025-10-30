@@ -384,7 +384,7 @@ export class CoffeeProfileQuiz {
             // this.continueToNextQuestion();
             return false;
         }
-        document.getElementById('proofpoint-image').src = `assets/images/${selectedProofpoint.image}`;
+        document.getElementById('proofpoint-image').src = `dist/assets/images/${selectedProofpoint.image}`;
         // document.getElementById('proofpoint-preheading').textContent = selectedProofpoint.title;
         document.getElementById('proofpoint-title').textContent = selectedProofpoint.title;
         document.getElementById('proofpoint-subtitle').textContent = selectedProofpoint.subtitle || '';
@@ -599,7 +599,7 @@ export class CoffeeProfileQuiz {
     }
 
     populateProfileReveal() {
-        document.querySelector('.profile-icon').src = `assets/images/${this.profile.icon}`;
+        document.querySelector('.profile-icon').src = `dist/assets/images/${this.profile.icon}`;
         document.getElementById('profile-title').innerHTML = this.profile.title;
         // document.getElementById('profile-tagline').textContent = this.profile.tagline;
         document.getElementById('profile-description').textContent = this.profile.description1;
@@ -607,7 +607,7 @@ export class CoffeeProfileQuiz {
         // Update profile icon dynamically
         const profileIcon = document.querySelector('#profile-reveal-screen img');
         if (profileIcon && this.profile.icon) {
-            profileIcon.src = `assets/images/${this.profile.icon}`;
+            profileIcon.src = `dist/assets/images/${this.profile.icon}`;
             profileIcon.alt = `${this.profile.title.replace('<br>', ' ')} icon`;
         }
     }

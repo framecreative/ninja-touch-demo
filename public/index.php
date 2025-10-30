@@ -19,14 +19,14 @@
         <div id="waiting-screen" class="screen active bg-buff">
             <div class="absolute inset-0  flex items-center justify-center bg-washed-black">
                 <video
-                    src="assets/video/homepage.mp4"
+                    src="/dist/assets/videos/homepage.mp4"
                     class="transition-all duration-200 absolute inset-0 w-full h-full object-cover object-top-right"
                     autoplay
                     muted
                     loop
                     playsinline
                     preload="auto">
-                </video>
+                </videos>
             </div>
             <div class="absolute inset-0  flex items-center justify-center">
                 <div class="w-full grid grid-cols-6 translate-y-1/5 gap-5">
@@ -48,7 +48,7 @@
                 <div class="w-full grid grid-cols-6 gap-x-4 text-center">
 
                     <div class="col-span-4 col-start-2 flex flex-col items-center gap-44 font-semibold text-washed-black text-5xl leading-[52px] mb-34">
-                        <img src='/assets/images/image_ninja_luxe_logo.png' class="max-w-112">
+                        <img src='/dist/assets/images/image_ninja_luxe_logo.png' class="max-w-112">
 
                         <div>
                             <p class=" t-copy-lg">You bring the personality,<br>we'll bring the crema.</p>

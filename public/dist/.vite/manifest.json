@@ -1,0 +1,11 @@
+{
+  "src/main.js": {
+    "file": "assets/main-D4RWDBb_.js",
+    "name": "main",
+    "src": "src/main.js",
+    "isEntry": true,
+    "css": [
+      "assets/main-hlpvX2Y4.css"
+    ]
+  }
+}
