@@ -404,7 +404,7 @@ export class CoffeeProfileQuiz {
         document.getElementById('proofpoint-feature').textContent = selectedProofpoint.feature;
         document.getElementById('proofpoint-title').textContent = selectedProofpoint.title;
         document.getElementById('proofpoint-subtitle').textContent = selectedProofpoint.subtitle || '';
-        document.getElementById('proofpoint-description').textContent = selectedProofpoint.description.replace(/\n/g, '<br>') || '';
+        document.getElementById('proofpoint-description').innerHTML = selectedProofpoint.description.replace(/\n/g, '<br>') || '';
         document.getElementById('continue-btn-text').textContent = (this.currentQuestion + 1 == this.questions.length) ? 'REVEAL' : 'NEXT';
         return true;
     }
