@@ -192,7 +192,7 @@
         <div id="profile-reveal-screen" class="screen bg-tan">
             <div class="absolute bottom-base w-full flex flex-col items-center justify-center">
                 <div class="w-full grid grid-cols-6 gap-x-5 gap-y-16 text-center">
-                    <div class="col-span-4 col-start-2 bg-buff px-23 pb-60 pt-80 rounded-xl">
+                    <div class="col-span-4 col-start-2 bg-buff px-23 pb-39 pt-44 rounded-xl">
                         <!-- Profile Icon -->
                         <div class="mb-9">
                             <img src=""
@@ -201,7 +201,7 @@
                         </div>
 
                         <!-- Profile Title -->
-                        <h1 id="profile-title" class="text-[30px] font-extrabold text-washed-black mb-32 text-center leading-[72px] tracking-[9px] uppercase">
+                        <h1 id="profile-title" class="text-[30px] font-extrabold text-washed-black mb-19 text-center leading-[42px] tracking-[9px] uppercase">
                             The<br>...
                         </h1>
 
@@ -213,6 +213,15 @@
                         <p id="profile-description" class="t-copy-md text-washed-black text-center">
                             Your coffee description will load here..
                         </p>
+                    </div>
+
+                    <div class="col-span-4 col-start-2 bg-caramel p-20 flex flex-row justify-between items-center rounded-xl h-74">
+                        <div>
+                           <img src=""
+                                alt="QR Code"
+                                class="profile-qr w-[135px] h-[135px]"/>
+                        </div>
+                        <span class="t-button">DISCOVER MORE</span>
                     </div>
 
 
