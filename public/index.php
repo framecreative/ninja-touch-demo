@@ -122,7 +122,7 @@
                                 <!-- Proofpoint title will be dynamically generated -->
                             </h2>
                             <p id="proofpoint-subtitle" class="text-3xl text-washed-black">
-                                <!-- Proofpoint subtitle will be dynamically generated -->
+                                <!-- Proofpoint subtitle will be dynamically generatedproo -->
                             </p>
                             <p id="proofpoint-description" class="text-3xl font-extrabold leading-[43px] text-center text-washed-black">
                                 <!-- Proofpoint description will be dynamically generated -->
