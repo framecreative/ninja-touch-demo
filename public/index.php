@@ -197,7 +197,7 @@
                         <div class="mb-9">
                             <img src=""
                                 alt="Profile icon"
-                                class="profile-icon w-[68px] h-[102px] mx-auto">
+                                class="profile-icon w-[102px] h-[102px] mx-auto">
                         </div>
 
                         <!-- Profile Title -->

@@ -81,6 +81,8 @@ export class ActivityTracker {
             this.countdownTimer = null;
         }
 
+        this.removeAnimation();
+
         this.timeoutTimer = setTimeout(() => {
             if (this.timeoutCallback) {
                 this.timeoutCallback();
@@ -97,7 +99,7 @@ export class ActivityTracker {
     startCountdown() {
         let countdown = this.config.countdownPopupSeconds || 15;
         const countdownNumber = document.getElementById('countdown-number');
-        const spinner = document.getElementById('timeout-screen').querySelector('.countdown-progress-circle');
+        const spinner = document.getElementById('timeout-screen').querySelector('.countdown-timer-progress-circle');
         countdownNumber.textContent = countdown;
 
         this.countdownTimer = setInterval(() => {
@@ -113,7 +115,7 @@ export class ActivityTracker {
                 }
             }
         }, 1000);
-
+        
         if (spinner) {
             const circle = spinner.querySelector('#progress-indicator');
             const circumference = 2 * Math.PI * (circle.r.baseVal.value);
@@ -123,20 +125,13 @@ export class ActivityTracker {
             //Remove hidden class on gradient circle if applied
             circle.setAttribute('class', '');
 
-            let animation = animate(0, 100, {
-                duration: (this.config.countdownPopupSeconds || 15) * 1000,
+            this.animation = animate(0, 100, {
+                duration: (this.config.countdownPopupSeconds || 15),
                 ease: "linear",
                 onUpdate(latest) {
-                    const offset = circumference - ((latest / 100) * circumference);
+                    const offset = circumference - (latest / 100) * circumference;
+                    console.log(offset)
                     circle.style.strokeDashoffset = offset;
-
-                    //Update timer based on current time of animation
-                    const currentSecond = animation.duration - Math.floor(animation.time);
-
-                    if(currentSecond < countdown) {
-                        countdown = currentSecond;
-                        countdownNumber.textContent = countdown;
-                    } 
                 },
             });
 
@@ -149,6 +144,13 @@ export class ActivityTracker {
     dismissTimeout() {
         this.hideTimeoutScreen();
         this.resetTimeout();
+        this.removeAnimation();
+    }
+
+    removeAnimation(){
+        if(this.animation){
+            this.animation.stop();
+        }
     }
 
     hideTimeoutScreen() {
