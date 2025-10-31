@@ -200,7 +200,7 @@
                         </div>
 
                         <!-- Profile Title -->
-                        <h1 id="profile-title" class="text-[30px] font-extrabold text-washed-black mb-19 text-center leading-[72px] tracking-[9px] uppercase">
+                        <h1 id="profile-title" class="text-[30px] font-extrabold text-washed-black mb-19 text-center leading-[42px] tracking-[9px] uppercase">
                             The<br>...
                         </h1>
 
@@ -218,7 +218,7 @@
                         <div>
                            <img src=""
                                 alt="QR Code"
-                                class="w-[135px] h-[135px]"/>
+                                class="profile-qr w-[135px] h-[135px]"/>
                         </div>
                         <span class="t-button">SCAN & SHARE </span>
                     </div>
