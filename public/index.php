@@ -220,7 +220,7 @@
                                 alt="QR Code"
                                 class="profile-qr w-[135px] h-[135px]"/>
                         </div>
-                        <span class="t-button">SCAN & SHARE </span>
+                        <span class="t-button">DISCOVER MORE</span>
                     </div>
 
 
