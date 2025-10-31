@@ -19,6 +19,7 @@
         <div id="waiting-screen" class="screen active bg-buff">
             <div class="absolute inset-0  flex items-center justify-center bg-washed-black">
                 <video
+                    id="home-video-bg"
                     src="/dist/assets/videos/homepage1.mp4"
                     class="transition-all duration-200 absolute inset-0 w-full h-full object-cover object-top-right"
                     autoplay
