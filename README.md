@@ -170,3 +170,12 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 ## Content Sync
 
 Content for the app (text, configs etc) is stored locally in a `data.json` file.  The app currently pings a [remote github Gist](https://gist.github.com/FrameShared/0ee640b463dc2a21910800afa14f5162) to see if there's a more updated version to use for content, however we may switch over to pulling the `data.json` file down with the rest of the assets in the future?
+
+## Homepage Videos
+
+The homepage has 3 options for background videos.  To change the background video, append the querysting `?video={2|3}` to the URL (where 2 and 3 are the optional video numbers) - any other number (or no querystring present) will simply fall back to the default video that would play.
+
+Examples:
+- https://ninja-touch-demo.on-forge.com/
+- https://ninja-touch-demo.on-forge.com/?video=2
+- https://ninja-touch-demo.on-forge.com/?video=3
