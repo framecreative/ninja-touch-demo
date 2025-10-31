@@ -603,7 +603,7 @@ export class CoffeeProfileQuiz {
         document.getElementById('profile-title').innerHTML = this.profile.title;
         document.getElementById('profile-tagline').textContent = this.profile.tagline;
         document.querySelector('.profile-qr').src = `dist/assets/images/${this.profile.qr_img}`;
-        document.getElementById('profile-description').textContent = this.profile.description1;
+        document.getElementById('profile-description').innerHTML = this.profile.description1.replace('\n', '<br>');
 
         // Update profile icon dynamically
         const profileIcon = document.querySelector('#profile-reveal-screen img');
