@@ -148,6 +148,7 @@ export class CoffeeProfileQuiz {
         this.bindEvents();
         this.activityTracker.startActivityTracking();
         // this.videoSync.initializeVideoSync();
+        this.setHomeVideo();
         this.resetAllScreenVisibility(this.screens.waitingScreen);
 
         // Global button press state:
@@ -206,6 +207,21 @@ export class CoffeeProfileQuiz {
         document.getElementById('timeout-dismiss-btn').addEventListener('click', () => {
             this.activityTracker.dismissTimeout();
         });
+    }
+
+    setHomeVideo() {
+        // Check for querystring 'video' number value (2 or 3) and swap homepage video to match:
+        let qsParams = new URLSearchParams(window.location.search);
+        const vidQS = qsParams.get('video');
+        if (vidQS) {
+            const videoEl = document.getElementById('home-video-bg');
+            if (videoEl && (vidQS == 2 || vidQS == 3)) {
+                videoEl.src = `dist/assets/videos/homepage${vidQS}.mp4`;
+            } else {
+                console.warn('Invalid video number, skipping video swap');
+            }
+        }
+
     }
 
     /**
