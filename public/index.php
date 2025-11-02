@@ -27,7 +27,7 @@
                     loop
                     playsinline
                     preload="auto">
-                </videos>
+                </video>
             </div>
             <div class="absolute inset-0  flex items-center justify-center">
                 <div class="w-full grid grid-cols-6 translate-y-1/5 gap-5">
