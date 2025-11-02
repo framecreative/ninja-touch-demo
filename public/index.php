@@ -47,7 +47,7 @@
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="w-full grid grid-cols-6 gap-x-4 text-center">
 
-                    <div class="col-span-4 col-start-2 flex flex-col items-center gap-44 font-semibold text-washed-black text-5xl leading-[52px] mb-34">
+                    <div class="col-span-4 col-start-2 flex flex-col items-center gap-44 font-semibold text-washed-black text-5xl mb-34">
                         <img src='/dist/assets/images/image_ninja_luxe_logo.png' class="max-w-112">
 
                         <div>
@@ -114,7 +114,7 @@
                             </div>
                         </div>
                         <div class="col-span-4 col-start-2 flex flex-col justify-center">
-                            <span id="proofpoint-feature" class="text-2xl font-extrabold tracking-[7.2px] uppercase text-center mb-9">
+                            <span id="proofpoint-feature" class="text-2xl font-extrabold tracking-[0.45rem] uppercase text-center mb-9">
                                 <!-- Proofpoint feature will be dynamically generated -->
                             </span>
                             <h2 id="proofpoint-title" class="text-5xl font-bold text-washed-black mb-9">
@@ -123,7 +123,7 @@
                             <p id="proofpoint-subtitle" class="text-3xl text-washed-black">
                                 <!-- Proofpoint subtitle will be dynamically generatedproo -->
                             </p>
-                            <p id="proofpoint-description" class="text-3xl font-extrabold leading-[43px] text-center text-washed-black">
+                            <p id="proofpoint-description" class="text-3xl font-extrabold leading-[2.68rem] text-center text-washed-black">
                                 <!-- Proofpoint description will be dynamically generated -->
                             </p>
                         </div>`
@@ -136,20 +136,18 @@
 
                             <div class="timer-progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
                                 <svg
-                                    class="-rotate-90" width="60" height="60"
-                                >
+                                    class="-rotate-90" width="60" height="60">
                                     <defs>
                                         <linearGradient id="globalGradient" x1="18.7588" y1="56.2744" x2="56.2725" y2="18.7607" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#F3E8D8"/>
-                                        <stop offset="1" stop-color="#D7B792"/>
+                                            <stop stop-color="#F3E8D8" />
+                                            <stop offset="1" stop-color="#D7B792" />
                                         </linearGradient>
                                     </defs>
                                     <!-- background track -->
-                                    <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent" ></circle>
+                                    <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent"></circle>
 
                                     <!-- animated progress stroke -->
-                                    <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#globalGradient)" stroke-width="6" fill="transparent" stroke-linecap="round"
-                                    ></circle>
+                                    <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#globalGradient)" stroke-width="6" fill="transparent" stroke-linecap="round"></circle>
                                 </svg>
                             </div>
                         </button>
@@ -166,20 +164,18 @@
                         <span class="t-button text-tan mx-auto">CALCULATING</span>
                         <div class="timer-progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
                             <svg
-                                class="-rotate-90" width="60" height="60"
-                            >
+                                class="-rotate-90" width="60" height="60">
                                 <defs>
                                     <linearGradient id="globalGradient" x1="18.7588" y1="56.2744" x2="56.2725" y2="18.7607" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#F3E8D8"/>
-                                    <stop offset="1" stop-color="#D7B792"/>
+                                        <stop stop-color="#F3E8D8" />
+                                        <stop offset="1" stop-color="#D7B792" />
                                     </linearGradient>
                                 </defs>
                                 <!-- background track -->
-                                <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent" ></circle>
+                                <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent"></circle>
 
                                 <!-- animated progress stroke -->
-                                <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#globalGradient)" stroke-width="6" fill="transparent" stroke-linecap="round" class="hidden"
-                                ></circle>
+                                <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#globalGradient)" stroke-width="6" fill="transparent" stroke-linecap="round" class="hidden"></circle>
                             </svg>
                         </div>
                     </div>
@@ -202,12 +198,12 @@
                         </div>
 
                         <!-- Profile Title -->
-                        <h1 id="profile-title" class="text-[30px] font-extrabold text-washed-black mb-19 text-center leading-[42px] tracking-[9px] uppercase">
+                        <h1 id="profile-title" class="text-[30px] font-extrabold text-washed-black mb-19 text-center leading-[2.63rem] tracking-[0.56rem] uppercase">
                             The<br>...
                         </h1>
 
                         <!-- Profile Tagline -->
-                        <p id="profile-tagline" class="t-copy text-washed-black text-center mb-10 leading-[72px]">
+                        <p id="profile-tagline" class="t-copy text-washed-black text-center mb-10">
                             Your coffee profile tagline will load here..
                         </p>
 
@@ -218,9 +214,9 @@
 
                     <div class="col-span-4 col-start-2 bg-caramel p-20 flex flex-row justify-between items-center rounded-xl h-74">
                         <div>
-                           <img src=""
+                            <img src=""
                                 alt="QR Code"
-                                class="profile-qr w-[135px] h-[135px]"/>
+                                class="profile-qr w-[135px] h-[135px]" />
                         </div>
                         <span class="t-button">DISCOVER MORE</span>
                     </div>
@@ -251,24 +247,22 @@
                 <div class="col-span-2 col-start-3 flex flex-col items-center gap-6 pb-20">
                     <div class="countdown-timer-progress-circle relative flex items-center justify-center w-[60px] h-[60px] ">
                         <svg
-                            class="-rotate-90" width="60" height="60"
-                        >
+                            class="-rotate-90" width="60" height="60">
                             <defs>
                                 <linearGradient id="timeout" x1="18.7588" y1="56.2744" x2="56.2725" y2="18.7607" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#F3E8D8"/>
-                                <stop offset="1" stop-color="#D7B792"/>
+                                    <stop stop-color="#F3E8D8" />
+                                    <stop offset="1" stop-color="#D7B792" />
                                 </linearGradient>
                             </defs>
                             <!-- background track -->
-                            <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent" ></circle>
+                            <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent"></circle>
                             <!-- animated progress stroke -->
-                            <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#timeout)" stroke-width="6" fill="transparent" stroke-linecap="round" class="hidden"
-                            ></circle>
+                            <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#timeout)" stroke-width="6" fill="transparent" stroke-linecap="round" class="hidden"></circle>
                         </svg>
                     </div>
 
                     <!-- Countdown Text -->
-                    <p id="countdown-text" class="text-[30px] font-extrabold text-center leading-[42px] tracking-[9px] uppercase text-tan">
+                    <p id="countdown-text" class="text-[30px] font-extrabold text-center leading-[2.63rem] tracking-[0.56rem] uppercase text-tan">
                         Restarting<br>in <span id="countdown-number">15</span>
                     </p>
                 </div>
