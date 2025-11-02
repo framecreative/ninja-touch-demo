@@ -35,8 +35,7 @@
                         <button
                             id="touch-btn"
                             class="t-button text-tan hover:opacity-70 transition-opacity duration-200 backdrop-blur-[75px] backdrop-filter bg-white/2 h-[130px] w-full rounded-xl flex items-center justify-center">
-                            TOUCH ME
-                            
+                            TOUCH TO START
                         </button>
                     </div>
                 </div>
