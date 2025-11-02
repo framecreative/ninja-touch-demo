@@ -198,7 +198,7 @@
                         </div>
 
                         <!-- Profile Title -->
-                        <h1 id="profile-title" class="text-[30px] font-extrabold text-washed-black mb-19 text-center leading-[2.63rem] tracking-[0.56rem] uppercase">
+                        <h1 id="profile-title" class="text-[1.9rem] font-extrabold text-washed-black mb-19 text-center leading-[2.63rem] tracking-[0.56rem] uppercase">
                             The<br>...
                         </h1>
 
@@ -262,7 +262,7 @@
                     </div>
 
                     <!-- Countdown Text -->
-                    <p id="countdown-text" class="text-[30px] font-extrabold text-center leading-[2.63rem] tracking-[0.56rem] uppercase text-tan">
+                    <p id="countdown-text" class="text-[1.9rem] font-extrabold text-center leading-[2.63rem] tracking-[0.56rem] uppercase text-tan">
                         Restarting<br>in <span id="countdown-number">15</span>
                     </p>
                 </div>
