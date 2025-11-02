@@ -10,7 +10,7 @@
     }
 
     .spinner, .spinner-light {
-        @apply w-[50px] h-[50px] rounded-full box-border animate-rotate
+        @apply w-[100px] h-[100px] rounded-full box-border animate-rotate
          [background:conic-gradient(from_90deg_at_50%_50%,#1e1d1c_0deg,#1e1d1c_0.04deg,#D7B792_360deg)];
     }
 
@@ -49,7 +49,7 @@
         @apply hover:cursor-pointer;
     }
     .answer-btn {
-        @apply w-full h-[200px] bg-buff rounded-xl transition-all duration-200 text-washed-black font-semibold text-4xl leading-tight text-center flex items-center justify-center px-8;
+        @apply w-full h-[400px] bg-buff rounded-xl transition-all duration-200 text-washed-black font-semibold text-3xl leading-tight text-center flex items-center justify-center px-8;
     }
 
     /* Timeout screen styles */

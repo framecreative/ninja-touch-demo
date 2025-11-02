@@ -34,7 +34,7 @@
                     <div class="col-span-2 col-start-3">
                         <button
                             id="touch-btn"
-                            class="t-button text-tan hover:opacity-70 transition-opacity duration-200 backdrop-blur-[75px] backdrop-filter bg-white/2 h-[130px] w-full rounded-xl flex items-center justify-center">
+                            class="t-button text-tan hover:opacity-70 transition-opacity duration-200 backdrop-blur-[75px] backdrop-filter bg-white/2 h-[260px] w-full rounded-xl flex items-center justify-center">
                             TOUCH TO START
                         </button>
                     </div>
@@ -48,7 +48,7 @@
                 <div class="w-full grid grid-cols-6 gap-x-4 text-center">
 
                     <div class="col-span-4 col-start-2 flex flex-col items-center gap-44 font-semibold text-washed-black text-5xl mb-34">
-                        <img src='/dist/assets/images/image_ninja_luxe_logo.png' class="max-w-112">
+                        <img src='/dist/assets/images/image_ninja_luxe_logo.png' class="">
 
                         <div>
                             <p class=" t-copy-lg">You bring the personality,<br>we'll bring the crema.</p>
@@ -59,7 +59,7 @@
                     </div>
                     <button
                         id="intro-next-btn"
-                        class="t-button col-span-2 col-start-3 bg-buff text-washed-black rounded-xl h-[130px] hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                        class="t-button col-span-2 col-start-3 bg-buff text-washed-black rounded-xl h-[260px] hover:opacity-90 transition-opacity duration-200 will-change-opacity">
                         BEGIN
                     </button>
                 </div>
@@ -87,14 +87,14 @@
                     <div class="col-span-4 col-start-2 grid grid-cols-4 gap-5">
                         <button
                             data-back-button
-                            class="bg-buff col-span-1 rounded-xl grow h-[130px] text-washed-black hover:opacity-70 transition-opacity duration-200 will-change-opacity flex flex-row items-center justify-center">
+                            class="bg-buff col-span-1 rounded-xl grow h-[260px] text-washed-black hover:opacity-70 transition-opacity duration-200 will-change-opacity flex flex-row items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="20" viewBox="0 0 32 20" fill="none">
                                 <path d="M31.1016 8.34875L31.1016 11.8348L6.92781 11.8347L12.9038 17.8107L10.7873 19.9687L0.889558 10.071L10.7873 0.17325L12.9038 2.33125L6.88631 8.34875L31.1016 8.34875Z" fill="#1E1D1C" />
                             </svg>
                         </button>
                         <button
                             data-next-btn
-                            class="t-button col-span-3 block  h-[130px] bg-washed-black text-buff rounded-xl tracking-widest hover:opacity-90 transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed will-change-opacity"
+                            class="t-button col-span-3 block  h-[260px] bg-washed-black text-buff rounded-xl tracking-widest hover:opacity-90 transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed will-change-opacity"
                             disabled>
                             NEXT
                         </button>
@@ -129,12 +129,12 @@
                         </div>`
                         <button
                             data-continue-btn
-                            class="flex flex-row justify-between items-center col-span-4 col-start-2 t-button mt-auto w-full bg-washed-black text-buff px-10 py-4 h-[130px] rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                            class="flex flex-row justify-between items-center col-span-4 col-start-2 t-button mt-auto w-full bg-washed-black text-buff px-10 py-4 h-[260px] rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
                             <span class="m-auto" id="continue-btn-text">
                                 NEXT
                             </span>
 
-                            <div class="timer-progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
+                            <div class="timer-progress-circle relative flex items-center justify-center w-[120px] h-[120px]">
                                 <svg
                                     class="-rotate-90" width="60" height="60">
                                     <defs>
@@ -160,9 +160,9 @@
         <div id="profile-calculation-screen" class="screen bg-washed-black">
             <div class="absolute inset-0 flex flex-col items-center justify-center">
                 <div class="profile-calculate-content translate-y-1/5 w-full grid grid-cols-6 mx-auto text-center opacity-0">
-                    <div class="col-span-4 col-start-2 rounded-xl flex justify-center items-center px-8 backdrop-blur-[75px] h-[130px] backdrop-filter bg-[#292928]">
+                    <div class="col-span-4 col-start-2 rounded-xl flex justify-center items-center px-8 backdrop-blur-[75px] h-[260px] backdrop-filter bg-[#292928]">
                         <span class="t-button text-tan mx-auto">CALCULATING</span>
-                        <div class="timer-progress-circle relative flex items-center justify-center w-[60px] h-[60px]">
+                        <div class="timer-progress-circle relative flex items-center justify-center w-[120px] h-[120px]">
                             <svg
                                 class="-rotate-90" width="60" height="60">
                                 <defs>
@@ -194,7 +194,7 @@
                                 width="1000"
                                 height="1000"
                                 alt="Profile icon"
-                                class="profile-icon w-[102px] h-[102px] mx-auto">
+                                class="profile-icon w-[204px] h-[204px] mx-auto">
                         </div>
 
                         <!-- Profile Title -->
@@ -215,8 +215,10 @@
                     <div class="col-span-4 col-start-2 bg-caramel p-20 flex flex-row justify-between items-center rounded-xl h-74">
                         <div>
                             <img src=""
+                                width="270"
+                                height="270"
                                 alt="QR Code"
-                                class="profile-qr w-[135px] h-[135px]" />
+                                class="profile-qr w-[270px] h-[270px]" />
                         </div>
                         <span class="t-button">DISCOVER MORE</span>
                     </div>
@@ -231,7 +233,7 @@
                         </button> -->
                         <button
                             id="start-over-btn"
-                            class="flex items-center t-button w-full bg-washed-black h-[130px] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                            class="flex items-center t-button w-full bg-washed-black h-[260px] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
                             <span class="t-button text-tan mx-auto">
                                 RESTART
                             </span>
@@ -270,14 +272,14 @@
                 <!-- Dismiss Button -->
                 <button
                     id="timeout-dismiss-btn"
-                    class="t-button col-span-4 col-start-2 h-[130px] bg-tan text-washed-black px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                    class="t-button col-span-4 col-start-2 h-[260px] bg-tan text-washed-black px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
                     DISMISS
                 </button>
 
                 <!-- Restart Button -->
                 <button
                     id="timeout-restart-btn"
-                    class="t-button col-span-4 col-start-2 h-[130px] bg-[#292928] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
+                    class="t-button col-span-4 col-start-2 h-[260px] bg-[#292928] text-buff px-12 py-4 rounded-xl hover:opacity-90 transition-opacity duration-200 will-change-opacity">
                     RESTART
                 </button>
             </div>
