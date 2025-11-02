@@ -105,12 +105,12 @@
 
         <!-- Proofpoint Display Screens -->
         <div id="proofpoint-screen" class="screen bg-gradient-to-b from-[#f3e8d8] to-[#d7b792]">
-            <div class="absolute flex flex-col items-center justify-center h-full will-change-contents">
+            <div class="absolute flex flex-col items-center justify-center h-full w-full will-change-contents">
                 <div class="proofpoint-content hidden w-full text-center h-full will-change-transform">
                     <div class="grid grid-cols-6 grid-rows-[auto_1fr_auto] h-full pb-base">
                         <div class="col-span-full px-7.5 pt-7.5">
-                            <div class="w-full h-auto bg-buff flex items-center justify-center rounded-xl overflow-hidden">
-                                <img id="proofpoint-image" src="" alt="Proofpoint image" class="w-full h-full object-contain ">
+                            <div id="proofpoint-image-container" class="w-full h-auto bg-buff flex items-center justify-center rounded-xl overflow-hidden">
+                                <img id="proofpoint-image" width="2024" height="1904" src="" alt="Proofpoint image" class="w-full h-full object-contain ">
                             </div>
                         </div>
                         <div class="col-span-4 col-start-2 flex flex-col justify-center">
@@ -195,6 +195,8 @@
                         <!-- Profile Icon -->
                         <div class="mb-9">
                             <img src=""
+                                width="1000"
+                                height="1000"
                                 alt="Profile icon"
                                 class="profile-icon w-[102px] h-[102px] mx-auto">
                         </div>
