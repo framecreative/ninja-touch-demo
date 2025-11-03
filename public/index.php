@@ -37,8 +37,8 @@
                 </video>
             </div>
             <div class="absolute inset-0  flex items-center justify-center">
-                <div class="w-full grid grid-cols-6 translate-y-1/5 gap-5">
-                    <div class="col-span-2 col-start-3">
+                <div class="w-full grid grid-cols-8 translate-y-1/5 gap-5">
+                    <div class="col-span-4 col-start-3">
                         <button
                             id="touch-btn"
                             class="t-button text-tan hover:opacity-70 transition-opacity duration-200 backdrop-blur-[75px] backdrop-filter bg-white/2 h-[260px] w-full rounded-xl flex items-center justify-center">
@@ -95,7 +95,7 @@
                         <button
                             data-back-button
                             class="bg-buff col-span-1 rounded-xl grow h-[260px] text-washed-black hover:opacity-70 transition-opacity duration-200 will-change-opacity flex flex-row items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="20" viewBox="0 0 32 20" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-[64px] h-auto" width="32" height="20" viewBox="0 0 32 20" fill="none">
                                 <path d="M31.1016 8.34875L31.1016 11.8348L6.92781 11.8347L12.9038 17.8107L10.7873 19.9687L0.889558 10.071L10.7873 0.17325L12.9038 2.33125L6.88631 8.34875L31.1016 8.34875Z" fill="#1E1D1C" />
                             </svg>
                         </button>
@@ -143,7 +143,7 @@
 
                             <div class="timer-progress-circle relative flex items-center justify-center w-[120px] h-[120px]">
                                 <svg
-                                    class="-rotate-90" width="60" height="60">
+                                    class="-rotate-90 w-full h-full" width="120" height="120">
                                     <defs>
                                         <linearGradient id="globalGradient" x1="18.7588" y1="56.2744" x2="56.2725" y2="18.7607" gradientUnits="userSpaceOnUse">
                                             <stop stop-color="#F3E8D8" />
@@ -151,10 +151,10 @@
                                         </linearGradient>
                                     </defs>
                                     <!-- background track -->
-                                    <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent"></circle>
+                                    <circle cx="60" cy="60" r="50" stroke="#d1c6b520" stroke-width="12" fill="transparent"></circle>
 
                                     <!-- animated progress stroke -->
-                                    <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#globalGradient)" stroke-width="6" fill="transparent" stroke-linecap="round"></circle>
+                                    <circle id="progress-indicator" cx="60" cy="60" r="50" stroke="url(#globalGradient)" stroke-width="12" fill="transparent" stroke-linecap="round"></circle>
                                 </svg>
                             </div>
                         </button>
@@ -171,7 +171,7 @@
                         <span class="t-button text-tan mx-auto">CALCULATING</span>
                         <div class="timer-progress-circle relative flex items-center justify-center w-[120px] h-[120px]">
                             <svg
-                                class="-rotate-90" width="60" height="60">
+                                class="-rotate-90 w-full h-full" width="120" height="120">
                                 <defs>
                                     <linearGradient id="globalGradient" x1="18.7588" y1="56.2744" x2="56.2725" y2="18.7607" gradientUnits="userSpaceOnUse">
                                         <stop stop-color="#F3E8D8" />
@@ -179,10 +179,10 @@
                                     </linearGradient>
                                 </defs>
                                 <!-- background track -->
-                                <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent"></circle>
+                                <circle cx="60" cy="60" r="50" stroke="#d1c6b520" stroke-width="12" fill="transparent"></circle>
 
                                 <!-- animated progress stroke -->
-                                <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#globalGradient)" stroke-width="6" fill="transparent" stroke-linecap="round" class="hidden"></circle>
+                                <circle id="progress-indicator" cx="60" cy="60" r="50" stroke="url(#globalGradient)" stroke-width="12" fill="transparent" stroke-linecap="round" class="hidden"></circle>
                             </svg>
                         </div>
                     </div>
@@ -256,7 +256,7 @@
                 <div class="col-span-2 col-start-3 flex flex-col items-center gap-6 pb-20">
                     <div class="countdown-timer-progress-circle relative flex items-center justify-center w-[60px] h-[60px] ">
                         <svg
-                            class="-rotate-90" width="60" height="60">
+                            class="-rotate-90 w-full h-full" width="120" height="120">
                             <defs>
                                 <linearGradient id="timeout" x1="18.7588" y1="56.2744" x2="56.2725" y2="18.7607" gradientUnits="userSpaceOnUse">
                                     <stop stop-color="#F3E8D8" />
@@ -264,9 +264,9 @@
                                 </linearGradient>
                             </defs>
                             <!-- background track -->
-                            <circle cx="30" cy="30" r="25" stroke="#d1c6b520" stroke-width="6" fill="transparent"></circle>
+                            <circle cx="60" cy="60" r="50" stroke="#d1c6b520" stroke-width="12" fill="transparent"></circle>
                             <!-- animated progress stroke -->
-                            <circle id="progress-indicator" cx="30" cy="30" r="25" stroke="url(#timeout)" stroke-width="6" fill="transparent" stroke-linecap="round" class="hidden"></circle>
+                            <circle id="progress-indicator" cx="60" cy="60" r="50" stroke="url(#timeout)" stroke-width="12" fill="transparent" stroke-linecap="round" class="hidden"></circle>
                         </svg>
                     </div>
 
