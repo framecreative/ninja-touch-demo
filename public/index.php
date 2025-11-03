@@ -6,11 +6,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Coffee Profile Quiz</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <?php echo vite_assets(); ?>
 </head>
+<style>
+    /* Prevent pinch-zoom!!!! */
+    :root {
+        touch-action: pan-x pan-y;
+        height: 100%
+    }
+</style>
 
 <body class="bg-tan min-h-screen font-sans">
     <div id="app" class="h-screen w-screen relative overflow-hidden">
