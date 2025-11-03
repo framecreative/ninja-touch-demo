@@ -1,8 +1,8 @@
 {
   "config": {
-    "countdownSeconds": 15,
-    "countdownPopupSeconds": 15,
-    "proofpointerSeconds": 10,
+    "countdownSeconds": 60,
+    "countdownPopupSeconds": 10,
+    "proofpointerSeconds": 15,
     "finalScreenSeconds": 20
   },
   "questions": [
@@ -117,14 +117,14 @@
       "image": "pp_baristocrat.webp",
       "feature": "[Related feature]",
       "title": "Dual Froth Technology",
-      "description": "Dual Froth Technology creates perfectly textured microfoam for a rich, velvety mouthfeel."
+      "description": "Dual Froth Technology creates perfectly textured microfoam for a rich,\nvelvety mouthfeel."
     },
     {
       "id": "proofpoint-2",
       "image": "pp_brewmantic.webp",
       "feature": "[Related feature]",
       "title": "Dual Froth Technology",
-      "description": "Dual Froth System creates silky, café-quality microfoam for drinks as soft and sincere as you are."
+      "description": "Dual Froth System creates silky,\ncafé-quality microfoam for drinks\nas soft and sincere as you are."
     },
     {
       "id": "proofpoint-3",
@@ -187,10 +187,10 @@
       "image": "pp_home_brewer.webp",
       "feature": "[Related feature]",
       "title": "Barista Assist Technology",
-      "description": "Barista Assist Technology™ takes out the guesswork, guiding you from grind size to extraction for café-quality comfort, cup after cup."
+      "description": "Barista Assist Technology™ takes out\nthe guesswork, guiding you from grind\nsize to extraction for café-quality\ncomfort, cup after cup."
     },
     {
-    "id": "proofpoint-12",
+      "id": "proofpoint-12",
       "image": "pp_optimiser.webp",
       "feature": "[Related feature]",
       "title": "Barista Assist Technology",
@@ -215,7 +215,7 @@
       "image": "pp_ritualist.webp",
       "feature": "[Related feature]",
       "title": "Barista Assist Technology",
-      "description": "Barista Assist Technology™ takes out the guesswork, guiding you from grind size to extraction for café-quality comfort, cup after cup."
+      "description": "Barista Assist Technology™ takes out\nthe guesswork, guiding you from grind\nsize to extraction for café-quality\ncomfort, cup after cup."
     },
     {
       "id": "proofpoint-16",
@@ -230,96 +230,96 @@
       "icon": "icon_precisionist.png",
       "title": "The<br>precisionist",
       "tagline": "Every detail, dialled.",
-      "description1": "You know perfection doesn’t happen by accident — it happens one micro-adjustment at a time. \nYou’re the type to notice when the crema’s two seconds late.",
-      "qr_img": "qr_precisionist.png",
+      "description1": "You know perfection doesn’t happen\nby accident — it happens one\nmicro-adjustment at a time. \n \nYou’re the type to notice when\nthe crema’s two seconds late.",
+      "qr_img": "qr_precisionist.svg",
       "proofpoint": "proofpoint-14"
     },
     "optimiser": {
       "icon": "icon_optimiser.png",
       "title": "The<br>optimiser",
       "tagline": "Better, every time.",
-      "description1": "You can’t leave well enough alone — and that’s the point. You tweak, refine, and shave seconds until routine becomes art.",
-      "qr_img": "qr_optimiser.png",
+      "description1": "You can’t leave well enough alone — and\nthat’s the point. \n \nYou tweak, refine, and shave seconds\nuntil routine becomes art.",
+      "qr_img": "qr_optimiser.svg",
       "proofpoint": "proofpoint-12"
     },
     "roastician": {
       "icon": "icon_roastician.png",
       "title": "The<br>roastician",
       "tagline": "Intuition meets alchemy.",
-      "description1": "You don’t follow recipes — you follow feeling. \nYou trust your nose, your timing, your gut, and somehow the magic always lands in the cup.",
-      "qr_img": "qr_roastician.png",
+      "description1": "You don’t follow recipes — you follow feeling. \n \nYou trust your nose, your timing,\nyour gut, and somehow the magic\nalways lands in the cup.",
+      "qr_img": "qr_roastician.svg",
       "proofpoint": "proofpoint-5"
     },
     "baristocrat": {
       "icon": "icon_baristocrat.png",
       "title": "The<br>baristocrat",
       "tagline": "Poise in every pour.",
-      "description1": "You’re all polish and preference — a little ceremony, a lot of confidence. \nRefinement isn’t an act; it’s how you wake up.",
-      "qr_img": "qr_baristocrat.png",
+      "description1": "You’re all polish and preference — a little\nceremony, a lot of confidence. \n \nRefinement isn’t an act;\nit’s how you wake up.",
+      "qr_img": "qr_baristocrat.svg",
       "proofpoint": "proofpoint-1"
     },
     "classicist": {
       "icon": "icon_classicist.png",
       "title": "The<br>classicist",
       "tagline": "Simple. Honest. Time-tested.",
-      "description1": "You trust tradition over trends — believing that quality endures and restraint is its own reward. \nYou trust tradition over trends — believing that quality endures and restraint is its own reward.",
-      "qr_img": "qr_classicist.png",
+      "description1": "You trust tradition over trends\nbelieving that quality endures and restraint is its own reward.",
+      "qr_img": "qr_classicist.svg",
       "proofpoint": "proofpoint-10"
     },
     "smooth_operator": {
       "icon": "icon_smooth_operator.png",
       "title": "The<br>smooth operator",
       "tagline": "Calm. Consistent. In control.",
-      "description1": "You keep everything humming — steady tempo, effortless flow. \nNothing flusters you; every pour feels like muscle memory.",
-      "qr_img": "qr_smooth_operator.png",
+      "description1": "You keep everything humming — steady tempo, effortless flow. \n \nNothing flusters you; every pour\nfeels like muscle memory.",
+      "qr_img": "qr_smooth_operator.svg",
       "proofpoint": "proofpoint-6"
     },
     "brewsmith": {
       "icon": "icon_brewsmith.png",
       "title": "The<br>brewsmith",
       "tagline": "Craft in every cup.",
-      "description1": "You trust your hands and your tools. \nFor you, craft is care — process is the point, and control is comfort.",
-      "qr_img": "qr_brewsmith.png",
+      "description1": "You trust your hands and your tools. \n \nFor you, craft is care — process is the point, and control is comfort.",
+      "qr_img": "qr_brewsmith.svg",
       "proofpoint": "proofpoint-9"
     },
     "home_brewer": {
       "icon": "icon_home_brewer.png",
       "title": "The<br>home brewer",
       "tagline": "Comfort, on repeat.",
-      "description1": "You make coffee the heart of your home — warm, familiar, and always ready to share. \nYour kitchen smells like belonging.",
-      "qr_img": "qr_home_brewer.png",
+      "description1": "You make coffee the heart\nof your home — warm, familiar,\nand always ready to share. \n \nYour kitchen smells like belonging.",
+      "qr_img": "qr_home_brewer.svg",
       "proofpoint": "proofpoint-11"
     },
     "zen_brewer": {
       "icon": "icon_zen_brewer.png",
       "title": "The<br>zen brewer",
       "tagline": "Focus. Flow. Freedom.",
-      "description1": "You find calm in motion — patient, present, and precise. \nThe process is your meditation; the pour, your pause.",
-      "qr_img": "qr_zen_brewer.png",
+      "description1": "You find calm in motion — patient,\npresent, and precise. \n \nThe process is your meditation;\nthe pour, your pause.",
+      "qr_img": "qr_zen_brewer.svg",
       "proofpoint": "proofpoint-16"
     },
     "mood_swinger": {
       "icon": "icon_mood_swinger.png",
       "title": "The<br>mood swinger",
       "tagline": "No rules, just vibes.",
-      "description1": "No rules, just vibes. You brew by instinct — espresso at dawn, cold brew at noon, maybe an affogato for dinner.  \nConsistency’s overrated anyway.",
-      "qr_img": "qr_mood_swinger.png",
+      "description1": "You brew by instinct — espresso\nat dawn, cold brew at noon,\nmaybe an affogato for dinner.  \n \nConsistency’s overrated anyway.",
+      "qr_img": "qr_mood_swinger.svg",
       "proofpoint": "proofpoint-4"
     },
     "blendsetter": {
       "icon": "icon_blendsetter.png",
       "title": "The<br>blendsetter",
       "tagline": "Always one brew ahead.",
-      "description1": "You see coffee as a canvas — remixing, experimenting, setting the tone before anyone else catches on. \nInnovation’s just your comfort zone.",
-      "qr_img": "qr_blendsetter.png",
+      "description1": "You see coffee as a canvas — remixing, experimenting, setting the tone before anyone else catches on. \n \nInnovation’s just your comfort zone.",
+      "qr_img": "qr_blendsetter.svg",
       "proofpoint": "proofpoint-8"
     },
     "ritualist": {
       "icon": "icon_ritualist.png",
       "title": "The<br>ritualist",
       "tagline": "Same time, same place, same joy.",
-      "description1": "For you, coffee isn’t just a drink — it’s an anchor. You find calm in consistency, comfort in repetition, and strength in keeping the ritual alive.",
-      "qr_img": "qr_ritualist.png",
+      "description1": "For you, coffee isn’t just\na drink — it’s an anchor. \n \nYou find calm in consistency,\ncomfort in repetition, and strength\nin keeping the ritual alive.",
+      "qr_img": "qr_ritualist.svg",
       "proofpoint": "proofpoint-15"
     },
     "everybuddy": {
@@ -327,31 +327,31 @@
       "title": "The<br>everybuddy",
       "tagline": "Never drinks alone.",
       "description1": "You make coffee a social ritual — the chat before work, the refill that becomes a catch-up, the reason to linger just a bit longer.",
-      "qr_img": "qr_everybuddy.png",
+      "qr_img": "qr_everybuddy.svg",
       "proofpoint": "proofpoint-3"
     },
     "percolator": {
       "icon": "icon_percolator.png",
       "title": "The<br>percolator",
       "tagline": "Keeps the good things bubbling.",
-      "description1": "You’re the energy source — warm, curious, always connecting people over a pour. \nWhen you’re around, the conversation never runs dry.",
-      "qr_img": "qr_percolator.png",
+      "description1": "You’re the energy source — warm, curious, always connecting people\nover a pour. \n \nWhen you’re around,\nthe conversation never runs dry.",
+      "qr_img": "qr_percolator.svg",
       "proofpoint": "proofpoint-13"
     },
     "beanfluencer": {
       "icon": "icon_beanfluencer.png",
       "title": "The<br>beanfluencer",
       "tagline": "Social by nature, caffeinated by choice.",
-      "description1": "You know what’s trending before it’s poured — talkative, tuned-in, contagiously upbeat. \nYou don’t just make coffee; you make it a movement.",
-      "qr_img": "qr_beanfluencer.png",
+      "description1": "You know what’s trending\nbefore it’s poured — talkative,\ntuned-in, contagiously upbeat. \n \nYou don’t just make coffee;\nyou make it a movement.",
+      "qr_img": "qr_beanfluencer.svg",
       "proofpoint": "proofpoint-7"
     },
     "brewmantic": {
       "icon": "icon_brewmantic.png",
       "title": "The<br>brewmantic",
       "tagline": "Coffee with feeling.",
-      "description1": "You pour your heart into every cup, the way some people write love letters. \nA swirl of nostalgia, a dash of foam, and suddenly the morning feels cinematic.",
-      "qr_img": "qr_brewmantic.png",
+      "description1": "You pour your heart into every cup,\nthe way some people write love letters. \n \nA swirl of nostalgia, a dash of foam,\nand suddenly the morning feels cinematic.",
+      "qr_img": "qr_brewmantic.svg",
       "proofpoint": "proofpoint-2"
     }
   }
