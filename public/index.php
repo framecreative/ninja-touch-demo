@@ -55,7 +55,7 @@
                 <div class="w-full grid grid-cols-6 gap-x-4 text-center">
 
                     <div class="col-span-4 col-start-2 flex flex-col items-center gap-44 font-semibold text-washed-black text-5xl mb-34">
-                        <img src='/dist/assets/images/image_ninja_luxe_logo.png' class="">
+                        <img src='/dist/assets/images/image_ninja_luxe_logo.png' width="895" height="358" class="max-w-[41.1vw]">
 
                         <div>
                             <p class=" t-copy-lg">You bring the personality,<br>we'll bring the crema.</p>
