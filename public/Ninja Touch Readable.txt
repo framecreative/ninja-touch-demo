@@ -1,0 +1,320 @@
+========================================
+  NINJA LUXE CAFE - QUIZ DATA OVERVIEW
+========================================
+
+
+--- SETTINGS ---
+
+  Countdown Timer:          60 seconds
+  Countdown Popup:          10 seconds
+  Proofpoint Display:       15 seconds
+  Final Screen Display:     20 seconds
+
+
+========================================
+  QUESTIONS
+========================================
+
+QUESTION 1: "Your morning coffee is..."
+  Weight: 1.5 (higher importance)
+
+  A) My daily anchor
+     Same mug same moment, same me.
+     -> Maps to: STABILITY
+
+  B) A precision test
+     I'm chasing god-tier crema.
+     -> Maps to: MASTERY
+
+  C) A wild card
+     Depends who I wake up as today.
+     -> Maps to: INDEPENDENCE
+
+  D) A shared ritual
+     Half the joy's in who I drink it with.
+     -> Maps to: BELONGING
+
+----------------------------------------
+
+QUESTION 2: "When it comes to taste, you're drawn to..."
+  Weight: 1
+
+  A) Smooth and steady
+     the comfort playlist of coffee.
+     -> Maps to: STABILITY
+
+  B) Bold and balanced
+     pure craft, zero shortcuts.
+     -> Maps to: MASTERY
+
+  C) Whatever fits the mood
+     variety keeps things interesting.
+     -> Maps to: INDEPENDENCE
+
+  D) The easy crowd-pleaser
+     hits the spot without overthinking it.
+     -> Maps to: BELONGING
+
+----------------------------------------
+
+QUESTION 3: "When you're at the machine, you..."
+  Weight: 1
+
+  A) Geek out
+     pressure, grind, and tamp like it's performance art.
+     -> Maps to: STABILITY
+
+  B) Hit brew, zone out and trust the machine.
+     -> Maps to: MASTERY
+
+  C) Treat it like a creative outlet
+     follow the recipe once, then make it yours.
+     -> Maps to: INDEPENDENCE
+
+  D) Take everyone's order
+     coffee diplomacy is your love language.
+     -> Maps to: BELONGING
+
+----------------------------------------
+
+QUESTION 4: "When your cup hits the bench, it usually..."
+  Weight: 1
+
+  A) Keeps it stripped-back
+     black, white, and effortlessly unfussy.
+     -> Maps to: MINIMALIST
+
+  B) Looks engineered by NASA
+     precision, poise, serious intent.
+     -> Maps to: FUTURIST
+
+  C) Could start a micro-trend on TikTok
+     confident pour, main-character energy.
+     -> Maps to: TRENDY
+
+  D) Feels like home
+     warm, familiar and a little nostalgic.
+     -> Maps to: CLASSIC
+
+
+========================================
+  PROOFPOINTS (Feature Highlights)
+========================================
+
+1.  Dual Froth Technology           (image: pp_baristocrat.webp)
+    Dual Froth Technology creates perfectly textured microfoam for a rich,
+    velvety mouthfeel.
+
+2.  Dual Froth Technology           (image: pp_brewmantic.webp)
+    Dual Froth System creates silky, cafe-quality microfoam for drinks
+    as soft and sincere as you are.
+
+3.  3-in-1 Machine                  (image: pp_everybuddy.webp)
+    3-in-1 machine allows you to create effortless espresso, rapid cold
+    brew and perfectly balanced filter coffee - for every social occasion.
+
+4.  3-in-1 Machine                  (image: pp_mood_swinger.webp)
+    3-in-1 versatility lets you shift from bold espresso to smooth cold
+    brew or easy drip, depending on the mood.
+
+5.  3-in-1 Machine                  (image: pp_roastician.webp)
+    Our 3-in-1 machine allows you to create the perfect well balanced
+    espresso, rapid cold brew and perfectly balanced filter coffee.
+
+6.  3-in-1 Machine                  (image: pp_smooth_operator.webp)
+    Our 3-in-1 machine allows you to create the perfect well balanced
+    espresso, rapid cold brew and perfectly balanced filter coffee.
+
+7.  3-in-1 Machine                  (image: pp_beanfluencer.webp)
+    3-in-1 versatility lets you share whatever's next - espresso
+    martinis, cold brew, or a classic pour.
+
+8.  Multiple Drink Presets          (image: pp_blendsetter.webp)
+    Multiple drink presets give you the flexibility for many drink styles
+    without manual dialing.
+
+9.  Weight-based Dosing             (image: pp_brewsmith.webp)
+    Weight-based dosing and time-based extraction let you dial in the
+    perfect shot, every time. Whilst four froth presets allow you to
+    customise your drink to your taste.
+
+10. Weight-based Dosing             (image: pp_classicist.webp)
+    Weight-based dosing and time-based extraction lets you dial in the
+    perfect shot, every time.
+
+11. Barista Assist Technology       (image: pp_home_brewer.webp)
+    Barista Assist Technology takes out the guesswork, guiding you from
+    grind size to extraction for cafe-quality comfort, cup after cup.
+
+12. Barista Assist Technology       (image: pp_optimiser.webp)
+    Barista Assist Technology takes out the guesswork, guiding you from
+    grind size to extraction for perfectly consistent results.
+
+13. Multiple Drink Presets          (image: pp_percolator.webp)
+    With 15+ preset drink options and 4 versatile froth settings, you
+    can create shared moments with effortless consistency.
+
+14. Barista Assist Technology       (image: pp_precisionist.webp)
+    Barista Assist Technology and intelligent temperature control
+    auto-calibrate to deliver the perfect brew and froth every time.
+
+15. Barista Assist Technology       (image: pp_ritualist.webp)
+    Barista Assist Technology takes out the guesswork, guiding you from
+    grind size to extraction for cafe-quality comfort, cup after cup.
+
+16. Barista Assist Technology       (image: pp_zen_brewer.webp)
+    Ninja Luxe Cafe redefines the at-home coffee ritual. With Barista
+    Assist Technology guiding every step - from grind size and tamping
+    to time-based dosing and hands-free frothing - your daily brew
+    becomes a moment of pure zen.
+
+
+========================================
+  PERSONALITY PROFILES (16 total)
+========================================
+
+Each profile is a quiz result. It includes a title, tagline,
+description, and a linked proofpoint (feature highlight).
+
+----------------------------------------
+
+THE PRECISIONIST
+  Tagline:     "Every detail, dialled."
+  Description: You know perfection doesn't happen by accident - it
+               happens one micro-adjustment at a time. You're the type
+               to notice when the crema's two seconds late.
+  Proofpoint:  #14 - Barista Assist Technology
+  Icon:        icon_precisionist.png
+  QR Code:     qr_precisionist.svg
+
+THE OPTIMISER
+  Tagline:     "Better, every time."
+  Description: You can't leave well enough alone - and that's the point.
+               You tweak, refine, and shave seconds until routine
+               becomes art.
+  Proofpoint:  #12 - Barista Assist Technology
+  Icon:        icon_optimiser.png
+  QR Code:     qr_optimiser.svg
+
+THE ROASTICIAN
+  Tagline:     "Intuition meets alchemy."
+  Description: You don't follow recipes - you follow feeling. You trust
+               your nose, your timing, your gut, and somehow the magic
+               always lands in the cup.
+  Proofpoint:  #5 - 3-in-1 Machine
+  Icon:        icon_roastician.png
+  QR Code:     qr_roastician.svg
+
+THE BARISTOCRAT
+  Tagline:     "Poise in every pour."
+  Description: You're all polish and preference - a little ceremony, a
+               lot of confidence. Refinement isn't an act; it's how you
+               wake up.
+  Proofpoint:  #1 - Dual Froth Technology
+  Icon:        icon_baristocrat.png
+  QR Code:     qr_baristocrat.svg
+
+THE CLASSICIST
+  Tagline:     "Simple. Honest. Time-tested."
+  Description: You trust tradition over trends believing that quality
+               endures and restraint is its own reward.
+  Proofpoint:  #10 - Weight-based Dosing
+  Icon:        icon_classicist.png
+  QR Code:     qr_classicist.svg
+
+THE SMOOTH OPERATOR
+  Tagline:     "Calm. Consistent. In control."
+  Description: You keep everything humming - steady tempo, effortless
+               flow. Nothing flusters you; every pour feels like muscle
+               memory.
+  Proofpoint:  #6 - 3-in-1 Machine
+  Icon:        icon_smooth_operator.png
+  QR Code:     qr_smooth_operator.svg
+
+THE BREWSMITH
+  Tagline:     "Craft in every cup."
+  Description: You trust your hands and your tools. For you, craft is
+               care - process is the point, and control is comfort.
+  Proofpoint:  #9 - Weight-based Dosing
+  Icon:        icon_brewsmith.png
+  QR Code:     qr_brewsmith.svg
+
+THE HOME BREWER
+  Tagline:     "Comfort, on repeat."
+  Description: You make coffee the heart of your home - warm, familiar,
+               and always ready to share. Your kitchen smells like
+               belonging.
+  Proofpoint:  #11 - Barista Assist Technology
+  Icon:        icon_home_brewer.png
+  QR Code:     qr_home_brewer.svg
+
+THE ZEN BREWER
+  Tagline:     "Focus. Flow. Freedom."
+  Description: You find calm in motion - patient, present, and precise.
+               The process is your meditation; the pour, your pause.
+  Proofpoint:  #16 - Barista Assist Technology
+  Icon:        icon_zen_brewer.png
+  QR Code:     qr_zen_brewer.svg
+
+THE MOOD SWINGER
+  Tagline:     "No rules, just vibes."
+  Description: You brew by instinct - espresso at dawn, cold brew at
+               noon, maybe an affogato for dinner. Consistency's
+               overrated anyway.
+  Proofpoint:  #4 - 3-in-1 Machine
+  Icon:        icon_mood_swinger.png
+  QR Code:     qr_mood_swinger.svg
+
+THE BLENDSETTER
+  Tagline:     "Always one brew ahead."
+  Description: You see coffee as a canvas - remixing, experimenting,
+               setting the tone before anyone else catches on.
+               Innovation's just your comfort zone.
+  Proofpoint:  #8 - Multiple Drink Presets
+  Icon:        icon_blendsetter.png
+  QR Code:     qr_blendsetter.svg
+
+THE RITUALIST
+  Tagline:     "Same time, same place, same joy."
+  Description: For you, coffee isn't just a drink - it's an anchor. You
+               find calm in consistency, comfort in repetition, and
+               strength in keeping the ritual alive.
+  Proofpoint:  #15 - Barista Assist Technology
+  Icon:        icon_ritualist.png
+  QR Code:     qr_ritualist.svg
+
+THE EVERYBUDDY
+  Tagline:     "Never drinks alone."
+  Description: You make coffee a social ritual - the chat before work,
+               the refill that becomes a catch-up, the reason to linger
+               just a bit longer.
+  Proofpoint:  #3 - 3-in-1 Machine
+  Icon:        icon_everybuddy.png
+  QR Code:     qr_everybuddy.svg
+
+THE PERCOLATOR
+  Tagline:     "Keeps the good things bubbling."
+  Description: You're the energy source - warm, curious, always
+               connecting people over a pour. When you're around, the
+               conversation never runs dry.
+  Proofpoint:  #13 - Multiple Drink Presets
+  Icon:        icon_percolator.png
+  QR Code:     qr_percolator.svg
+
+THE BEANFLUENCER
+  Tagline:     "Social by nature, caffeinated by choice."
+  Description: You know what's trending before it's poured - talkative,
+               tuned-in, contagiously upbeat. You don't just make
+               coffee; you make it a movement.
+  Proofpoint:  #7 - 3-in-1 Machine
+  Icon:        icon_beanfluencer.png
+  QR Code:     qr_beanfluencer.svg
+
+THE BREWMANTIC
+  Tagline:     "Coffee with feeling."
+  Description: You pour your heart into every cup, the way some people
+               write love letters. A swirl of nostalgia, a dash of foam,
+               and suddenly the morning feels cinematic.
+  Proofpoint:  #2 - Dual Froth Technology
+  Icon:        icon_brewmantic.png
+  QR Code:     qr_brewmantic.svg

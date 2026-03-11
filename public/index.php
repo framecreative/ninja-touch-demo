@@ -37,12 +37,15 @@
                 </video>
             </div>
             <div class="absolute inset-0  flex items-center justify-center">
-                <div class="w-full grid grid-cols-6 translate-y-1/5 gap-5">
-                    <div class="col-span-2 col-start-3">
+                <div class="w-full grid grid-cols-6 grid-rows-2 translate-y-1/5 gap-x-5 gap-y-24">
+                    <div class="col-span-4 col-start-2 text-center">
+                        <span class="text-buff text-5xl text-center font-semibold leading-[124px]">Discover Your Coffee Archetype</span>
+                    </div>
+                    <div class="col-span-2 col-start-3 row-start-2">
                         <button
                             id="touch-btn"
                             class="t-button text-tan hover:opacity-70 transition-opacity duration-200 backdrop-blur-[75px] backdrop-filter bg-white/2 h-[260px] w-full rounded-xl flex items-center justify-center">
-                            TOUCH TO START
+                            START HERE
                         </button>
                     </div>
                 </div>
