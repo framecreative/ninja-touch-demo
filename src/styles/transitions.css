@@ -69,6 +69,15 @@
 	}
 }
 
+/* Exclude the progress bar from view transitions */
+html::view-transition-group(quiz-progress),
+html::view-transition-new(quiz-progress),
+html::view-transition-old(quiz-progress) {
+	animation: none;
+    mix-blend-mode: normal !important;
+    z-index: 9999999999 !important;
+}
+
 /* View Transition API Styles */
 /* Slide-up animation (forward navigation) */
 html::view-transition-new(slideup_new) {

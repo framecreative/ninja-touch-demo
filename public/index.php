@@ -22,6 +22,13 @@
 <body class="bg-tan min-h-screen font-sans">
     <div id="app" class="h-screen w-screen relative overflow-hidden">
 
+        <!-- Quiz Progress Bar (fixed above all screens, not affected by view transitions) -->
+             <div id="quiz-progress-bar" class="fixed top-0 left-0 w-full px-7.5 pt-7.5 opacity-0 pointer-events-none transition-opacity duration-300 ease-out" style="view-transition-name: quiz-progress; contain: layout; z-index: 9999999">
+                 <div class="w-full h-[12px] bg-buff rounded-full overflow-hidden">
+                     <div id="quiz-progress-fill" class="h-full bg-washed-black rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
+                 </div>
+             </div>
+
         <!-- Waiting/Touch Screen -->
         <div id="waiting-screen" class="screen active bg-buff">
             <div class="absolute inset-0  flex items-center justify-center bg-washed-black">

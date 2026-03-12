@@ -54,6 +54,8 @@ export class CoffeeProfileQuiz {
         this.config = {};
 
         this.appWrapper = document.getElementById('app');
+        this.progressBar = document.getElementById('quiz-progress-bar');
+        this.progressFill = document.getElementById('quiz-progress-fill');
 
         this.screens = {
             waitingScreen: document.getElementById('waiting-screen'),
@@ -235,6 +237,7 @@ export class CoffeeProfileQuiz {
         this.activityTracker.hideTimeoutScreen(); // Hide timeout overlay if visible
         this.activityTracker.startActivityTracking();
         this.screens.proofpointContent.classList.add('hidden');
+        this.updateProgressBar(false);
         this.resetAllScreenVisibility(this.screens.waitingScreen);
     }
 
@@ -242,6 +245,7 @@ export class CoffeeProfileQuiz {
         this.currentQuestion = 0;
         this.answers = [];
         this.populateQuestionScreen();
+        this.updateProgressBar(true);
         this.transitionToScreen(this.screens.questionScreen, this.screens.introScreen, 'slideup');
     }
 
@@ -372,11 +376,16 @@ export class CoffeeProfileQuiz {
             if (hasProofpoint) {
                 // Clear any existing timeout timers, as everything is now automated from here:
                 this.activityTracker.clearTimeoutTimers();
+                this.updateProgressBar(false);
 
-                this.transitionToScreen(this.screens.proofpointScreen, this.screens.questionScreen, 'fade', null, () => {
-                    this.showProofpointContent();
-                    this.startProgressionTimer(this.screens.proofpointScreen, this.config.proofpointerSeconds, (() => { this.continueToNextQuestion() }));
-                });
+                // Delay transition to allow time for progress bar to animate out
+                setTimeout(() => {
+                    this.transitionToScreen(this.screens.proofpointScreen, this.screens.questionScreen, 'fade', null, () => {
+                        this.showProofpointContent();
+                        this.startProgressionTimer(this.screens.proofpointScreen, this.config.proofpointerSeconds, (() => { this.continueToNextQuestion() }));
+                    });
+                }, 300);
+
             } else {
                 this.continueToNextQuestion(hasProofpoint);
             }
@@ -493,6 +502,7 @@ export class CoffeeProfileQuiz {
                 this.hideProofpointContent().then(() => {
                     this.currentQuestion++;
                     this.populateQuestionScreen();
+                    this.updateProgressBar(true);
                     this.transitionToScreen(
                         this.screens.questionScreen, 
                         this.screens.proofpointScreen, 
@@ -512,6 +522,7 @@ export class CoffeeProfileQuiz {
                 this.createImposterQuestionScreen();
                 this.currentQuestion++;
                 this.populateQuestionScreen();
+                this.updateProgressBar(true);
                 this.transitionToScreen(
                     this.screens.questionScreen, 
                     this.screens.tempQuestionScreen, 
@@ -522,6 +533,7 @@ export class CoffeeProfileQuiz {
         } else {
             console.log('All questions done. calculating profile and showing profile calculation screen');
             this.screens.proofpointScreen.classList.remove('z-20');
+            this.updateProgressBar(false);
             this.showProfileCalculationScreen();
         }
     }
@@ -533,8 +545,10 @@ export class CoffeeProfileQuiz {
         if (this.currentQuestion > 0) {
             this.currentQuestion--;
             this.answers.pop();
+            this.updateProgressBar(true);
 
             if (this.questionHasProofpoint(this.currentQuestion)) {
+                this.updateProgressBar(false);
                 this.transitionToScreen(this.screens.proofpointScreen, this.screens.questionScreen, 'slidedown', null, () => {
                     this.showProofpointContent();
                     this.startProgressionTimer(this.screens.proofpointScreen, this.config.proofpointerSeconds, (() => { this.continueToNextQuestion() }));
@@ -545,7 +559,11 @@ export class CoffeeProfileQuiz {
                 this.transitionToScreen(this.screens.questionScreen, this.screens.tempQuestionScreen, 'slidedown');
             }
         } else {
-            this.transitionToScreen(this.screens.introScreen, this.screens.questionScreen, 'slidedown');
+            // Animate fill to 0%, then fade out the whole bar
+            this.updateProgressBar(false, true);
+            setTimeout(() => {
+                this.transitionToScreen(this.screens.introScreen, this.screens.questionScreen, 'slidedown');
+            }, 250);
         }
     }
 
@@ -751,6 +769,26 @@ export class CoffeeProfileQuiz {
         });
 
         return viewTransition;
+    }
+
+    /**
+     * Updates the quiz progress bar.
+     * @param {boolean} visible - Whether the progress bar should be visible.
+     * @param {boolean} resetFill - Whether to reset the fill width to 0%. Only applies when hiding.
+     */
+    updateProgressBar(visible = true, resetFill = false) {
+        if (visible) {
+            this.progressBar.classList.remove('opacity-0', 'pointer-events-none');
+            this.progressBar.classList.add('opacity-100');
+            const progress = ((this.currentQuestion + 1) / 5) * 100;
+            this.progressFill.style.width = `${progress}%`;
+        } else {
+            if (resetFill) {
+                this.progressFill.style.width = '0%';
+            }
+            this.progressBar.classList.remove('opacity-100');
+            this.progressBar.classList.add('opacity-0', 'pointer-events-none');
+        }
     }
 
     /**
