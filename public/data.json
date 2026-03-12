@@ -11,22 +11,22 @@
       "weight": 1.5,
       "options": [
         {
-          "text": "My daily anchor\nSame mug same moment, same me.",
+          "text": "My daily anchor",
           "value": "stability",
           "proofpoint": null
         },
         {
-          "text": "A precision test\nI'm chasing god-tier crema.",
+          "text": "A precision test",
           "value": "mastery",
           "proofpoint": null
         },
         {
-          "text": "A wild card\nDepends who I wake up as today.",
+          "text": "Dependent on how I feel",
           "value": "independence",
           "proofpoint": null
         },
         {
-          "text": "A shared ritual\nHalf the joy's in who I drink it with.",
+          "text": "A shared ritual",
           "value": "belonging",
           "proofpoint": null
         }
@@ -37,22 +37,22 @@
       "weight": 1,
       "options": [
         {
-          "text": "Smooth and steady\nthe comfort playlist of coffee.",
+          "text": "Comfort and consistency",
           "value": "stability",
           "proofpoint": null
         },
         {
-          "text": "Bold and balanced\npure craft, zero shortcuts.",
+          "text": "Craft; bold and balanced",
           "value": "mastery",
           "proofpoint": null
         },
         {
-          "text": "Whatever fits the mood\nvariety keeps things interesting.",
+          "text": "Whatever fits the mood",
           "value": "independence",
           "proofpoint": null
         },
         {
-          "text": "The easy crowd-pleaser\nhits the spot without overthinking it.",
+          "text": "The easy crowd-pleaser",
           "value": "belonging",
           "proofpoint": null
         }
@@ -63,24 +63,28 @@
       "weight": 1,
       "options": [
         {
-          "text": "Geek out\npressure, grind, and tamp like it’s performance art.",
+          "text": "Adjust, perform\n and perfect",
           "value": "stability",
-          "proofpoint": null
+          "proofpoint": null,
+          "icon": "q_icon_filter.png"
         },
         {
-          "text": "Hit brew, zone out and trust the machine.",
+          "text": "Let the machine do\n it's thing",
           "value": "mastery",
-          "proofpoint": null
+          "proofpoint": null,
+          "icon": "q_icon_power.png"
         },
         {
-          "text": "Treat it like a creative outlet\nfollow the recipe once, then make it yours.",
+          "text": "Treat it like a\n creative outlet",
           "value": "independence",
-          "proofpoint": null
+          "proofpoint": null,
+          "icon": "q_icon_lightbulb.png"
         },
         {
-          "text": "Take everyone’s order\ncoffee diplomacy is your love language.",
+          "text": "Take everyone’s\n order",
           "value": "belonging",
-          "proofpoint": null
+          "proofpoint": null,
+          "icon": "q_icon_note.png"
         }
       ]
     },
@@ -89,24 +93,28 @@
       "weight": 1,
       "options": [
         {
-          "text": "Keeps it stripped-back\nblack, white, and effortlessly unfussy.",
+          "text": "Stays simple; black\n or white",
           "value": "minimalist",
-          "proofpoint": null
+          "proofpoint": null,
+          "icon": "q_icon_halves.png"
         },
         {
-          "text": "Looks engineered by NASA\nprecision, poise, serious intent.",
+          "text": "Looks engineered\n by NASA",
           "value": "futurist",
-          "proofpoint": null
+          "proofpoint": null, 
+          "icon": "q_icon_cog.png"
         },
         {
-          "text": "Could start a micro-trend on TikTok\nconfident pour, main-character energy.",
+          "text": "Takes centre stage",
           "value": "trendy",
-          "proofpoint": null
+          "proofpoint": null,
+          "icon": "q_icon_star.png"
         },
         {
-          "text": "Feels like home\nwarm, familiar and a little nostalgic.",
+          "text": "Feels like home",
           "value": "classic",
-          "proofpoint": null
+          "proofpoint": null, 
+          "icon": "q_icon_home.png"
         }
       ]
     }
@@ -190,7 +198,7 @@
       "description": "Barista Assist Technology™ takes out\nthe guesswork, guiding you from grind\nsize to extraction for café-quality\ncomfort, cup after cup."
     },
     {
-      "id": "proofpoint-12",
+    "id": "proofpoint-12",
       "image": "pp_optimiser.webp",
       "feature": "[Related feature]",
       "title": "Barista Assist Technology",

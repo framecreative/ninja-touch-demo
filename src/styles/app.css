@@ -52,6 +52,20 @@
         @apply w-full h-[400px] bg-buff rounded-xl transition-all duration-200 text-washed-black font-semibold text-3xl leading-tight text-center flex items-center justify-center px-8;
     }
 
+    /* Tile grid layout for icon-based questions (Q3, Q4) */
+    .answer-tiles {
+        @apply grid grid-cols-2 gap-5;
+    }
+    .answer-tile {
+        @apply bg-buff rounded-xl transition-all duration-200 text-washed-black font-semibold text-2xl leading-tight text-center flex flex-col items-center justify-center p-10 aspect-4/5;
+    }
+    .answer-tile img {
+        @apply w-20 h-20 object-contain mb-7;
+    }
+    .answer-tile.selected {
+        @apply bg-linear-to-b from-gradient-from to-gradient-to;
+    }
+
     /* Timeout screen styles */
     .timeout-screen {
         @apply absolute inset-0 bg-washed-black flex items-center justify-center z-50;

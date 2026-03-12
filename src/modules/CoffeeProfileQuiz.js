@@ -260,40 +260,76 @@ export class CoffeeProfileQuiz {
         const optionsContainer = screen.querySelector('[data-answer-options]');
         optionsContainer.innerHTML = '';
 
+        // Check if this question has icon-based options (tile layout)
+        const hasIcons = question.options.some(opt => opt.icon);
+
+        if (hasIcons) {
+            optionsContainer.classList.add('answer-tiles');
+            optionsContainer.classList.remove('space-y-7.5');
+        } else {
+            optionsContainer.classList.remove('answer-tiles');
+            optionsContainer.classList.add('space-y-7.5');
+        }
+
         question.options.forEach((option, index) => {
             const optionElement = document.createElement('button');
-            optionElement.className = 'answer-btn';
-            optionElement.innerHTML = option.text.replace('\n', '<br>');
+
+            if (hasIcons && option.icon) {
+                // Tile layout with icon
+                optionElement.className = 'answer-tile';
+                const iconImg = document.createElement('img');
+                fetch(`dist/assets/images/${option.icon}`)
+                    .then(response => response.blob())
+                    .then(blob => new Promise((resolve, reject) => {
+                        const reader = new FileReader()
+                        reader.onloadend = () => resolve(reader.result)
+                        reader.onerror = reject
+                        reader.readAsDataURL(blob)
+                    }))
+                    .then((data) => {
+                        iconImg.src = data;
+                    })
+
+                // iconImg.addEventListener('load', () => {
+                //     console.log("HELLO");
+                //     iconImg.src = 'data:image/png;base64,' + btoa(iconImg.src);
+                // });
+                iconImg.alt = option.text;
+                optionElement.appendChild(iconImg);
+                const label = document.createElement('span');
+                label.innerHTML = option.text.replace('\n', '<br>');
+                optionElement.appendChild(label);
+            } else {
+                // Standard list layout
+                optionElement.className = 'answer-btn';
+                optionElement.innerHTML = option.text.replace('\n', '<br>');
+            }
+
             optionElement.dataset.value = option.value;
-            optionElement.dataset.weight = question.weight || 1; // Store the question weight
+            optionElement.dataset.weight = question.weight || 1;
 
             optionElement.addEventListener('click', () => {
                 this.selectOption(optionElement, option, question.weight);
             });
-            // Append the answer option button to the options container:
             optionsContainer.appendChild(optionElement);
         });
 
         // Reset next button
         screen.querySelector('[data-next-btn]').disabled = true;
-
-        // stagger-animate the answer options buttons in:
-        // Motion.animate("#answer-options button", {
-        //     opacity: [0, 1],
-        //     y: [50, 0]
-        // }, {
-        //     delay: stagger(0.05)
-        // })
     }
 
     selectOption(element, option, weight = 1) {
-        // Remove previous selection
+        // Remove previous selection from both standard and tile buttons
         document.querySelectorAll('div[data-answer-options] button').forEach(btn => {
-            btn.classList.remove('bg-gradient-to-b', 'from-[#f3e8d8]', 'to-[#d7b792]');
+            btn.classList.remove('bg-gradient-to-b', 'from-[#f3e8d8]', 'to-[#d7b792]', 'selected');
         });
 
         // Highlight selected option
-        element.classList.add('bg-gradient-to-b', 'from-[#f3e8d8]', 'to-[#d7b792]');
+        if (element.classList.contains('answer-tile')) {
+            element.classList.add('selected');
+        } else {
+            element.classList.add('bg-gradient-to-b', 'from-[#f3e8d8]', 'to-[#d7b792]');
+        }
 
         // Enable next button
         this.screens.questionScreen.querySelector('[data-next-btn]').disabled = false;
@@ -763,9 +799,12 @@ export class CoffeeProfileQuiz {
      * run a standard viewTransition from this old question to the new one (which can be populated with new questions after the imposter is created)
      */
     createImposterQuestionScreen() {
-        // copy the real question screen content into the imposter screen:
-        this.screens.tempQuestionScreen.innerHTML = this.screens.questionScreen.innerHTML;
-
+        // clone (not innerHTML copy) so images retain rendered data and don't need to re-fetch:
+        this.screens.tempQuestionScreen.innerHTML = '';
+        for (const child of this.screens.questionScreen.childNodes) {
+            this.screens.tempQuestionScreen.appendChild(child.cloneNode(true));
+        }
+        
         // sneakily flip the real question screen and temp screen visibility before we animate it all back again:
         this.screens.questionScreen.classList.remove('active');
         this.screens.tempQuestionScreen.classList.add('active');
