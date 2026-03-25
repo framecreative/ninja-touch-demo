@@ -55,6 +55,9 @@
                             START HERE
                         </button>
                     </div>
+                    <div class="col-span-4 col-start-2 text-center">
+                        <span class="text-buff t-copy-lg text-center font-semibold">Daily Prize and chance of Instant Win Prizes</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -237,7 +240,7 @@
                                 alt="QR Code"
                                 class="profile-qr w-[270px] h-[270px]" />
                         </div>
-                        <span class="t-button">DISCOVER MORE</span>
+                        <span class="t-button">SCAN TO ENTER THE DRAW</span>
                     </div>
 
 
