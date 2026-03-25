@@ -56,7 +56,7 @@
                         </button>
                     </div>
                     <div class="col-span-4 col-start-2 text-center">
-                        <span class="text-buff t-copy-lg text-center font-semibold">Daily Prize and chance of Instant Win Prizes</span>
+                        <span class="text-buff t-copy-lg text-center font-semibold">Play to Win</span>
                     </div>
                 </div>
             </div>
